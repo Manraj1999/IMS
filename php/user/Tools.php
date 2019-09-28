@@ -32,7 +32,13 @@ class Tools {
         return $pswd_hash;
     }
 
-    function createCompanyDBAndTables($companyID, $response) {
+    function sendErrorMessage($message) {
+        echo "<div class='message'>
+        <div class='alert alert-danger alert-dismissible inner-message fade show'>
+            <button type='button' class='close' data-dismiss='alert'>&times;</button>" . $message . "</div></div>";
+    }
+
+    function createCompanyDBAndTables($companyID, $response, $invType) {
         $DatabaseHandler = new DatabaseHandler();
 
         // Create Custom Database for Company
@@ -49,56 +55,147 @@ class Tools {
             $response['status_code'] = 3;
         }
 
-        // Create Tables for the Custom Company Database
-        $connectionCompanyTablesCreations = $DatabaseHandler->getCompanyMySQLiConnection($companyID);
-        $companyInfoSQL = "CREATE TABLE company_info (
-                Company_ID VARCHAR(32) PRIMARY KEY,
-                SU_ID VARCHAR(32) NOT NULL,
-                Company_Name VARCHAR(128) NOT NULL,
-                Company_Location VARCHAR(128)
+        if($response['error'] !== true) {
+            if($invType == "STOCK") {
+                // Create Tables for the Custom Company Database
+                $connectionCompanyTablesCreations = $DatabaseHandler->getCompanyMySQLiConnection($companyID);
+                $companyInfoSQL = "CREATE TABLE company_info (
+                Company_ID INT NOT NULL AUTO_INCREMENT,
+                SU_ID VARCHAR(32),
+                Company_Name VARCHAR(128),
+                Company_Location VARCHAR(128),
+                Inventory_Type VARCHAR(32),
+                PRIMARY KEY (Company_ID)
             )";
-        $companyStoresSQL = "CREATE TABLE company_stores (
-                Store_ID VARCHAR(32) PRIMARY KEY,
-                Store_Name VARCHAR(32) NOT NULL,
-                Store_Location VARCHAR(128)
+                $companyStoresSQL = "CREATE TABLE company_stores (
+                Store_ID INT NOT NULL AUTO_INCREMENT,
+                Store_Name VARCHAR(128) NOT NULL,
+                Store_Location VARCHAR(128),
+                PRIMARY KEY (Store_ID)
             )";
-        $supplierSQL = "CREATE TABLE suppliers (
-                Supplier_ID VARCHAR(32) PRIMARY KEY,
-                Supplier_Name VARCHAR(128) NOT NULL
+                $supplierSQL = "CREATE TABLE suppliers (
+                Supplier_ID INT NOT NULL AUTO_INCREMENT,
+                Supplier_Name VARCHAR(128) NOT NULL,
+                Supplier_Location VARCHAR(128) NOT NULL,
+                PRIMARY KEY (Supplier_ID)
             )";
-        $productsSQL = "CREATE TABLE products (
-                Product_ID VARCHAR(32) PRIMARY KEY,
+                $productsSQL = "CREATE TABLE products (
+                Product_ID INT NOT NULL AUTO_INCREMENT,
+                Supplier_ID VARCHAR(32) NOT NULL,
                 Product_Name VARCHAR(128) NOT NULL,
-                Product_Inventory INT(32) NOT NULL
+                Product_Inventory INT(32) NOT NULL,
+                PRIMARY KEY (Product_ID)
             )";
-        $purchasesSQL = "CREATE TABLE purchases (
-                Purchase_ID VARCHAR(32) PRIMARY KEY,
+                $purchasesSQL = "CREATE TABLE purchases (
+                Purchase_ID INT NOT NULL AUTO_INCREMENT,
                 Product_ID VARCHAR(32) NOT NULL,
                 Supplier_ID VARCHAR(32) NOT NULL,
                 Amount_Received INT(32) NOT NULL,
-                Purchase_Date DATETIME NOT NULL
+                Purchase_Date DATETIME NOT NULL,
+                PRIMARY KEY (Purchase_ID)
             )";
-        $ordersSQL = "CREATE TABLE orders (
-                Order_ID VARCHAR(32) PRIMARY KEY,
+                $ordersSQL = "CREATE TABLE orders (
+                Order_ID INT NOT NULL AUTO_INCREMENT,
                 Product_ID VARCHAR(32) NOT NULL,
                 Order_Person_Name VARCHAR(128) NOT NULL,
                 Product_Amount VARCHAR(32) NOT NULL,
-                Order_Date DATETIME NOT NULL
+                Order_Date DATETIME NOT NULL,
+                PRIMARY KEY (Order_ID)
+            )";
+                $usersSQL = "CREATE TABLE users (
+                User_ID INT NOT NULL,
+                User_FullName VARCHAR(128) NOT NULL,
+                User_Email VARCHAR(128) NOT NULL,
+                User_Type VARCHAR(32) NOT NULL,
+                PRIMARY KEY (User_ID)
             )";
 
-        $tablesSQL = [$companyInfoSQL, $companyStoresSQL, $supplierSQL, $productsSQL, $purchasesSQL, $ordersSQL];
+                $tablesSQL = [$companyInfoSQL, $companyStoresSQL, $supplierSQL, $productsSQL, $purchasesSQL, $ordersSQL, $usersSQL];
 
-        foreach($tablesSQL as $k => $sql) {
-            $tablesResult = $connectionCompanyTablesCreations->query($sql);
+                foreach($tablesSQL as $k => $sql) {
+                    $tablesResult = $connectionCompanyTablesCreations->query($sql);
 
-            if($tablesResult) {
-                $response['error'] = false;
-                $response['status_code'] = 0;
+                    if($tablesResult) {
+                        $response['error'] = false;
+                        $response['status_code'] = 0;
+                    } else {
+                        $response['error'] = true;
+                        $response['status_code'] = 4;
+                    }
+                }
+            } elseif($invType == "MEDICAL") {
+                // Create Tables for the Custom Company Database
+                $connectionCompanyTablesCreations = $DatabaseHandler->getCompanyMySQLiConnection($companyID);
+                $companyInfoSQL = "CREATE TABLE company_info (
+                Company_ID INT NOT NULL AUTO_INCREMENT,
+                SU_ID VARCHAR(32),
+                Company_Name VARCHAR(128),
+                Company_Location VARCHAR(128),
+                Inventory_Type VARCHAR(32),
+                PRIMARY KEY (Company_ID)
+            )";
+                $companyStoresSQL = "CREATE TABLE company_stores (
+                Store_ID INT NOT NULL AUTO_INCREMENT,
+                Store_Name VARCHAR(128) NOT NULL,
+                Store_Location VARCHAR(128),
+                PRIMARY KEY (Store_ID)
+            )";
+                $supplierSQL = "CREATE TABLE suppliers (
+                Supplier_ID INT NOT NULL AUTO_INCREMENT,
+                Supplier_Name VARCHAR(128) NOT NULL,
+                Supplier_Location VARCHAR(128) NOT NULL,
+                PRIMARY KEY (Supplier_ID)
+            )";
+                $productsSQL = "CREATE TABLE products (
+                Product_ID INT NOT NULL AUTO_INCREMENT,
+                Supplier_ID VARCHAR(32) NOT NULL,
+                Product_Name VARCHAR(128) NOT NULL,
+                Product_Inventory INT(32) NOT NULL,
+                PRIMARY KEY (Product_ID)
+            )";
+                $purchasesSQL = "CREATE TABLE purchases (
+                Purchase_ID INT NOT NULL AUTO_INCREMENT,
+                Product_ID VARCHAR(32) NOT NULL,
+                Supplier_ID VARCHAR(32) NOT NULL,
+                Amount_Received INT(32) NOT NULL,
+                Purchase_Date DATETIME NOT NULL,
+                PRIMARY KEY (Purchase_ID)
+            )";
+                $ordersSQL = "CREATE TABLE orders (
+                Order_ID INT NOT NULL AUTO_INCREMENT,
+                Product_ID VARCHAR(32) NOT NULL,
+                Order_Person_Name VARCHAR(128) NOT NULL,
+                Product_Amount VARCHAR(32) NOT NULL,
+                Order_Date DATETIME NOT NULL,
+                PRIMARY KEY (Order_ID)
+            )";
+                $usersSQL = "CREATE TABLE users (
+                User_ID INT NOT NULL,
+                User_FullName VARCHAR(128) NOT NULL,
+                User_Email VARCHAR(128) NOT NULL,
+                User_Type VARCHAR(32) NOT NULL,
+                PRIMARY KEY (User_ID)
+            )";
+
+                $tablesSQL = [$companyInfoSQL, $companyStoresSQL, $supplierSQL, $productsSQL, $purchasesSQL, $ordersSQL, $usersSQL];
+
+                foreach($tablesSQL as $k => $sql) {
+                    $tablesResult = $connectionCompanyTablesCreations->query($sql);
+
+                    if($tablesResult) {
+                        $response['error'] = false;
+                        $response['status_code'] = 0;
+                    } else {
+                        $response['error'] = true;
+                        $response['status_code'] = 4;
+                    }
+                }
             } else {
                 $response['error'] = true;
-                $response['status_code'] = 4;
+                $response['status_code'] = 5;
             }
         }
+        return $response;
     }
 
 }

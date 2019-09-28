@@ -42,7 +42,7 @@ class User {
         return $response;
     }
 
-    function register($data) {
+    function register($data, $companyName, $invType) {
         // Variable Defines
         $emailFromUser = "";
         $companyID = $data[0][1];
@@ -97,7 +97,38 @@ class User {
                 $response['status_code'] = 1;
             }
 
-            $apiTools->createCompanyDBAndTables($companyID, $response);
+            // Create DB and Tables
+            $companyDBTablesResponse = $apiTools->createCompanyDBAndTables($companyID, $response, $invType);
+
+            // Add Company Info
+            if($companyDBTablesResponse['error'] !== true) {
+                $su_id = "";
+                // Get Supervisor ID
+                $supervisorConnection = $DatabaseHandler->getMySQLiConnection();
+                $getSupervisorIDSQL = "SELECT User_ID FROM users WHERE User_Email = '" . $emailFromUser . "'";
+                $resultSupervisor = $supervisorConnection->query($getSupervisorIDSQL);
+
+                if($resultSupervisor->num_rows > 0) {
+                    while($row = $resultSupervisor->fetch_assoc()) {
+                        $su_id = $row['User_ID'];
+                    }
+                }
+
+                $companyConnection = $DatabaseHandler->getCompanyMySQLiConnection($companyID);
+                $updateCompanyInfoSQL = "INSERT INTO company_info (Company_Name, SU_ID, Inventory_Type) VALUES ('" . $companyName . "', '" . $su_id . "', '" . $invType . "')";
+
+                $companyResult = $companyConnection->query($updateCompanyInfoSQL);
+
+                if($companyResult) {
+                    $response['error'] = false;
+                    $response['status_code'] = 0;
+                } else {
+                    $response['error'] = true;
+                    $response['status_code'] = 1;
+                    echo $companyConnection->error;
+                }
+
+            }
 
         }
 
@@ -146,6 +177,8 @@ class User {
                 $message = MSG_DB_CREATION_FAILED;
             } elseif($response['status_code'] == 4) {
                 $message = MSG_TABLE_CREATION_FAILED;
+            } elseif($response['status_code'] ==5 ) {
+                $message = MSG_TABLE_CREATION_INCORRECT_INV_TYPE;
             }
         } else {
             $message = "API Configuration: The type entered was incorrect!";

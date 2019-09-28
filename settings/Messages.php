@@ -9,6 +9,7 @@ DEFINE("MSG_REGISTER_SUCCESS", "User has been registered successfully.");
 DEFINE("MSG_REGISTER_FAIL", "There was an error in registering the user.");
 DEFINE("MSG_DB_CREATION_FAILED", "We were unable to create your database.");
 DEFINE("MSG_TABLE_CREATION_FAILED", "We were unable to create the tables for your database.");
+DEFINE("MSG_TABLE_CREATION_INCORRECT_INV_TYPE", "The inventory type selected is incorrect.");
 
 // Login
 DEFINE("MSG_LOGIN_SUCCESS", "You've successfully logged in!");

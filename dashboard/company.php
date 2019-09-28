@@ -60,11 +60,11 @@
                                                 </button>
                                             </h3>
                                             <!-- Modal -->
-                                            <div class="modal fade" id="editCompanyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                                            <div class="modal fade" id="editCompanyModal" tabindex="-1" role="dialog" aria-labelledby="ModalScrollableTitle" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-scrollable" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalScrollableTitle">Company Information</h5>
+                                                            <h5 class="modal-title" id="ModalScrollableTitle">Company Information</h5>
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
@@ -72,9 +72,15 @@
                                                         <div class="modal-body">
                                                             <div class="input-group mb-3">
                                                                 <div class="input-group-prepend">
-                                                                    <span class="input-group-text" id="basic-addon1">@</span>
+                                                                    <span class="input-group-text" id="inputGroup-sizing-default">Name</span>
                                                                 </div>
-                                                                <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                                                                <input type="text" class="form-control modal-text" aria-label="Name" aria-describedby="inputGroup-sizing-default">
+                                                            </div>
+                                                            <div class="input-group mb-3">
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text" id="inputGroup-sizing-default">Location</span>
+                                                                </div>
+                                                                <input type="text" class="form-control modal-text" aria-label="Location" aria-describedby="inputGroup-sizing-default">
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">
@@ -114,11 +120,12 @@
                                         <div>
                                             <h3 class="text-center text-blue">
                                                 <i style="margin-right: 8px;" class="fa fa-store"></i> Stores
-                                                <button name="edit-stores" class="edit">
+                                                <button name="edit-stores" class="edit" data-toggle="modal" data-target="#editStores">
                                                     <i class="fa fa-pencil-alt fa-align-right text-blue"></i>
                                                 </button>
                                             </h3>
                                         </div>
+
                                         <hr/>
                                         <div class="row">
                                             <div class="col-xl-6 text-center">
@@ -129,6 +136,41 @@
                                                 <h4 class="text-blue text-underline">Store #2</h4>
                                                 <h4 class="text-blue">Location</h4>
                                             </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="editStores" tabindex="-1" role="dialog" aria-labelledby="ModalScrollableTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="ModalScrollableTitle">Stores</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <form name="add_store" id="add_store">
+                                                <div class="modal-body">
+                                                    <div class="form-group">
+                                                        <div class="table-responsive">
+                                                            <table class="table" id="dynamic_field">
+                                                                <tr>
+                                                                    <h3>Store</h3>
+                                                                    <td><input type="text" name="name[]" placeholder="Store Name" class="modal-text form-control name_list" /></td>
+                                                                    <td><input type="text" name="location[]" placeholder="Store Location" class="modal-text form-control name_list" /></td>
+                                                                    <td><button type="button" name="add" id="add" class="btn btn-success">Add More</button></td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <button type="button" id="save-store" class="btn btn-primary">Save changes</button>
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -148,6 +190,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js"></script>
         <!--   Dashboard JS   -->
         <script src="../assets/js/dashboard.min.js"></script>
+        <script src="../assets/js/modal-rows.js"></script>
     </body>
 
 </html>

@@ -15,7 +15,7 @@ class CompanyModal {
         $DatabaseHandler = new DatabaseHandler();
         $connection = $DatabaseHandler->getMySQLiConnection();
 
-        $sql = "SELECT Company_ID FROM ims.users WHERE User_Email = '" . $_SESSION['email'] . "'";
+        $sql = "SELECT Company_ID FROM users WHERE User_Email = '" . $_SESSION['email'] . "'";
         $results = $connection->query($sql);
 
         if($results->num_rows > 0) {
@@ -25,11 +25,11 @@ class CompanyModal {
         }
 
         $companyConnection = $DatabaseHandler->getCompanyMySQLiConnection($company_ID);
-        $sqlCompany = "SELECT " . $DataType . " FROM company_info";
+        $sqlCompany = "SELECT " . $DataType . " FROM company_info WHERE Company_ID = 1";
         $resultsCompany = $companyConnection->query($sqlCompany);
 
         if($resultsCompany->num_rows > 0) {
-            while($row = $results->fetch_assoc()) {
+            while($row = $resultsCompany->fetch_assoc()) {
                 $data = $row[$DataType];
             }
         }

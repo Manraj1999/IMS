@@ -10,7 +10,7 @@
 
     if(session_status() === PHP_SESSION_ACTIVE) {
         if(isset($_SESSION['email'])) {
-            header("Location: dashboard.php");
+            header("Location: /IMS/dashboard/dashboard.php");
         }
     }
 
@@ -110,7 +110,7 @@
                 <div class="form-container" id="form-container">
                     <div class="inner-container sign-up-container">
                         <!-- Sign Up-->
-                        <form action="register-2.php" method="post">
+                        <form action="register.php" method="post">
                             <div class="input-field">
                                 <i class="material-icons prefix">business</i>
                                 <input type="text" name="company-name-sign-up" class="validate" id="company-name-sign-up" />
