@@ -10,6 +10,10 @@ $UserModal = new UserModal();
 
 $connect = $DatabaseHandler->getCompanyMySQLiConnection($UserModal->getUserData("Company_ID"));
 $number = count($_POST["name"]);
+
+$delSQL = "TRUNCATE TABLE company_stores";
+$connect->query($delSQL);
+
 if($number > 0)
 {
     for($i=0; $i<$number; $i++)
@@ -24,5 +28,5 @@ if($number > 0)
 }
 else
 {
-    echo "Please Enter Name";
+    echo "Please insert the data correctly";
 }

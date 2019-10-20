@@ -3971,10 +3971,10 @@ input[type="button"].btn-block {
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
-  color: #adb5bd;
+  color: #f5f4f3;
   text-align: center;
   white-space: nowrap;
-  background-color: #fff;
+  background-color: #5e72e4;
   border: 1px solid #cad1d7;
   border-radius: 0.375rem;
 }
@@ -5404,8 +5404,8 @@ input[type="button"].btn-block {
 }
 
 .badge-light {
-  color: #879cb0;
-  background-color: rgba(244, 245, 246, 0.5);
+  color: #343a40;
+  background-color: rgba(248, 249, 250, 1.0);
 }
 
 .badge-light[href]:hover,
@@ -20653,7 +20653,8 @@ pre>code.highlight {
   margin-left: 1rem;
 }
 
-button.edit {
+button.edit,
+button.edit-2 {
   background-color: transparent;
   border: 1px solid #5e72e4;
   border-radius: 3px;
@@ -20663,7 +20664,12 @@ button.edit {
   transition: ease-in-out 0.2s;
 }
 
-button.edit i {
+button.edit-2 {
+  border: 1px solid var(--red) !important;
+}
+
+button.edit i,
+button.edit-2 i {
   transition: ease-in-out 0.2s;
 }
 
@@ -20672,7 +20678,39 @@ button.edit:hover {
   background-color: #5e72e4;
 }
 
+button.edit-2:active,
+button.edit-2:hover {
+  background-color: var(--red);
+}
+
 button.edit:active i,
 button.edit:hover i {
   color: #f5f4f3 !important;
+}
+
+button.edit-2:active i,
+button.edit-2:hover i {
+  color: #f5f4f3 !important;
+}
+
+.modal-text {
+  color: #0a0c0d !important;
+}
+
+.gif {
+  width: 50%;
+  margin: 0 auto 2% auto;
+}
+
+.subtitle {
+  margin: 2% auto 0 auto;
+  color: #5e72e4;
+}
+
+.bg-gradient-peach {
+  background: linear-gradient(40deg,#fc6262,#ffd86f)!important;
+}
+
+.no-outline {
+  outline: none !important;
 }

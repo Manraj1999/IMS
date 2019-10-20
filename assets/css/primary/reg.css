@@ -10,6 +10,10 @@
     color: #5e72e4;
 }
 
+.alert {
+    position: absolute;
+}
+
 .bg-bright {
     background: #f8f9fe !important;
 }
@@ -226,4 +230,18 @@ label {
     width: 100%;
     background: #f5f4f3;
     border-radius: 5px;
+}
+
+/* Message Alerts */
+.message {
+    margin: 1% auto;
+    display: table;
+    position: fixed;
+    width: 60%;
+    left: 20%;
+    z-index: 9999;
+}
+
+.inner-message {
+    text-align: center;
 }

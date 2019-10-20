@@ -73,16 +73,25 @@ class Tools {
                 Store_Location VARCHAR(128),
                 PRIMARY KEY (Store_ID)
             )";
+                $categoriesSQL = "CREATE TABLE categories (
+                Category_ID INT NOT NULL AUTO_INCREMENT,
+                Category_Abbr VARCHAR(32) NOT NULL,
+                Category_Name VARCHAR(128) NOT NULL,
+                PRIMARY KEY (Category_ID)
+            )";
                 $supplierSQL = "CREATE TABLE suppliers (
                 Supplier_ID INT NOT NULL AUTO_INCREMENT,
+                Supplier_Code VARCHAR(32) NOT NULL,
                 Supplier_Name VARCHAR(128) NOT NULL,
                 Supplier_Location VARCHAR(128) NOT NULL,
                 PRIMARY KEY (Supplier_ID)
             )";
                 $productsSQL = "CREATE TABLE products (
                 Product_ID INT NOT NULL AUTO_INCREMENT,
-                Supplier_ID VARCHAR(32) NOT NULL,
+                Supplier_Code VARCHAR(32) NOT NULL,
+                Product_Code VARCHAR(128) NOT NULL,
                 Product_Name VARCHAR(128) NOT NULL,
+                Product_Category VARCHAR(32) NOT NULL,
                 Product_Inventory INT(32) NOT NULL,
                 PRIMARY KEY (Product_ID)
             )";
@@ -110,7 +119,7 @@ class Tools {
                 PRIMARY KEY (User_ID)
             )";
 
-                $tablesSQL = [$companyInfoSQL, $companyStoresSQL, $supplierSQL, $productsSQL, $purchasesSQL, $ordersSQL, $usersSQL];
+                $tablesSQL = [$companyInfoSQL, $companyStoresSQL, $categoriesSQL, $supplierSQL, $productsSQL, $purchasesSQL, $ordersSQL, $usersSQL];
 
                 foreach($tablesSQL as $k => $sql) {
                     $tablesResult = $connectionCompanyTablesCreations->query($sql);
@@ -140,6 +149,11 @@ class Tools {
                 Store_Location VARCHAR(128),
                 PRIMARY KEY (Store_ID)
             )";
+                $categoriesSQL = "CREATE TABLE categories (
+                Category_ID INT NOT NULL AUTO_INCREMENT,
+                Category_Name VARCHAR(128) NOT NULL,
+                PRIMARY KEY (Category_ID)
+            )";
                 $supplierSQL = "CREATE TABLE suppliers (
                 Supplier_ID INT NOT NULL AUTO_INCREMENT,
                 Supplier_Name VARCHAR(128) NOT NULL,
@@ -177,7 +191,7 @@ class Tools {
                 PRIMARY KEY (User_ID)
             )";
 
-                $tablesSQL = [$companyInfoSQL, $companyStoresSQL, $supplierSQL, $productsSQL, $purchasesSQL, $ordersSQL, $usersSQL];
+                $tablesSQL = [$companyInfoSQL, $companyStoresSQL, $categoriesSQL, $supplierSQL, $productsSQL, $purchasesSQL, $ordersSQL, $usersSQL];
 
                 foreach($tablesSQL as $k => $sql) {
                     $tablesResult = $connectionCompanyTablesCreations->query($sql);

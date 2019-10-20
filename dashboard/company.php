@@ -3,8 +3,13 @@
     include_once $_SERVER['DOCUMENT_ROOT'] . "/ims/settings/General.php";
     include_once $_SERVER['DOCUMENT_ROOT'] . '/ims/php/UI/Dashboard.php';
     include_once $_SERVER['DOCUMENT_ROOT'] . '/ims/php/modals/CompanyModal.php';
+    include_once $_SERVER['DOCUMENT_ROOT'] . '/ims/php/dashboard/Company.php';
+    include_once $_SERVER['DOCUMENT_ROOT'] . "/ims/php/Armor.php";
 
     session_start();
+
+    $armor = new Armor();
+    $armor->initDashboard();
 
     $CompanyModal = new CompanyModal();
     $CompanyName = $CompanyModal->getCompanyData("Company_Name");
@@ -127,15 +132,11 @@
                                         </div>
 
                                         <hr/>
-                                        <div class="row">
-                                            <div class="col-xl-6 text-center">
-                                                <h4 class="text-blue text-underline">Store #1</h4>
-                                                <h4 class="text-blue">Location</h4>
-                                            </div>
-                                            <div class="col-xl-6 text-center">
-                                                <h4 class="text-blue text-underline">Store #2</h4>
-                                                <h4 class="text-blue">Location</h4>
-                                            </div>
+                                        <div class="row" id="company-stores-data">
+                                            <?php
+                                                $Company = new Company();
+                                                $Company->getStores();
+                                            ?>
                                         </div>
                                     </div>
                                 </div>
@@ -158,16 +159,17 @@
                                                             <table class="table" id="dynamic_field">
                                                                 <tr>
                                                                     <h3>Store</h3>
-                                                                    <td><input type="text" name="name[]" placeholder="Store Name" class="modal-text form-control name_list" /></td>
-                                                                    <td><input type="text" name="location[]" placeholder="Store Location" class="modal-text form-control name_list" /></td>
-                                                                    <td><button type="button" name="add" id="add" class="btn btn-success">Add More</button></td>
+
+                                                                    <?php
+                                                                        $counter = $Company->checkStoresLogic();
+                                                                    ?>
                                                                 </tr>
                                                             </table>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <button type="button" id="close-btn-store" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                                     <button type="button" id="save-store" class="btn btn-primary">Save changes</button>
                                                 </div>
                                             </form>
@@ -191,6 +193,11 @@
         <!--   Dashboard JS   -->
         <script src="../assets/js/dashboard.min.js"></script>
         <script src="../assets/js/modal-rows.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                storeModalsJS(<?php echo $counter; ?>);
+            });
+        </script>
     </body>
 
 </html>

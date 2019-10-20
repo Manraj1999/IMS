@@ -258,16 +258,3 @@ form {
         font-size: 115%;
     }
 }
-
-/* Message Alerts */
-.message {
-    margin: 1% auto;
-    display: table;
-    position: absolute;
-    width: 60%;
-    left: 20%;
-}
-
-.inner-message {
-    text-align: center;
-}
