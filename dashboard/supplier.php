@@ -2,7 +2,7 @@
     include_once $_SERVER['DOCUMENT_ROOT'] . "/ims/settings/General.php";
     include_once $_SERVER['DOCUMENT_ROOT'] . '/ims/php/UI/Dashboard.php';
     include_once $_SERVER['DOCUMENT_ROOT'] . '/ims/php/Armor.php';
-    include_once $_SERVER['DOCUMENT_ROOT'] . '/ims/php/dashboard/Categories.php';
+    include_once $_SERVER['DOCUMENT_ROOT'] . '/ims/php/dashboard/Supplier.php';
 
     $Armor = new Armor();
     $Armor->initDashboard();
@@ -14,7 +14,7 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title><?php echo SITE_NAME; ?> | Categories</title>
+        <title><?php echo SITE_NAME; ?> | Supplier</title>
         <!-- Favicon -->
         <link href="../assets/img/brand/favicon.png" rel="icon" type="image/png">
         <!-- Fonts -->
@@ -30,7 +30,7 @@
         <!-- Start: Navbar -->
         <?php
         $dashboard = new Dashboard();
-        $dashboard->getNavigation(3);
+        $dashboard->getNavigation(2);
         ?>
         <!-- End: Navbar -->
         <div class="main-content">
@@ -39,7 +39,7 @@
             $dashboard->getHeader();
             ?>
             <!-- End: Header -->
-            <div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+            <div style="background: linear-gradient(to right, #ed213a, #93291e);" class="header pb-8 pt-5 pt-md-8">
                 <div class="container-fluid">
                     <div class="header-body">
                         <div class="row">
@@ -48,20 +48,20 @@
                                 <div class="card card-stats mb-4 mb-xl-0">
                                     <div class="card-body">
                                         <div>
-                                            <h3 class="text-center text-red">
-                                                <i style="margin-right: 8px;" class="fa fa-list text-red"></i> Categories
-                                                <button name="edit-categories" class="edit-2" data-toggle="modal" data-target="#editCategories">
-                                                    <i class="fa fa-pencil-alt fa-align-right text-red"></i>
+                                            <h3 class="text-center" style="color: #ed213a;">
+                                                <i style="margin-right: 8px; color: #ed213a;" class="fa fa-industry"></i> Supplier
+                                                <button name="edit-categories" class="edit-2" data-toggle="modal" data-target="#editSuppliers">
+                                                    <i class="fa fa-pencil-alt fa-align-right text-danger"></i>
                                                 </button>
                                             </h3>
                                         </div>
 
                                         <hr/>
-                                        <div class="row" id="company-categories-data">
+                                        <div class="row" id="company-suppliers-data">
 
                                             <?php
-                                                $Categories = new Categories();
-                                                $Categories->getCategories();
+                                            $Supplier = new Supplier();
+                                            $Supplier->getSuppliers();
                                             ?>
                                         </div>
                                     </div>
@@ -69,34 +69,32 @@
 
 
                                 <!-- Modal -->
-                                <div class="modal fade" id="editCategories" tabindex="-1" role="dialog" aria-labelledby="ModalScrollableTitle" aria-hidden="true">
+                                <div class="modal fade" id="editSuppliers" tabindex="-1" role="dialog" aria-labelledby="ModalScrollableTitle" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="ModalScrollableTitle">Categories</h5>
+                                                <h5 class="modal-title" id="ModalScrollableTitle">Add a Supplier</h5>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
-                                            <form name="add_categories" id="add_categories">
+                                            <form name="add_suppliers" id="add_suppliers">
                                                 <div class="modal-body">
                                                     <div class="form-group">
-                                                        <div class="table-responsive">
-                                                            <table class="table" id="dynamic_field">
-                                                                <tr>
-                                                                    <h3>Categories</h3>
+                                                        <table class="table" id="dynamic_field">
+                                                            <tr>
+                                                                <h3>Supplier</h3>
+                                                                <?php
+                                                                    $counter = $Supplier->checkSuppliersLogic();
+                                                                ?>
+                                                            </tr>
+                                                        </table>
 
-                                                                    <?php
-                                                                        $counter = $Categories->checkCategoriesLogic();
-                                                                    ?>
-                                                                </tr>
-                                                            </table>
-                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" id="close-btn-categories" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <button type="button" id="save-categories" class="btn btn-primary">Save changes</button>
+                                                    <button type="button" id="close-btn-suppliers" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <button type="button" id="save-suppliers" class="btn btn-primary">Save changes</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -118,7 +116,7 @@
         <script src="../assets/js/modal-rows.js"></script>
         <script type="text/javascript">
             $(document).ready(function() {
-                categoryModalsJS(<?php echo $counter; ?>);
+                supplierModalsJS(<?php echo $counter; ?>);
             });
         </script>
 

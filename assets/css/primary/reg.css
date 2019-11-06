@@ -1,3 +1,14 @@
+@keyframes fadein{
+    from{opacity:0;}
+    to{opacity:1;}
+}
+
+.row {
+    -webkit-animation: fadein 0.333s;
+    -o-animation: fadein 0.333s;
+    animation: fadein 0.333s;
+}
+
 .reg-body {
     background: url("http://manraj.randhawa.my/IMS/assets/ss_welcome.png") no-repeat;
     vertical-align: center;
@@ -39,6 +50,18 @@ div.reg-top-container {
     left: 0;
 }
 
+div.log-top-container {
+    background: #5e72e4;
+    border-radius: 5px 5px 0 0;
+    width: 100%;
+    height: 11%;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    display: block;
+    left: 0;
+}
+
 /* Form */
 
 .register-form {
@@ -72,12 +95,28 @@ div.reg-top-container {
     color: #f5f4f3 !important;
 }
 
-.sign-up-btn {
+.reg-btn {
+    margin-top: 2.75%;
+    position: absolute;
+    background-color: #ffffff !important;
+    color: #5e72e4 !important;
+    border-radius: 5px;
+}
+
+.reg-btn:hover {
+    background-color: #5e72e4 !important;
+    border: 1px solid #f5f4f3 !important;
+    color: #f5f4f3 !important;
+}
+
+.sign-up-btn,
+.sign-in-btn {
     background-color: #5e72e4 !important;
     color: #f5f4f3 !important;
 }
 
-.sign-up-btn:hover {
+.sign-up-btn:hover,
+.sign-in-btn:hover {
     color: #f5f4f3 !important;
     background-color: var(--dark) !important;
 }
@@ -128,12 +167,28 @@ div.reg-top-container {
         left: 0;
     }
 
+    div.log-bottom-text-div {
+        background: #5e72e4;
+        border-radius: 0 0 5px 5px;
+        width: 100%;
+        height: 7%;
+        text-align: center;
+        position: absolute;
+        bottom: 0;
+        display: block;
+        left: 0;
+    }
+
     img.img-header {
         margin-top: 15%;
     }
 
     div.reg-top-container {
         height: 5%;
+    }
+
+    div.log-top-container {
+        height: 9%;
     }
 
     p.bottom-text {

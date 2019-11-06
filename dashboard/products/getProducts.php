@@ -5,4 +5,9 @@
     session_start();
 
     $Products = new Products();
-    $Products->getProducts();
+
+    if(isset($_POST['limitCount'])) {
+        $Products->getProducts($_POST['limitCount']);
+    } else {
+        $Products->getProducts(10);
+    }

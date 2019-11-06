@@ -43,46 +43,6 @@
         }
 
     }
-
-    /*
-    if(isset($_POST['sign-up-btn'])) {
-        $companyName = $_POST['company-name-sign-up'];
-        $userFullName = $_POST['name-sign-up'];
-        $userEmail = $_POST['email-sign-up'];
-        $userPassword = $_POST['password-sign-up'];
-
-        $companyID = strtolower(preg_replace("/[^a-zA-Z]/", "", $companyName));
-
-        $data = array(
-            array("Company_ID", $companyID),
-            array("User_FullName", $userFullName),
-            array("User_Email", $userEmail),
-            array("User_Salt", $userPassword),
-            array("User_Type", "SUPERVISOR")
-        );
-
-        $response = $user->register($data);
-        $message = $user->displayMessage($response, "register");
-
-        if($response['error'] == false) {
-            echo "<div class='message'>
-        <div class='alert alert-success alert-dismissible inner-message fade show'>
-            <button type='button' class='close' data-dismiss='alert'>&times;</button>" .
-                $message .
-                "</div>
-    </div>";
-        } else {
-            echo "<div class='message'>
-        <div class='alert alert-danger alert-dismissible inner-message fade show'>
-            <button type='button' class='close' data-dismiss='alert'>&times;</button>" .
-                $message .
-                "</div>
-    </div>";
-        }
-    }
-    */
-
-
 ?>
 
 <!DOCTYPE html>
@@ -92,103 +52,68 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <title><?php echo SITE_NAME; ?> | Home</title>
+        <title><?php echo ORI_SITE_NAME; ?> | Login</title>
 
-        <!-- CSS -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-        <link rel="stylesheet" href="assets/css/materialize/materialize.min.css" />
+        <!-- CSS Files -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
         <link rel="stylesheet" href="assets/css/primary-layout.css" />
-        <link rel="stylesheet" href="assets/css/primary/login-reg.css" />
+        <link rel="stylesheet" href="assets/css/primary/reg.css" />
+        <link rel="stylesheet" href="assets/css/materialize/materialize.min.css" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
 
     </head>
 
-    <body class="container">
-        <div class="row">
-            <div class="col-sm-1"></div>
-            <div class="col-sm-10">
-                <div class="form-container" id="form-container">
-                    <div class="inner-container sign-up-container">
-                        <!-- Sign Up-->
-                        <form action="register.php" method="post">
-                            <div class="input-field">
-                                <i class="material-icons prefix">business</i>
-                                <input type="text" name="company-name-sign-up" class="validate" id="company-name-sign-up" />
-                                <label for="company-name-sign-up">Company's Name</label>
-                            </div>
-                            <div class="input-field">
-                                <i class="material-icons prefix">person</i>
-                                <input type="text" name="name-sign-up" class="validate" id="name-sign-up" />
-                                <label for="name-sign-up">Name</label>
-                            </div>
-                            <div class="input-field">
-                                <i class="material-icons prefix">email</i>
-                                <input type="email" name="email-sign-up" class="validate" id="email-sign-up" />
-                                <label for="email-sign-up">Email Address</label>
-                            </div>
-                            <div class="input-field">
-                                <i class="material-icons prefix">vpn_key</i>
-                                <input type="password" name="password-sign-up" class="validate" id="password-sign-up" />
-                                <label for="password-sign-up">Password</label>
-                            </div>
-                            <button class="btn waves-effect waves-light blue lighten-1" type="submit" name="sign-up-btn">Sign up
-                                <i class="material-icons right">chevron_right</i>
-                            </button>
-                            <div class="bottom-text-div">
-                                <p class="bottom-text d-block d-sm-none">Already have an account? <a id="signInMobile" href="#">Sign in now!</a></p>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="inner-container sign-in-container">
-                        <!-- Sign In -->
-                        <form action="" method="post">
-                            <div class="input-field">
-                                <i class="material-icons prefix">email</i>
-                                <input type="email" name="email-sign-in" class="validate" id="email-sign-in" />
-                                <label for="email-sign-in">Email Address</label>
-                            </div>
-                            <div class="input-field">
-                                <i class="material-icons prefix">vpn_key</i>
-                                <input type="password" name="password-sign-in" class="validate" id="password-sign-in" />
-                                <label for="password-sign-in">Password</label>
-                            </div>
-                            <button class="btn waves-effect waves-light blue lighten-1" type="submit" name="sign-in-btn">Sign in
-                                <i class="material-icons right">chevron_right</i>
-                            </button>
-                            <div class="bottom-text-div">
-                                <p class="bottom-text d-block d-sm-none">Don't have an account? <a id="signUpMobile" href="#">Create one now!</a></p>
-                            </div>
-                        </form>
-
-                    </div>
-                    <div class="overlay-container d-none d-sm-block">
-                        <!-- Overlay -->
-                        <div class="overlay">
-                            <div class="overlay-panel overlay-left">
-                                <h3>Create an account</h3>
-                                <p>Start using <?php echo SITE_NAME; ?> and manage your company's inventory.</p>
-                                <p>If you already have an account, sign in now!</p>
-                                <button class="ghost" id="signIn">Sign In</button>
-                            </div>
-                            <div class="overlay-panel overlay-right">
-                                <h3>Welcome to <?php echo SITE_NAME; ?></h3>
-                                <p>Enter your credentials to start managing your company's inventory.</p>
-                                <p>If you've not signed up yet, sign up now!</p>
-                                <button class="ghost" id="signUp">Sign Up</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-1"></div>
+    <body class="container-fluid">
+    <div class="row">
+        <div class="col-sm-6">
+            <img alt="..." class="responsive-img" src="http://manraj.randhawa.my/IMS/assets/ss_welcome.png" style="position: fixed; width: 50%;"/>
+            <h4 class="fixed-info mt-5">Welcome back.</h4>
+            <h6 class="fixed-info">Sign in and get back to where you left off! :)</h6>
         </div>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-4 bg-white register-form">
+            <div class="log-top-container left-0">
+                <h5 class="reg-title">Login</h5>
+            </div>
+            <button onclick="location.href='register.php'" class="btn waves-effect waves-light lighten-1 d-none d-sm-block reg-btn right" type="button" name="back-btn">
+                <i class="material-icons right">chevron_right</i>
+                Register
+            </button>
 
-        <!-- JavaScript -->
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-        <script src="assets/js/materialize/materialize.min.js"></script>
-        <script src="assets/js/login-reg-overlay.js"></script>
+            <img src="http://manraj.randhawa.my/IMS/assets/ss_welcome_2.png" class="img-header" alt="...">
+            <form class="" action="" method="post">
+                <div class="input-field">
+                    <i class="material-icons prefix">email</i>
+                    <input type="email" name="email-sign-in" class="validate" id="email-sign-in" />
+                    <label for="email-sign-in">Email Address</label>
+                </div>
+                <div class="input-field">
+                    <i class="material-icons prefix">vpn_key</i>
+                    <input type="password" name="password-sign-in" class="validate" id="password-sign-in" />
+                    <label for="password-sign-in">Password</label>
+                </div>
+                <button class="btn waves-effect waves-light lighten-1 right sign-up-btn" type="submit" name="sign-in-btn">Sign in
+                    <i class="material-icons right">chevron_right</i>
+                </button>
+                <div class="log-bottom-text-div">
+                    <p class="bottom-text text-center d-block d-sm-none">Don't have an account yet? <a id="signInMobile" href="register.php">Sign up now!</a></p>
+                </div>
+            </form>
+        </div>
+        <div class="col-sm-1"></div>
+    </div>
+
+    <!--   Core   -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/materialize/materialize.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            setTimeout(function() {
+                $(".alert").alert('close');
+            }, 1500);
+        });
+    </script>
     </body>
 
 </html>

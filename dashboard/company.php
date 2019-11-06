@@ -6,8 +6,6 @@
     include_once $_SERVER['DOCUMENT_ROOT'] . '/ims/php/dashboard/Company.php';
     include_once $_SERVER['DOCUMENT_ROOT'] . "/ims/php/Armor.php";
 
-    session_start();
-
     $armor = new Armor();
     $armor->initDashboard();
 

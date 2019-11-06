@@ -18,6 +18,7 @@ class Categories {
             while($row = $results->fetch_assoc()) {
                 echo "<button type='button' name='" . $row["Category_Abbr"] . "' id='cat-btns' class='btn btn-danger mb-2'>
                                                 " . $row["Category_Name"] . " <span class='badge badge-light text-danger'>" . $row["Category_Abbr"] . "</span>
+                                                <span class='badge badge-light text-danger m--2'>" . $this->getNumberOfProductsCategories($row["Category_Abbr"]) . "</span>
                                             </button>";
             }
         } else {
@@ -55,6 +56,26 @@ class Categories {
                     <td><button type='button' name='add' id='add' class='btn btn-success'>Add More</button></td></tr>";
         }
         return $counter;
+    }
+
+    function getNumberOfProductsCategories($Category_Abbr) {
+        $DatabaseHandler = new DatabaseHandler();
+        $UserModal = new UserModal();
+
+        $sql = "SELECT * FROM products WHERE Product_Category =  '" . $Category_Abbr . "'";
+        $connection = $DatabaseHandler->getCompanyMySQLiConnection($UserModal->getUserData("Company_ID"));
+
+        $results = $connection->query($sql);
+        $count = 0;
+        if($results->num_rows > 0) {
+            while($row = $results->fetch_assoc()) {
+                $count++;
+            }
+        } else {
+            $count = 0;
+        }
+
+        return $count;
     }
 
 }

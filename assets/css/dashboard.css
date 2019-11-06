@@ -20714,3 +20714,18 @@ button.edit-2:hover i {
 .no-outline {
   outline: none !important;
 }
+
+.del-msg {
+  margin: -7% 0 0 -7%;
+  display: inline-block;
+  position: fixed;
+  z-index: 9999;
+  visibility: hidden;
+}
+
+/* Mobile */
+@media (max-width: 575px) {
+  .del-msg {
+    margin: -10% 0 0 -25%;
+  }
+}

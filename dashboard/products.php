@@ -1,9 +1,11 @@
 <?php
     include_once $_SERVER['DOCUMENT_ROOT'] . "/ims/settings/General.php";
     include_once $_SERVER['DOCUMENT_ROOT'] . '/ims/php/UI/Dashboard.php';
+    include_once $_SERVER['DOCUMENT_ROOT'] . '/ims/php/Armor.php';
     include_once $_SERVER['DOCUMENT_ROOT'] . '/ims/php/dashboard/Products.php';
 
-    session_start();
+    $Armor = new Armor();
+    $Armor->initDashboard();
 
     $Products = new Products();
 ?>
@@ -14,7 +16,7 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title><?php echo SITE_NAME; ?> | Categories</title>
+        <title><?php echo SITE_NAME; ?> | Products</title>
         <!-- Favicon -->
         <link href="../assets/img/brand/favicon.png" rel="icon" type="image/png">
         <!-- Fonts -->
@@ -31,7 +33,7 @@
         <!-- Start: Navbar -->
         <?php
         $dashboard = new Dashboard();
-        $dashboard->getNavigation(3);
+        $dashboard->getNavigation(4);
         ?>
         <!-- End: Navbar -->
         <div class="main-content">
@@ -46,6 +48,20 @@
                         <div class="row">
                             <div class="col-xl-1 col-lg-1"></div>
                             <div class="col-xl-10 col-lg-10">
+                                <div id="message" style="visibility: hidden; text-align: center;">
+                                    <div style="width: 50%; left: 75%; margin: -7% 0 0 -51%; display: block; position: fixed; z-index: 9999;">
+                                        <div id="modal-msg" class="alert alert-primary">
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="message" style="visibility: visible; text-align: center;">
+                                    <div class="del-msg">
+                                        <div id="inner-msg" class="alert alert-primary">
+
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="card card-stats mb-4 mb-xl-0">
                                     <div class="card-body">
                                         <div>
@@ -58,7 +74,7 @@
 
                                             <div class="col-5 col-sm-3 col-md-4 col-lg-2 col-xl-2 ml--3 ">
                                                 <select class="selectpicker form-control float-left mt--4" id="limit-selector" name="limit-selector" data-style="btn-primary">
-                                                    <option selected disabled>Limit</option>
+                                                    <option value="10" selected disabled>Limit</option>
                                                     <option value="10">10</option>
                                                     <option value="50">50</option>
                                                     <option value="100">100</option>
@@ -82,9 +98,7 @@
                                                 </thead>
 
                                                 <tbody id="products-table">
-                                                <?php
-                                                    $Products->getProducts();
-                                                ?>
+                                                    <!-- Using JavaScript to call data -->
                                                 </tbody>
                                             </table>
                                         </div>
@@ -112,7 +126,7 @@
                                                         </div>
                                                         <div class="col-xl-4 col-lg-4 mb-2">
                                                             <select id='product_category' class='selectpicker' data-style='btn-primary no-outline' name='product_category' data-live-search='true'>
-                                                                <option>Product Category</option>
+                                                                <option val="default" selected disabled hidden>Product Category</option>
                                                                 <?php
                                                                     $Products->getCategoriesForAddingProducts();
                                                                 ?>
@@ -123,7 +137,7 @@
                                                         </div>
                                                         <div class="col-xl-5 col-lg-5 mb-2">
                                                             <select id='supplier_code' class='selectpicker' data-style='btn-primary no-outline' name='supplier_code' data-live-search='true'>
-                                                                <option>Product Supplier</option>
+                                                                <option val="default" selected disabled hidden>Product Supplier</option>
                                                                 <?php
                                                                     $Products->getSuppliersForAddingProducts();
                                                                 ?>
@@ -191,8 +205,32 @@
         <script>
             $(document).ready(function() {
                 addProductModalsJS();
+
+                // START: Get Products and place them in the respective div
+                $.get("./products/getProducts.php", function(data) {
+                    $('#products-table').html(data);
+                });
+                // END
+
+
+                // START: Set limit to the products
+                var limit = 10;
+
+                $("#limit-selector").change(function() {
+                    limit = $(this).children("option:selected").val();
+                    $.ajax({
+                        url: "./products/getProducts.php",
+                        method: "POST",
+                        data: {limitCount: limit},
+                        success: function(data) {
+                            $('#products-table').html(data);
+                        }
+                    });
+                });
+                // END
             });
 
+            // START: Auto-capitalize and set number limit to modals
             var number = document.getElementById('product_inventory');
             var numberUpdate = document.getElementById('update_product_inventory');
 
@@ -203,7 +241,7 @@
                     || e.keyCode == 8)) {
                     return false;
                 }
-            }
+            };
 
             // Listen for input event on numInput.
             numberUpdate.onkeydown = function(e) {
@@ -212,7 +250,7 @@
                     || e.keyCode == 8)) {
                     return false;
                 }
-            }
+            };
 
             function forceKeyPressUppercase(e)
             {
@@ -230,6 +268,7 @@
             }
 
             document.getElementById("product_code").addEventListener("keypress", forceKeyPressUppercase, false);
+            // END
         </script>
     </body>
 </html>

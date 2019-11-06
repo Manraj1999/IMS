@@ -1,7 +1,7 @@
 <?php
 
-include $_SERVER['DOCUMENT_ROOT'] . '/ims/php/modals/UserModal.php';
-include $_SERVER['DOCUMENT_ROOT'] . '/ims/php/modals/CompanyModal.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/ims/php/modals/UserModal.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/ims/php/modals/CompanyModal.php';
 
 class Dashboard {
 
@@ -14,6 +14,7 @@ class Dashboard {
         $string[4] = "";
         $string[5] = "";
         $string[6] = "";
+        $string[7] = "";
         $string[$id] = "active";
 
         echo "<nav class=\"navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white\" id=\"sidenav-main\">
@@ -24,7 +25,7 @@ class Dashboard {
         </button>
         <!-- Brand -->
         <a class=\"navbar-brand pt-0\">
-            <img src=\"http://localhost/ims/assets/img/brand/blue.png\" class=\"navbar-brand-img\" alt=\"...\">
+            <img src=\"../assets/img/brand/blue.png\" class=\"navbar-brand-img\" alt=\"...\">
         </a>
         <!-- User -->
         <ul class=\"nav align-items-center d-md-none\">
@@ -32,7 +33,7 @@ class Dashboard {
                 <a class=\"nav-link\" href=\"#\" role=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
                     <div class=\"media align-items-center\">
                       <span class=\"avatar avatar-sm rounded-circle\">
-                        <img alt=\"Image placeholder\" src='" . "http://localhost/ims/assets/img/theme/team-4-800x800.jpg" . "'>
+                        <img alt=\"Image placeholder\" src='" . "../assets/img/theme/team-4-800x800.jpg" . "'>
                       </span>
                     </div>
                 </a>
@@ -59,7 +60,7 @@ class Dashboard {
                 <div class=\"row\">
                     <div class=\"col-6 collapse-brand\">
                         <a>
-                            <img src='http://localhost/ims/assets/img/brand/blue.png'>
+                            <img src='../assets/img/brand/blue.png'>
                         </a>
                     </div>
                     <div class=\"col-6 collapse-close\">
@@ -82,28 +83,37 @@ class Dashboard {
                         <i class=\"fa fa-building text-blue\"></i> Company
                     </a>
                 </li>
+            </ul>
+            <hr class=\"my-3\">
+            <h6 class=\"navbar-heading text-muted\">Inventory</h6>
+            <ul class='navbar-nav'>    
                 <li class=\"nav-item\">
-                    <a class='nav-link " . $string[2] . "'href=\"./categories.php\">
+                    <a class='nav-link " . $string[2] . "'href=\"./supplier.php\">
+                        <i class=\"fa fa-industry\" style='color: #ed213a;'></i> Supplier
+                    </a>
+                </li>
+                <li class=\"nav-item\">
+                    <a class='nav-link " . $string[3] . "'href=\"./categories.php\">
                         <i class=\"ni ni-bullet-list-67 text-red\"></i> Categories
                     </a>
                 </li>
                 <li class=\"nav-item\">
-                    <a class='nav-link " . $string[3] . "'href=\"./products.php\">
+                    <a class='nav-link " . $string[4] . "'href=\"./products.php\">
                         <i class=\"fa fa-archive text-orange\"></i> Products
                     </a>
                 </li>
                 <li class=\"nav-item\">
-                    <a class='nav-link " . $string[4] . "'href=\"./stores.php\">
+                    <a class='nav-link " . $string[5] . "'href=\"./stores.php\">
                         <i class=\"fa fa-store text-purple\"></i> Stores
                     </a>
                 </li>
                 <li class=\"nav-item\">
-                    <a class='nav-link " . $string[5] . "'href=\"./orders.php\">
+                    <a class='nav-link " . $string[6] . "'href=\"./orders.php\">
                         <i class=\"fa fa-shopping-cart text-info\"></i> Orders
                     </a>
                 </li>
                 <li class=\"nav-item\">
-                    <a class='nav-link " . $string[6] . "'href=\"./profile.php\">
+                    <a class='nav-link " . $string[7] . "'href=\"./profile.php\">
                         <i class=\"ni ni-single-02 text-green\"></i> Users
                     </a>
                 </li>
@@ -114,6 +124,11 @@ class Dashboard {
             <h6 class=\"navbar-heading text-muted\">Services</h6>
             <!-- Navigation -->
             <ul class=\"navbar-nav mb-md-3\">
+                <li class=\"nav-item\">
+                    <a class='nav-link' href='settings.php'>
+                        <i class=\"fa fa-cog\"></i> Settings
+                    </a>
+                </li>
                 <li class=\"nav-item\">
                     <a class=\"nav-link\" href=\"./privacy-policy.php\">
                         <i class=\"fa fa-lock\"></i> Privacy Policy
@@ -143,7 +158,7 @@ class Dashboard {
                     <a class=\"nav-link pr-0\" href=\"#\" role=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
                         <div class=\"media align-items-center\">
                 <span class=\"avatar avatar-sm rounded-circle\">
-                  <img alt=\"Image placeholder\" src=\"http://localhost/ims/assets/img/theme/team-4-800x800.jpg\">
+                  <img alt=\"Image placeholder\" src=\"../assets/img/theme/team-4-800x800.jpg\">
                 </span>
                             <div class=\"media-body ml-2 d-none d-lg-block\">
                                 <span class=\"mb-0 text-sm  font-weight-bold\">" . $UserModal->getUserData("User_FullName") ."</span>

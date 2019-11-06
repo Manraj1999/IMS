@@ -9,87 +9,79 @@ if(!(session_status() === PHP_SESSION_ACTIVE)) {
 }
 
 if(session_status() === PHP_SESSION_ACTIVE) {
-    if(!(isset($_POST['company-name-sign-up'])) ||
-        !(isset($_POST['name-sign-up'])) ||
-        !(isset($_POST['email-sign-up'])) ||
-        !(isset($_POST['password-sign-up']))) {
-        header("Location: index.php");
-    } else {
-        // Register User
-        if(isset($_POST['sign-up-btn-reg'])) {
-            $companyName = $_POST['company-name-sign-up'];
-            $userFullName = $_POST['name-sign-up'];
-            $userEmail = $_POST['email-sign-up'];
-            $userPassword = $_POST['password-sign-up'];
-            $userPasswordConfirm = $_POST['confirm-password-sign-up'];
-            $invType = $_POST['inventory-type'];
+    // Register User
+    if (isset($_POST['sign-up-btn-reg'])) {
+        $companyName = $_POST['company-name-sign-up'];
+        $userFullName = $_POST['name-sign-up'];
+        $userEmail = $_POST['email-sign-up'];
+        $userPassword = $_POST['password-sign-up'];
+        $userPasswordConfirm = $_POST['confirm-password-sign-up'];
+        $invType = $_POST['inventory-type'];
 
-            $companyID = strtolower(preg_replace("/[^a-zA-Z]/", "", $companyName));
+        $companyID = strtolower(preg_replace("/[^a-zA-Z]/", "", $companyName));
 
-            $error = false;
-            $errorMsg = "";
-            if(empty($companyName)) {
-                $error = true;
-                $errorMsg .= "The 'Company Name' field is empty<br/>";
-            }
-            if(empty($userFullName)) {
-                $error = true;
-                $errorMsg .= "The 'Full Name' field is empty<br/>";
-            }
-            if(empty($userEmail)) {
-                $error = true;
-                $errorMsg .= "The 'Email' field is empty<br/>";
-            }
-            if(empty($userPassword)) {
-                $error = true;
-                $errorMsg .= "The 'Password' field is empty<br/>";
-            }
-            if(empty($userPasswordConfirm)) {
-                $error = true;
-                $errorMsg .= "The 'Confirm Password' field is empty<br/>";
-            }
-            if(empty($invType)) {
-                $error = true;
-                $errorMsg .= "The 'Inventory Type' field is not selected<br/>";
-            }
-
-            if($error == true) {
-                $tools = new Tools();
-                $tools->sendErrorMessage($errorMsg);
-            } else {
-                if ($userPassword !== $userPasswordConfirm) {
-                    echo "<div class='message'>
+        $error = false;
+        $errorMsg = "";
+        if (empty($companyName)) {
+            $error = true;
+            $errorMsg .= "The 'Company Name' field is empty<br/>";
+        }
+        if (empty($userFullName)) {
+            $error = true;
+            $errorMsg .= "The 'Full Name' field is empty<br/>";
+        }
+        if (empty($userEmail)) {
+            $error = true;
+            $errorMsg .= "The 'Email' field is empty<br/>";
+        }
+        if (empty($userPassword)) {
+            $error = true;
+            $errorMsg .= "The 'Password' field is empty<br/>";
+        }
+        if (empty($userPasswordConfirm)) {
+            $error = true;
+            $errorMsg .= "The 'Confirm Password' field is empty<br/>";
+        }
+        if (empty($invType)) {
+            $error = true;
+            $errorMsg .= "The 'Inventory Type' field is not selected<br/>";
+        }
+        if ($error == true) {
+            $tools = new Tools();
+            $tools->sendErrorMessage($errorMsg);
+        } else {
+            if ($userPassword !== $userPasswordConfirm) {
+                echo "<div class='message'>
         <div class='alert alert-danger alert-dismissible inner-message fade show'>
             <button type='button' class='close' data-dismiss='alert'>&times;</button>The passwords do not match!</div></div>";
-                } else {
-                    $data = array(
-                        array("Company_ID", $companyID),
-                        array("User_FullName", $userFullName),
-                        array("User_Email", $userEmail),
-                        array("User_Salt", $userPassword),
-                        array("User_Type", "SUPERVISOR")
-                    );
+            } else {
+                $data = array(
+                    array("Company_ID", $companyID),
+                    array("User_FullName", $userFullName),
+                    array("User_Email", $userEmail),
+                    array("User_Salt", $userPassword),
+                    array("User_Type", "SUPERVISOR")
+                );
 
-                    $user = new User();
+                $user = new User();
 
-                    $response = $user->register($data, $companyName, $invType);
-                    $message = $user->displayMessage($response, "register");
+                $response = $user->register($data, $companyName, $invType);
+                $message = $user->displayMessage($response, "register");
 
-                    if ($response['error'] == false) {
-                        echo "<div class='message'>
+                if ($response['error'] == false) {
+                    echo "<div class='message'>
         <div class='alert alert-success alert-dismissible inner-message fade show'>
             <button type='button' class='close' data-dismiss='alert'>&times;</button>" .
-                            $message .
-                            "</div>
+                        $message .
+                        "</div>
     </div>";
-                    } else {
-                        echo "<div class='message'>
+                } else {
+                    echo "<div class='message'>
         <div class='alert alert-danger alert-dismissible inner-message fade show'>
             <button type='button' class='close' data-dismiss='alert'>&times;</button>" .
-                            $message .
-                            "</div>
+                        $message .
+                        "</div>
     </div>";
-                    }
                 }
             }
         }
@@ -102,7 +94,7 @@ if(session_status() === PHP_SESSION_ACTIVE) {
 <html lang="en">
 
     <head>
-        <title><?php echo SITE_NAME; ?> | Register</title>
+        <title><?php echo ORI_SITE_NAME; ?> | Register</title>
 
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -135,22 +127,22 @@ if(session_status() === PHP_SESSION_ACTIVE) {
                 <form class="" action="" method="post">
                     <div class="input-field">
                         <i class="material-icons prefix">business</i>
-                        <input type="text" name="company-name-sign-up" class="validate" id="company-name-sign-up" value="<?php echo $_POST['company-name-sign-up']; ?>" />
+                        <input type="text" name="company-name-sign-up" class="validate" id="company-name-sign-up" />
                         <label for="company-name-sign-up">Company's Name</label>
                     </div>
                     <div class="input-field">
                         <i class="material-icons prefix">person</i>
-                        <input type="text" name="name-sign-up" class="validate" id="name-sign-up" value="<?php echo $_POST['name-sign-up']; ?>" />
+                        <input type="text" name="name-sign-up" class="validate" id="name-sign-up" />
                         <label for="name-sign-up">Name</label>
                     </div>
                     <div class="input-field">
                         <i class="material-icons prefix">email</i>
-                        <input type="email" name="email-sign-up" class="validate" id="email-sign-up" value="<?php echo $_POST['email-sign-up']; ?>" />
+                        <input type="email" name="email-sign-up" class="validate" id="email-sign-up" />
                         <label for="email-sign-up">Email Address</label>
                     </div>
                     <div class="input-field">
                         <i class="material-icons prefix">vpn_key</i>
-                        <input type="password" name="password-sign-up" class="validate" id="password-sign-up" value="<?php echo $_POST['password-sign-up']; ?>" />
+                        <input type="password" name="password-sign-up" class="validate" id="password-sign-up" />
                         <label for="password-sign-up">Password</label>
                     </div>
                     <div class="input-field">

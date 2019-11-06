@@ -78,7 +78,7 @@ function addProductModalsJS() {
             data:$('#add_products').serialize(),
             success:function(data)
             {
-                alert(data);
+                $('#modal-msg').text(data).fadeIn().css('visibility', 'visible').delay(1800).fadeOut();
             }
         });
     });
@@ -91,7 +91,6 @@ function addProductModalsJS() {
         $.get("./products/getProducts.php", function(data) {
             $('#products-table').html(data);
         });
-
     });
 
     $('#save-update-products').click(function(){
@@ -101,7 +100,7 @@ function addProductModalsJS() {
             data:$('#update_products').serialize(),
             success:function(data)
             {
-                alert(data);
+                $('#modal-msg').text(data).fadeIn().css('visibility', 'visible').delay(1800).fadeOut();
             }
         });
     });
@@ -112,6 +111,15 @@ function addProductModalsJS() {
         });
 
     });
+
+    // START: Reset Data after closing Modal
+    $('#editProducts').on('hidden.bs.modal', function () {
+        $(this).find("input").val('').end();
+        $('#supplier_code').selectpicker("val", "default");
+        $('#product_category').selectpicker("val", "default");
+
+    });
+    // END: Reset Data after closing Modal
 
     $(document).on('click', '.edit-data', function() {
         var product_code = $(this).attr("id");
@@ -137,11 +145,47 @@ function addProductModalsJS() {
             method: "POST",
             data: {Product_Code: product_code},
             success: function(data) {
-                alert(data);
+                $('#inner-msg').text(data).fadeIn().css('visibility', 'visible').delay(1800).fadeOut();
                 $.get("./products/getProducts.php", function(data) {
                     $('#products-table').html(data);
                 });
             }
         });
+    });
+}
+
+function supplierModalsJS(j) {
+    $('#add').click(function(){
+        j++;
+        $('#dynamic_field').append('<tr id="row'+j+'"><td><input type="text" name="name[]" placeholder="Supplier Name" class="modal-text form-control name_list" /></td><td><input type=\'text\' name=\'code[]\' placeholder=\'Supplier Code\' class=\'modal-text form-control name_list\' /></td><td><button type="button" name="remove" id="'+j+'" class="btn btn-danger btn_remove">X</button></td></tr>');
+    });
+
+    $(document).on('click', '.btn_remove', function(){
+        var button_id = $(this).attr("id");
+        $('#row'+button_id+'').remove();
+    });
+
+    $('#save-suppliers').click(function(){
+        $.ajax({
+            url:"./supplier/saveSuppliers.php",
+            method:"POST",
+            data:$('#add_suppliers').serialize(),
+            success:function(data)
+            {
+                alert(data);
+            }
+        });
+    });
+
+    $.ajaxSetup ({
+        cache: false
+    });
+    var ajax_load = "./supplier/saveSuppliers.php";
+
+    $('#close-btn-suppliers').click(function() {
+        $.get("./supplier/getSuppliers.php", function(data) {
+            $('#company-suppliers-data').html(data);
+        });
+
     });
 }

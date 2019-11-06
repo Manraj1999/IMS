@@ -5,11 +5,11 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/ims/php/modals/UserModal.php';
 
 class Products {
 
-    function getProducts() {
+    function getProducts($limit) {
         $DatabaseHandler = new DatabaseHandler();
         $UserModal = new UserModal();
 
-        $sql = "SELECT * FROM products LIMIT 10";
+        $sql = "SELECT * FROM products LIMIT " . $limit;
         $connection = $DatabaseHandler->getCompanyMySQLiConnection($UserModal->getUserData("Company_ID"));
 
         $results = $connection->query($sql);
@@ -52,7 +52,7 @@ class Products {
                                                                     Action
                                                                 </button>
                                                                 <div class='dropdown-menu' aria-labelledby='actionButton'>
-                                                                    <a class='dropdown-item edit-data' id='" . $row["Product_Code"] ."' data-toggle='modal' data-target='#updateProducts'>Edit</a>
+                                                                    <a class='dropdown-item edit-data' id='" . $row["Product_Code"] ."' data-toggle='modal' data-target='#updateProducts' href='#'>Edit</a>
                                                                     <a class='dropdown-item delete-data' id='" . $row["Product_Code"] ."' href='#'>Delete</a>
                                                                 </div>
                                                             </div>
