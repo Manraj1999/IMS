@@ -25,8 +25,13 @@ class Products {
                 $sqlGetSupplier = "SELECT * FROM suppliers WHERE Supplier_Code='" . $row["Supplier_Code"] . "'";
                 $supplierResults = $connection->query($sqlGetSupplier);
 
+                // Get Store
+                $sqlGetStore = "SELECT * FROM company_stores WHERE Store_Code = '" . $row["Store_Code"] . "'";
+                $storeResults = $connection->query($sqlGetStore);
+
                 $categoryName = "";
                 $supplierName = "";
+                $storeName = "";
 
                 if($categoryResults->num_rows > 0) {
                     while($rowCat = $categoryResults->fetch_assoc()) {
@@ -40,11 +45,18 @@ class Products {
                     }
                 }
 
+                if($storeResults->num_rows > 0) {
+                    while($rowStore = $storeResults->fetch_assoc()) {
+                        $storeName = $rowStore["Store_Name"];
+                    }
+                }
+
                 echo "<tr>
                                                         <th scope='row'>" . $row["Product_Code"] . "</th>
                                                         <td>" . $row["Product_Name"] . "</td>
                                                         <td>" . $categoryName . " <span class='badge badge-danger'>" . $row["Product_Category"] . "</span></td>
                                                         <td>" . $row["Product_Inventory"] . "</td>
+                                                        <td>" . $storeName . "</td>
                                                         <td>" . $supplierName . " <span class='badge badge-light'>" . $row["Supplier_Code"] . "</span></td>
                                                         <td>
                                                             <div class='dropdown'>
@@ -93,6 +105,22 @@ class Products {
         if($results->num_rows > 0) {
             while ($row = $results->fetch_assoc()) {
                 echo "<option value='" . $row['Supplier_Code'] . "'>" . $row['Supplier_Name'] . "</option>";
+            }
+        }
+    }
+
+    function getStoresForAddingProducts() {
+        $DatabaseHandler = new DatabaseHandler();
+        $UserModal = new UserModal();
+
+        $sql = "SELECT * FROM company_stores";
+        $connection = $DatabaseHandler->getCompanyMySQLiConnection($UserModal->getUserData("Company_ID"));
+
+        $results = $connection->query($sql);
+
+        if($results->num_rows > 0) {
+            while ($row = $results->fetch_assoc()) {
+                echo "<option value='" . $row['Store_Code'] . "'>" . $row['Store_Name'] . "</option>";
             }
         }
     }

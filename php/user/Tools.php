@@ -69,6 +69,7 @@ class Tools {
             )";
                 $companyStoresSQL = "CREATE TABLE company_stores (
                 Store_ID INT NOT NULL AUTO_INCREMENT,
+                Store_Code VARCHAR(32) NOT NULL,
                 Store_Name VARCHAR(128) NOT NULL,
                 Store_Location VARCHAR(128),
                 PRIMARY KEY (Store_ID)
@@ -89,6 +90,7 @@ class Tools {
                 $productsSQL = "CREATE TABLE products (
                 Product_ID INT NOT NULL AUTO_INCREMENT,
                 Supplier_Code VARCHAR(32) NOT NULL,
+                Store_Code VARCHAR(32) NOT NULL,
                 Product_Code VARCHAR(128) NOT NULL,
                 Product_Name VARCHAR(128) NOT NULL,
                 Product_Category VARCHAR(32) NOT NULL,

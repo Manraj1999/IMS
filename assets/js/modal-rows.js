@@ -1,7 +1,7 @@
 function storeModalsJS(i) {
     $('#add').click(function(){
         i++;
-        $('#dynamic_field').append('<tr id="row'+i+'"><td><input type="text" name="name[]" placeholder="Store Name" class="modal-text form-control name_list" /></td><td><input type="text" name="location[]" placeholder="Store Location" class="modal-text form-control name_list" /></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');
+        $('#dynamic_field').append('<tr id="row'+i+'"><td><input type="text" name="code[]" placeholder="Store Code" class="modal-text form-control name_list" /></td><td><input type="text" name="name[]" placeholder="Store Name" class="modal-text form-control name_list" /></td><td><input type="text" name="location[]" placeholder="Store Location" class="modal-text form-control name_list" /></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');
     });
 
     $(document).on('click', '.btn_remove', function(){
@@ -11,7 +11,7 @@ function storeModalsJS(i) {
 
     $('#save-store').click(function(){
         $.ajax({
-            url:"./company/saveStores.php",
+            url:"./stores/saveStores.php",
             method:"POST",
             data:$('#add_store').serialize(),
             success:function(data)
@@ -24,13 +24,27 @@ function storeModalsJS(i) {
     $.ajaxSetup ({
         cache: false
     });
-    var ajax_load = "./company/saveStores.php";
+    var ajax_load = "./stores/saveStores.php";
 
     $('#close-btn-store').click(function() {
-        $.get("./company/getStores.php", function(data) {
+        $.get("./stores/getStores.php", function(data) {
             $('#company-stores-data').html(data);
         });
 
+    });
+}
+
+function storesProductsModalsJS() {
+    $(".product-store").click(function() {
+        $.ajax({
+            url:"./stores/getSpecificStores.php",
+            method:"POST",
+            data: {storeCode: this.id},
+            success:function(data)
+            {
+                $('#store-product-data').html(data);
+            }
+        });
     });
 }
 
@@ -117,6 +131,7 @@ function addProductModalsJS() {
         $(this).find("input").val('').end();
         $('#supplier_code').selectpicker("val", "default");
         $('#product_category').selectpicker("val", "default");
+        $('#store_code').selectpicker("val", "default");
 
     });
     // END: Reset Data after closing Modal

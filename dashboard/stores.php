@@ -3,11 +3,13 @@
     include_once $_SERVER['DOCUMENT_ROOT'] . "/ims/settings/General.php";
     include_once $_SERVER['DOCUMENT_ROOT'] . '/ims/php/UI/Dashboard.php';
     include_once $_SERVER['DOCUMENT_ROOT'] . '/ims/php/modals/CompanyModal.php';
-    include_once $_SERVER['DOCUMENT_ROOT'] . '/ims/php/dashboard/Company.php';
+    include_once $_SERVER['DOCUMENT_ROOT'] . '/ims/php/dashboard/Stores.php';
     include_once $_SERVER['DOCUMENT_ROOT'] . "/ims/php/Armor.php";
 
     $armor = new Armor();
     $armor->initDashboard();
+
+    $Stores = new Stores();
 
 ?>
 
@@ -53,7 +55,7 @@
                                     <div>
                                         <h3 class="text-center text-blue">
                                             <i style="margin-right: 8px;" class="fa fa-store"></i> Stores
-                                            <button name="edit-company" class="edit" data-toggle="modal" data-target="#editCompanyModal">
+                                            <button name="edit-company" class="edit" data-toggle="modal" data-target="#editStores">
                                                 <i class="fa fa-pencil-alt fa-align-right text-blue"></i>
                                             </button>
                                         </h3>
@@ -67,19 +69,89 @@
             </div>
         </div>
         <div class="container-fluid">
-            <div class="row mt--5">
-                <div class="col-xl-6 col-lg-6 mb-4">
-                    <a href="#">
-                        <div class="card card-stats bg-gradient-dark">
-                            <div class="card-body">
-                                <h3 class="text-center text-primary">Store #1</h3>
-                                <h4 class="text-center text-primary">This is where the location will go along with everything extra</h4>
-                                <br/>
-                                <h1 class="text-center"><span class='badge badge-light text-white p-3 bg-primary'>15</span></h1>
+            <div class="row mt--5" id="company-stores-data">
+                <?php
+                    $Stores->getStores();
+                ?>
+            </div>
+        </div>
+    </div>
+
+    <!-- Store Modal -->
+    <div class="modal fade" id="editStores" tabindex="-1" role="dialog" aria-labelledby="ModalScrollableTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModalScrollableTitle">Stores</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form name="add_store" id="add_store">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <div class="table-responsive">
+                                <table class="table" id="dynamic_field">
+                                    <tr>
+                                        <h3>Store</h3>
+
+                                        <?php
+                                        $counter = $Stores->checkStoresLogic();
+                                        ?>
+                                    </tr>
+                                </table>
                             </div>
                         </div>
-                    </a>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="close-btn-store" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" id="save-store" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Products in Store Modal -->
+    <div class="modal fade" id="showTable" tabindex="-1" role="dialog" aria-labelledby="ModalScrollableTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModalScrollableTitle">Stores</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
+                <form name="show_products_table" id="show_products_table">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <div class="table-responsive">
+                                <table class="table" id="dynamic_field">
+                                    <tr>
+                                        <div class="table-responsive">
+                                            <table class="table text-center">
+                                                <thead>
+                                                <tr>
+                                                    <th scope="col">Code</th>
+                                                    <th scope="col">Name</th>
+                                                    <th scope="col">Category</th>
+                                                    <th scope="col">Quantity</th>
+                                                    <th scope="col">Store</th>
+                                                    <th scope="col">Supplier</th>
+                                                </tr>
+                                                </thead>
+
+                                                <tbody id="store-product-data">
+                                                <!-- Using JavaScript to call data -->
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -95,6 +167,7 @@
     <script type="text/javascript">
         $(document).ready(function() {
             storeModalsJS(<?php echo $counter; ?>);
+            storesProductsModalsJS();
         });
     </script>
     </body>

@@ -92,6 +92,7 @@
                                                     <th scope="col">Name</th>
                                                     <th scope="col">Category</th>
                                                     <th scope="col">Quantity</th>
+                                                    <th scope="col">Store</th>
                                                     <th scope="col">Supplier</th>
                                                     <th scope="col">Action</th>
                                                 </tr>
@@ -118,30 +119,42 @@
                                             <form name="add_products" id="add_products">
                                                 <div class="modal-body">
                                                     <div class="form-group row">
-                                                        <div class="col-xl-3 col-lg-3 mb-2">
-                                                            <input type='text' id="product_code" name='product_code' placeholder='Product Code' class='modal-text form-control' />
+                                                        <div class="row col-xl-12 col-lg-12">
+                                                            <div class="col-xl-4 col-lg-4 mb-2">
+                                                                <input type='text' id="product_code" name='product_code' placeholder='Product Code' class='modal-text form-control' />
+                                                            </div>
+                                                            <div class="col-xl-5 col-lg-5 mb-2">
+                                                                <input type='text' name='product_name' placeholder='Product Name' class='modal-text form-control' />
+                                                            </div>
+                                                            <div class="col-xl-3 col-lg-3 mb-2">
+                                                                <input type="number" name='product_inventory' id="product_inventory" min="0" placeholder="Quantity" class="modal-text form-control"/>
+                                                            </div>
                                                         </div>
-                                                        <div class="col-xl-5 col-lg-5 mb-2">
-                                                            <input type='text' name='product_name' placeholder='Product Name' class='modal-text form-control' />
-                                                        </div>
-                                                        <div class="col-xl-4 col-lg-4 mb-2">
-                                                            <select id='product_category' class='selectpicker' data-style='btn-primary no-outline' name='product_category' data-live-search='true'>
-                                                                <option val="default" selected disabled hidden>Product Category</option>
-                                                                <?php
+                                                        <div class="row col-xl-12 col-lg-12">
+                                                            <div class="col-xl-4 col-lg-4 mb-2">
+                                                                <select id='product_category' class='selectpicker' data-style='btn-primary no-outline' name='product_category' data-live-search='true'>
+                                                                    <option val="default" selected disabled hidden>Category</option>
+                                                                    <?php
                                                                     $Products->getCategoriesForAddingProducts();
-                                                                ?>
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-xl-3 col-lg-3 mb-2">
-                                                            <input type="number" name='product_inventory' id="product_inventory" min="0" placeholder="Quantity" class="modal-text form-control"/>
-                                                        </div>
-                                                        <div class="col-xl-5 col-lg-5 mb-2">
-                                                            <select id='supplier_code' class='selectpicker' data-style='btn-primary no-outline' name='supplier_code' data-live-search='true'>
-                                                                <option val="default" selected disabled hidden>Product Supplier</option>
-                                                                <?php
+                                                                    ?>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-xl-4 col-lg-4 mb-2">
+                                                                <select id='supplier_code' class='selectpicker' data-style='btn-primary no-outline' name='supplier_code' data-live-search='true'>
+                                                                    <option val="default" selected disabled hidden>Supplier</option>
+                                                                    <?php
                                                                     $Products->getSuppliersForAddingProducts();
-                                                                ?>
-                                                            </select>
+                                                                    ?>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-xl-3 col-lg-3 mb-2">
+                                                                <select id='store_code' class='selectpicker' data-style='btn-primary no-outline' name='store_code' data-live-search='true'>
+                                                                    <option val="default" selected disabled hidden>Store</option>
+                                                                    <?php
+                                                                    $Products->getStoresForAddingProducts();
+                                                                    ?>
+                                                                </select>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
