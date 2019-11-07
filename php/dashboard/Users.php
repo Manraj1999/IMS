@@ -75,8 +75,8 @@ class Users {
                                                     </tr>";
             }
         } else {
-            echo "<tr><h2 class='subtitle text-red text-center'>It seems that you've not inserted any products yet...</h2>
-                                            <img src='../assets/img/theme/not-found.gif' class='gif'/><tr/>";
+            echo "<div><h2 class='subtitle text-red text-center'>It seems that you've not inserted any products yet...</h2>
+                                            <img src='../assets/img/theme/not-found.gif' class='gif'/></div>";
         }
     }
 

@@ -201,6 +201,7 @@ function usersModalsJS() {
     });
 
     $('#add-user').click(function(){
+
         $.ajax({
             url:"./users/addUser.php",
             method:"POST",
@@ -211,6 +212,12 @@ function usersModalsJS() {
                 $.get("./users/getUsers.php", function(data) {
                     $('#users-table').html(data);
                 });
+
+                // Reset Data
+                $("#user_fullname").val('');
+                $("#user_email").val('');
+                $("#user_password").val('');
+                $("#user_password_confirm").val('');
             }
         });
     });

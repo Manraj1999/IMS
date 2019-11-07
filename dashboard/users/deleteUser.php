@@ -18,34 +18,38 @@
     if(isset($_POST["User_ID"])) {
         $User_ID = $_POST["User_ID"];
 
-        $User_Salt = $Tools->hashPasswordFromInput($_POST["user_pswd"]);
-
         $userEmail = "";
 
+        $getNewDataSQL = "SELECT * FROM users WHERE User_ID='$User_ID'";
+
         $sql = "DELETE FROM users WHERE User_ID='$User_ID'";
-        if($result = $connect->query($sql)) {
-            $getNewDataSQL = "SELECT * FROM users WHERE User_ID='$User_ID'";
-            if($results = $connect->query($getNewDataSQL)) {
-                if($results->num_rows > 0) {
-                    while($row = $results->fetch_assoc()) {
-                        $userEmail = $row["User_Email"];
-                    }
+
+
+
+        if($results = $connect->query($getNewDataSQL)) {
+            if($results->num_rows > 0) {
+                while($row = $results->fetch_assoc()) {
+                    $userEmail = $row["User_Email"];
                 }
             }
+        }
 
-            $sqlChangeInMainDB = "DELETE FROM users WHERE User_Email='$userEmail'";
-            if($connectAdmin->query($sqlChangeInMainDB)) {
-                $response["error"] = false;
-            } else {
-                $response["error"] = true;
-            }
+        $sqlDeleteInMainDB = "DELETE FROM ims.users WHERE User_Email='$userEmail'";
+        if($connectAdmin->query($sqlDeleteInMainDB)) {
+            $response["error"] = false;
+        } else {
+            $response["error"] = true;
+        }
+
+        if($result = $connect->query($sql)) {
+            $response["error"] = false;
         } else {
             $response["error"] = true;
         }
 
         if($response["error"] == false) {
-            echo "User [" . $_POST['User_ID'] . "]'s password has been updated";
+            echo "User [" . $_POST['User_ID'] . "] has been deleted";
         } else {
-            echo "Failed to update User [" . $_POST['User_ID'] . "]'s password";
+            echo "Failed to delete User [" . $_POST['User_ID'] . "]";
         }
     }

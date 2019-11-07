@@ -111,10 +111,10 @@
                                         <div class="modal-body">
                                             <div class="form-group row">
                                                 <div class="row col-xl-12 col-lg-12 mb-2">
-                                                    <input type='text' id="user_fullname" name='user_fullname' placeholder='Full Name' class='modal-text form-control' />
+                                                    <input type='text' id="user_fullname" id="user_fullname" name='user_fullname' placeholder='Full Name' class='modal-text form-control' />
                                                 </div>
                                                 <div class="row col-xl-12 col-lg-12 mb-2">
-                                                    <input type='email' name='user_email' placeholder='Email Address' class='modal-text form-control' />
+                                                    <input type='email' name='user_email' id="user_email" placeholder='Email Address' class='modal-text form-control' />
                                                 </div>
                                                 <div class="row col-xl-12 col-lg-12 mb-2">
                                                     <input type="password" name='user_password' id="user_password" placeholder="Password" class="modal-text form-control"/>
