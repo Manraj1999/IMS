@@ -105,12 +105,17 @@ class User {
                 $su_id = "";
                 // Get Supervisor ID
                 $supervisorConnection = $DatabaseHandler->getMySQLiConnection();
-                $getSupervisorIDSQL = "SELECT User_ID FROM users WHERE User_Email = '" . $emailFromUser . "'";
+                $getSupervisorIDSQL = "SELECT * FROM users WHERE User_Email = '" . $emailFromUser . "'";
                 $resultSupervisor = $supervisorConnection->query($getSupervisorIDSQL);
+
+                $userFullName = "";
+                $userSalt = "";
 
                 if($resultSupervisor->num_rows > 0) {
                     while($row = $resultSupervisor->fetch_assoc()) {
                         $su_id = $row['User_ID'];
+                        $userFullName = $row['User_FullName'];
+                        $userSalt = $row['User_Salt'];
                     }
                 }
 
@@ -122,6 +127,20 @@ class User {
                 if($companyResult) {
                     $response['error'] = false;
                     $response['status_code'] = 0;
+
+                    // Add User to Company Users
+                    $addUserSQL = "INSERT INTO users(User_FullName, User_Email, User_Salt, User_Type) VALUES ('" . $userFullName . "', '" . $emailFromUser . "', '" . $userSalt . "', 'SUPERVISOR')";
+                    $addUserResult = $companyConnection->query($addUserSQL);
+
+                    if($addUserResult) {
+                        $response['error'] = false;
+                        $response['status_code'] = 0;
+                    } else {
+                        $response['error'] = true;
+                        $response['status_code'] = 1;
+                        echo $companyConnection->error;
+                    }
+
                 } else {
                     $response['error'] = true;
                     $response['status_code'] = 1;

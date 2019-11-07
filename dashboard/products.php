@@ -46,8 +46,7 @@
                 <div class="container-fluid">
                     <div class="header-body">
                         <div class="row">
-                            <div class="col-xl-1 col-lg-1"></div>
-                            <div class="col-xl-10 col-lg-10">
+                            <div class="col-xl-12 col-lg-12">
                                 <div id="message" style="visibility: hidden; text-align: center;">
                                     <div style="width: 50%; left: 75%; margin: -7% 0 0 -51%; display: block; position: fixed; z-index: 9999;">
                                         <div id="modal-msg" class="alert alert-primary">
@@ -199,9 +198,7 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
-                            <div class="col-xl-1 col-lg-1"></div>
                         </div>
                     </div>
                 </div>

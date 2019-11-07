@@ -20654,7 +20654,8 @@ pre>code.highlight {
 }
 
 button.edit,
-button.edit-2 {
+button.edit-2,
+button.edit-3 {
   background-color: transparent;
   border: 1px solid #5e72e4;
   border-radius: 3px;
@@ -20668,8 +20669,13 @@ button.edit-2 {
   border: 1px solid var(--red) !important;
 }
 
+button.edit-3 {
+  border: 1px solid var(--green) !important;
+}
+
 button.edit i,
-button.edit-2 i {
+button.edit-2 i,
+button.edit-3 i {
   transition: ease-in-out 0.2s;
 }
 
@@ -20683,13 +20689,17 @@ button.edit-2:hover {
   background-color: var(--red);
 }
 
-button.edit:active i,
-button.edit:hover i {
-  color: #f5f4f3 !important;
+button.edit-3:active,
+button.edit-3:hover {
+  background-color: var(--green);
 }
 
+button.edit:active i,
+button.edit:hover i,
 button.edit-2:active i,
-button.edit-2:hover i {
+button.edit-2:hover i,
+button.edit-3:active i,
+button.edit-3:hover i {
   color: #f5f4f3 !important;
 }
 
@@ -20729,3 +20739,4 @@ button.edit-2:hover i {
     margin: -10% 0 0 -25%;
   }
 }
+

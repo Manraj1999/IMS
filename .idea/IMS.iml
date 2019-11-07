@@ -9,5 +9,7 @@
     <orderEntry type="library" name="bootstrap.bundle" level="application" />
     <orderEntry type="library" name="jquery" level="application" />
     <orderEntry type="library" name="Chart.bundle" level="application" />
+    <orderEntry type="library" name="mdb" level="application" />
+    <orderEntry type="library" name="jquery.dataTables" level="application" />
   </component>
 </module>

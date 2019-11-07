@@ -113,7 +113,7 @@ class Dashboard {
                     </a>
                 </li>
                 <li class=\"nav-item\">
-                    <a class='nav-link " . $string[7] . "'href=\"./profile.php\">
+                    <a class='nav-link " . $string[7] . "'href=\"./users.php\">
                         <i class=\"ni ni-single-02 text-green\"></i> Users
                     </a>
                 </li>

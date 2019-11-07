@@ -204,3 +204,17 @@ function supplierModalsJS(j) {
 
     });
 }
+
+function usersModalsJS() {
+    $("#search-user").keyup(function() {
+        $.ajax({
+            url:"./users/getSearchUsers.php",
+            method:"POST",
+            data: {searchData: $("#search-user").val()},
+            success:function(data)
+            {
+                $('#users-table').html(data);
+            }
+        });
+    });
+}

@@ -117,6 +117,7 @@ class Tools {
                 User_ID INT NOT NULL,
                 User_FullName VARCHAR(128) NOT NULL,
                 User_Email VARCHAR(128) NOT NULL,
+                User_Salt VARCHAR(128) NOT NULL,
                 User_Type VARCHAR(32) NOT NULL,
                 PRIMARY KEY (User_ID)
             )";
@@ -127,21 +128,30 @@ class Tools {
                     $tablesResult = $connectionCompanyTablesCreations->query($sql);
 
                     if ($tablesResult) {
-                        $addInitialDataSQL = "INSERT INTO categories(Category_Abbr, Category_Name) VALUES ('UN-CAT', 'Uncategorized')";
-                        $initialSetup = $connectionCompanyTablesCreations->query($addInitialDataSQL);
-
-                        if($initialSetup) {
-                            $response['error'] = false;
-                            $response['status_code'] = 0;
-                        } else {
-                            $response['error'] = true;
-                            $response['status_code'] = 4;
-                        }
+                        $response['error'] = false;
+                        $response['status_code'] = 0;
                     } else {
                         $response['error'] = true;
                         $response['status_code'] = 4;
                     }
                 }
+
+                if(!$response['error']) {
+                    $addInitialDataSQL = "INSERT INTO categories(Category_Abbr, Category_Name) VALUES ('UN-CAT', 'Uncategorized')";
+                    $initialSetup = $connectionCompanyTablesCreations->query($addInitialDataSQL);
+
+                    if($initialSetup) {
+                        $response['error'] = false;
+                        $response['status_code'] = 0;
+                    } else {
+                        $response['error'] = true;
+                        $response['status_code'] = 4;
+                    }
+                } else {
+                    $response['error'] = true;
+                    $response['status_code'] = 4;
+                }
+
             } else {
                 $response['error'] = true;
                 $response['status_code'] = 5;
