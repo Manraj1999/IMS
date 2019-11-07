@@ -46,7 +46,7 @@ class Supplier {
                 } else {
                     echo "<tr id='row" . $counter . "'><td><input type='text' name='name[]' placeholder='Supplier Name' value='" . $row["Supplier_Name"] . "' class='modal-text form-control name_list' /></td>
                         <td><input type='text' name='code[]' placeholder='Supplier Code' value='" . $row["Supplier_Code"] . "' class='modal-text form-control name_list' /></td>
-                        <td><input type='text' name='loc[]' placeholder='Supplier Code' value='" . $row["Supplier_Location"] . "' class='modal-text form-control name_list' /></td>
+                        <td><input type='text' name='loc[]' placeholder='Supplier Location' value='" . $row["Supplier_Location"] . "' class='modal-text form-control name_list' /></td>
                         <td><button type=\"button\" name=\"remove\" id='" . $counter . "' class=\"btn btn-danger btn_remove\">X</button></td></tr>";
                 }
                 $counter++;

@@ -32,6 +32,14 @@ class Tools {
         return $pswd_hash;
     }
 
+    function hashPasswordFromInput($pswd) {
+        // Initialize variable with base values
+
+        $pswd_hash = password_hash($pswd, PASSWORD_DEFAULT);
+
+        return $pswd_hash;
+    }
+
     function sendErrorMessage($message) {
         echo "<div class='message'>
         <div class='alert alert-danger alert-dismissible inner-message fade show'>

@@ -17,20 +17,15 @@ function storeModalsJS(i) {
             success:function(data)
             {
                 alert(data);
+                $.get("./stores/getStores.php", function(data) {
+                    $('#company-stores-data').html(data);
+                });
             }
         });
     });
 
     $.ajaxSetup ({
         cache: false
-    });
-    var ajax_load = "./stores/saveStores.php";
-
-    $('#close-btn-store').click(function() {
-        $.get("./stores/getStores.php", function(data) {
-            $('#company-stores-data').html(data);
-        });
-
     });
 }
 
@@ -67,20 +62,15 @@ function categoryModalsJS(j) {
             success:function(data)
             {
                 alert(data);
+                $.get("./categories/getCategories.php", function(data) {
+                    $('#company-categories-data').html(data);
+                });
             }
         });
     });
 
     $.ajaxSetup ({
         cache: false
-    });
-    var ajax_load = "./categories/saveCategories.php";
-
-    $('#close-btn-categories').click(function() {
-        $.get("./categories/getCategories.php", function(data) {
-            $('#company-categories-data').html(data);
-        });
-
     });
 }
 
@@ -93,18 +83,15 @@ function addProductModalsJS() {
             success:function(data)
             {
                 $('#modal-msg').text(data).fadeIn().css('visibility', 'visible').delay(1800).fadeOut();
+                $.get("./products/getProducts.php", function(data) {
+                    $('#products-table').html(data);
+                });
             }
         });
     });
 
     $.ajaxSetup ({
         cache: false
-    });
-
-    $('#close-btn-products').click(function() {
-        $.get("./products/getProducts.php", function(data) {
-            $('#products-table').html(data);
-        });
     });
 
     $('#save-update-products').click(function(){
@@ -115,15 +102,11 @@ function addProductModalsJS() {
             success:function(data)
             {
                 $('#modal-msg').text(data).fadeIn().css('visibility', 'visible').delay(1800).fadeOut();
+                $.get("./products/getProducts.php", function(data) {
+                    $('#products-table').html(data);
+                });
             }
         });
-    });
-
-    $('#close-btn-update-products').click(function() {
-        $.get("./products/getProducts.php", function(data) {
-            $('#products-table').html(data);
-        });
-
     });
 
     // START: Reset Data after closing Modal
@@ -172,7 +155,7 @@ function addProductModalsJS() {
 function supplierModalsJS(j) {
     $('#add').click(function(){
         j++;
-        $('#dynamic_field').append('<tr id="row'+j+'"><td><input type="text" name="name[]" placeholder="Supplier Name" class="modal-text form-control name_list" /></td><td><input type=\'text\' name=\'code[]\' placeholder=\'Supplier Code\' class=\'modal-text form-control name_list\' /></td><td><button type="button" name="remove" id="'+j+'" class="btn btn-danger btn_remove">X</button></td></tr>');
+        $('#dynamic_field').append('<tr id="row'+j+'"><td><input type="text" name="name[]" placeholder="Supplier Name" class="modal-text form-control name_list" /></td><td><input type=\'text\' name=\'code[]\' placeholder=\'Supplier Code\' class=\'modal-text form-control name_list\' /></td><td><input type="text" name="loc[]" placeholder="Supplier Location" class="modal-text form-control name_list" /></td><td><button type="button" name="remove" id="'+j+'" class="btn btn-danger btn_remove">X</button></td></tr>');
     });
 
     $(document).on('click', '.btn_remove', function(){
@@ -188,20 +171,15 @@ function supplierModalsJS(j) {
             success:function(data)
             {
                 alert(data);
+                $.get("./supplier/getSuppliers.php", function(data) {
+                    $('#company-suppliers-data').html(data);
+                });
             }
         });
     });
 
     $.ajaxSetup ({
         cache: false
-    });
-    var ajax_load = "./supplier/saveSuppliers.php";
-
-    $('#close-btn-suppliers').click(function() {
-        $.get("./supplier/getSuppliers.php", function(data) {
-            $('#company-suppliers-data').html(data);
-        });
-
     });
 }
 
@@ -214,6 +192,64 @@ function usersModalsJS() {
             success:function(data)
             {
                 $('#users-table').html(data);
+            }
+        });
+    });
+
+    $.ajaxSetup ({
+        cache: false
+    });
+
+    $('#add-user').click(function(){
+        $.ajax({
+            url:"./users/addUser.php",
+            method:"POST",
+            data:$('#add_user').serialize(),
+            success:function(data)
+            {
+                alert(data);
+                $.get("./users/getUsers.php", function(data) {
+                    $('#users-table').html(data);
+                });
+            }
+        });
+    });
+
+    $(document).on('click', '.change-pass', function() {
+        var user_id = $(this).attr("id");
+
+        // Reset Data
+        $("#user_pswd").val('');
+        $("#user_pswd_confirm").val('');
+
+        $('#save-update-pass').click(function() {
+            $.ajax({
+                url:"./users/changeUserPass.php",
+                method:"POST",
+                data:$('#update_password').serialize() + "&User_ID=" + user_id,
+                success:function(data)
+                {
+                    $('#modal-msg').text(data).fadeIn().css('visibility', 'visible').delay(1800).fadeOut();
+                    $.get("./users/getUsers.php", function(data) {
+                        $('#users-table').html(data);
+                    });
+                }
+            });
+        });
+    });
+
+    $(document).on('click', '.delete-data', function() {
+        var user_id = $(this).attr("id");
+
+        $.ajax({
+            url: "./users/deleteUser.php",
+            method: "POST",
+            data: {User_ID: user_id},
+            success: function(data) {
+                $('#inner-msg').text(data).fadeIn().css('visibility', 'visible').delay(1800).fadeOut();
+                $.get("./users/getUsers.php", function(data) {
+                    $('#users-table').html(data);
+                });
             }
         });
     });

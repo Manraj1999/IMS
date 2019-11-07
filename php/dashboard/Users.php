@@ -28,7 +28,7 @@ class Users {
                                                                     Action
                                                                 </button>
                                                                 <div class='dropdown-menu' aria-labelledby='actionButton'>
-                                                                    <a class='dropdown-item edit-data' id='" . $row["User_ID"] ."' data-toggle='modal' data-target='#updateProducts' href='#'>Edit</a>
+                                                                    <a class='dropdown-item change-pass' id='" . $row["User_ID"] ."' data-toggle='modal' data-target='#updatePassword' href='#'>Change Password</a>
                                                                     <a class='dropdown-item delete-data' id='" . $row["User_ID"] ."' href='#'>Delete</a>
                                                                 </div>
                                                             </div>
@@ -67,7 +67,7 @@ class Users {
                                                                     Action
                                                                 </button>
                                                                 <div class='dropdown-menu' aria-labelledby='actionButton'>
-                                                                    <a class='dropdown-item edit-data' id='" . $row["User_ID"] ."' data-toggle='modal' data-target='#updateProducts' href='#'>Edit</a>
+                                                                    <a class='dropdown-item change-pass' id='" . $row["User_ID"] ."' data-toggle='modal' data-target='#updatePassword' href='#'>Change Password</a>
                                                                     <a class='dropdown-item delete-data' id='" . $row["User_ID"] ."' href='#'>Delete</a>
                                                                 </div>
                                                             </div>

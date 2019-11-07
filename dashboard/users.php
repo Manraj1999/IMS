@@ -51,6 +51,20 @@
             <div class="container-fluid">
                 <div class="header-body">
                     <div class="row">
+                        <div id="message" style="visibility: hidden; text-align: center;">
+                            <div style="width: 50%; left: 75%; margin: -7% 0 0 -51%; display: block; position: fixed; z-index: 9999;">
+                                <div id="modal-msg" class="alert alert-primary">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div id="message" style="visibility: visible; text-align: center;">
+                            <div class="del-msg">
+                                <div id="inner-msg" class="alert alert-primary">
+
+                                </div>
+                            </div>
+                        </div>
                         <div class="col-xl-2 col-lg-2"></div>
                         <div class="col-xl-8 col-lg-8">
                             <div class="card card-stats mb-4 mb-xl-0">
@@ -93,7 +107,7 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <form name="add_products" id="add_products">
+                                    <form name="add_user" id="add_user">
                                         <div class="modal-body">
                                             <div class="form-group row">
                                                 <div class="row col-xl-12 col-lg-12 mb-2">
@@ -113,8 +127,8 @@
                                     </form>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Add User</button>
+                                    <button type="button" id="close-add-user" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" id="add-user" class="btn btn-primary">Add User</button>
                                 </div>
                             </div>
                         </div>
@@ -145,6 +159,36 @@
                                     <!-- Using JavaScript to call data -->
                                     </tbody>
                                 </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Update Modal -->
+                    <div class="modal fade" id="updatePassword" tabindex="-1" role="dialog" aria-labelledby="ModalScrollableTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="ModalScrollableTitle">Change Password</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form name="update_password" id="update_password">
+                                        <div class="form-group row">
+                                            <div class="col-xl-6 col-lg-6 mb-2">
+                                                <input type='password' id="user_pswd" name='user_pswd' placeholder='Enter the new password' class='modal-text form-control' />
+                                            </div>
+                                            <div class="col-xl-6 col-lg-6 mb-2">
+                                                <input type='password' id="user_pswd_confirm" name='user_pswd_confirm' placeholder='Re-enter the new password' class='modal-text form-control' />
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" id="close-btn-update-pass" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" id="save-update-pass" class="btn btn-primary">Change Password</button>
+                                </div>
                             </div>
                         </div>
                     </div>
