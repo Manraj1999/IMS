@@ -3,7 +3,7 @@
 class CompanyModal {
 
     /**
-     * @param mixed getCompanyData(DataType) - Company_ID, SU_ID, Company_Name, Company_Location
+     * @param mixed getCompanyData(DataType) - Company_ID, SU_ID, Company_Name, Company_Location, Minimum_Threshold, Maximum_Threshold
      * @return string Returns the data from the database
      */
     public function getCompanyData($DataType) {

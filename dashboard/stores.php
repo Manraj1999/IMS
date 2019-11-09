@@ -19,7 +19,7 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title><?php echo SITE_NAME; ?> | Company</title>
+        <title><?php echo SITE_NAME; ?> | Stores</title>
         <!-- Favicon -->
         <link href="../assets/img/brand/favicon.png" rel="icon" type="image/png">
         <!-- Fonts -->

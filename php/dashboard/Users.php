@@ -17,6 +17,12 @@ class Users {
         if($results->num_rows > 0) {
             while($row = $results->fetch_assoc()) {
 
+                $deleteString = "";
+
+                if($row["User_Type"] !== "SUPERVISOR") {
+                    $deleteString = "<a class='dropdown-item delete-data' id='" . $row["User_ID"] ."' href='#'>Delete</a>";
+                }
+
                 echo "<tr>
                                                         <th scope='row'>" . $row["User_ID"] . "</th>
                                                         <td>" . $row["User_FullName"] . "</td>
@@ -29,7 +35,7 @@ class Users {
                                                                 </button>
                                                                 <div class='dropdown-menu' aria-labelledby='actionButton'>
                                                                     <a class='dropdown-item change-pass' id='" . $row["User_ID"] ."' data-toggle='modal' data-target='#updatePassword' href='#'>Change Password</a>
-                                                                    <a class='dropdown-item delete-data' id='" . $row["User_ID"] ."' href='#'>Delete</a>
+                                                                    $deleteString
                                                                 </div>
                                                             </div>
                                                         </td>
@@ -56,6 +62,12 @@ class Users {
         if($results->num_rows > 0) {
             while($row = $results->fetch_assoc()) {
 
+                $deleteString = "";
+
+                if($row["User_Type"] !== "SUPERVISOR") {
+                    $deleteString = "<a class='dropdown-item delete-data' id='" . $row["User_ID"] ."' href='#'>Delete</a>";
+                }
+
                 echo "<tr>
                                                         <th scope='row'>" . $row["User_ID"] . "</th>
                                                         <td>" . $row["User_FullName"] . "</td>
@@ -68,7 +80,7 @@ class Users {
                                                                 </button>
                                                                 <div class='dropdown-menu' aria-labelledby='actionButton'>
                                                                     <a class='dropdown-item change-pass' id='" . $row["User_ID"] ."' data-toggle='modal' data-target='#updatePassword' href='#'>Change Password</a>
-                                                                    <a class='dropdown-item delete-data' id='" . $row["User_ID"] ."' href='#'>Delete</a>
+                                                                    $deleteString
                                                                 </div>
                                                             </div>
                                                         </td>

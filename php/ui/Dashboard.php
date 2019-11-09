@@ -15,6 +15,8 @@ class Dashboard {
         $string[5] = "";
         $string[6] = "";
         $string[7] = "";
+        $string[8] = "";
+        $string[9] = "";
         $string[$id] = "active";
 
         echo "<nav class=\"navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white\" id=\"sidenav-main\">
@@ -75,11 +77,11 @@ class Dashboard {
             <!-- Navigation -->
             <ul class=\"navbar-nav\">
                 <li class=\"nav-item\">
-                    <a class='nav-link " . $string[0] . "'href=\" ./dashboard.php\"> <i class=\"ni ni-tv-2 text-indigo\"></i> Dashboard
+                    <a class='nav-link " . $string[0] . "' href=\" ./dashboard.php\"> <i class=\"ni ni-tv-2 text-indigo\"></i> Dashboard
                     </a>
                 </li>
                 <li class=\"nav-item\">
-                    <a class='nav-link " . $string[1] . "'href=\"./company.php\">
+                    <a class='nav-link " . $string[1] . "' href=\"./company.php\">
                         <i class=\"fa fa-building text-blue\"></i> Company
                     </a>
                 </li>
@@ -88,32 +90,32 @@ class Dashboard {
             <h6 class=\"navbar-heading text-muted\">Inventory</h6>
             <ul class='navbar-nav'>    
                 <li class=\"nav-item\">
-                    <a class='nav-link " . $string[2] . "'href=\"./supplier.php\">
+                    <a class='nav-link " . $string[2] . "' href=\"./supplier.php\">
                         <i class=\"fa fa-industry\" style='color: #ed213a;'></i> Supplier
                     </a>
                 </li>
                 <li class=\"nav-item\">
-                    <a class='nav-link " . $string[3] . "'href=\"./categories.php\">
+                    <a class='nav-link " . $string[3] . "' href=\"./categories.php\">
                         <i class=\"ni ni-bullet-list-67 text-red\"></i> Categories
                     </a>
                 </li>
                 <li class=\"nav-item\">
-                    <a class='nav-link " . $string[4] . "'href=\"./products.php\">
+                    <a class='nav-link " . $string[4] . "' href=\"./products.php\">
                         <i class=\"fa fa-archive text-orange\"></i> Products
                     </a>
                 </li>
                 <li class=\"nav-item\">
-                    <a class='nav-link " . $string[5] . "'href=\"./stores.php\">
+                    <a class='nav-link " . $string[5] . "' href=\"./stores.php\">
                         <i class=\"fa fa-store text-purple\"></i> Stores
                     </a>
                 </li>
                 <li class=\"nav-item\">
-                    <a class='nav-link " . $string[6] . "'href=\"./orders.php\">
+                    <a class='nav-link " . $string[6] . "' href=\"./orders.php\">
                         <i class=\"fa fa-shopping-cart text-info\"></i> Orders
                     </a>
                 </li>
                 <li class=\"nav-item\">
-                    <a class='nav-link " . $string[7] . "'href=\"./users.php\">
+                    <a class='nav-link " . $string[7] . "' href=\"./users.php\">
                         <i class=\"ni ni-single-02 text-green\"></i> Users
                     </a>
                 </li>
@@ -125,12 +127,12 @@ class Dashboard {
             <!-- Navigation -->
             <ul class=\"navbar-nav mb-md-3\">
                 <li class=\"nav-item\">
-                    <a class='nav-link' href='settings.php'>
+                    <a class='nav-link " . $string[8] . "' href='settings.php'>
                         <i class=\"fa fa-cog\"></i> Settings
                     </a>
                 </li>
                 <li class=\"nav-item\">
-                    <a class=\"nav-link\" href=\"./privacy-policy.php\">
+                    <a class='nav-link " . $string[9] . "' href=\"./privacy-policy.php\">
                         <i class=\"fa fa-lock\"></i> Privacy Policy
                     </a>
                 </li>

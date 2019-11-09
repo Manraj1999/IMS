@@ -261,3 +261,29 @@ function usersModalsJS() {
         });
     });
 }
+
+function settingsModalsJS() {
+    $("#save-threshold").click(function() {
+
+        var min = $("#min_threshold").val();
+        var max = $("#max_threshold").val();
+
+        $.ajax({
+            url: "./settings/updateThreshold.php",
+            method: "POST",
+            data: {Min: min, Max: max},
+            success: function(data) {
+                $('#inner-msg').text(data).fadeIn().css('visibility', 'visible').delay(1800).fadeOut();
+            }
+        });
+    });
+
+    $("#delete").click(function() {
+        $.ajax({
+            url: "./settings/deleteEverything.php",
+            method: "POST",
+            data: {},
+            success: function(data) {}
+        });
+    });
+}

@@ -73,6 +73,8 @@ class Tools {
                 Company_Name VARCHAR(128),
                 Company_Location VARCHAR(128),
                 Inventory_Type VARCHAR(32),
+                Minimum_Threshold INT(64),
+                Maximum_Threshold INT(64),
                 PRIMARY KEY (Company_ID)
             )";
                 $companyStoresSQL = "CREATE TABLE company_stores (
@@ -122,7 +124,7 @@ class Tools {
                 PRIMARY KEY (Order_ID)
             )";
                 $usersSQL = "CREATE TABLE users (
-                User_ID INT NOT NULL,
+                User_ID INT NOT NULL AUTO_INCREMENT,
                 User_FullName VARCHAR(128) NOT NULL,
                 User_Email VARCHAR(128) NOT NULL,
                 User_Salt VARCHAR(128) NOT NULL,

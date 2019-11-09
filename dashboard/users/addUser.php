@@ -19,21 +19,23 @@
 
         $userSalt = $Tools->hashPasswordFromInput($_POST["user_password"]);
 
-        $sql = "INSERT INTO users(User_FullName, User_Email, User_Salt, User_Type) VALUES ('".mysqli_real_escape_string($connect, $_POST["user_fullname"])."', '".mysqli_real_escape_string($connect, $_POST["user_email"])."', '" . $userSalt ."', 'USER')";
+        $sql = "INSERT INTO users(User_FullName, User_Email, User_Salt, User_Type) VALUES ('".mysqli_real_escape_string($connect, $_POST["user_fullname"])."', '".mysqli_real_escape_string($connect, $_POST["user_email"])."', '" . $userSalt ."', 'EMPLOYEE')";
         if($connect->query($sql)) {
             $response['error'] = false;
         } else {
             $response['error'] = true;
+            echo $connect->error;
         }
 
         if($response['error'] == false) {
             $Company_ID = $UserModal->getUserData("Company_ID");
-            $addUserToMainDBSQL = "INSERT INTO ims.users(Company_ID, User_FullName, User_Email, User_Salt, User_Type) VALUES ('" . $Company_ID . "','".mysqli_real_escape_string($connect, $_POST["user_fullname"])."', '".mysqli_real_escape_string($connect, $_POST["user_email"])."', '" . $userSalt ."', 'USER')";
+            $addUserToMainDBSQL = "INSERT INTO ims.users(Company_ID, User_FullName, User_Email, User_Salt, User_Type) VALUES ('" . $Company_ID . "','".mysqli_real_escape_string($connect, $_POST["user_fullname"])."', '".mysqli_real_escape_string($connect, $_POST["user_email"])."', '" . $userSalt ."', 'EMPLOYEE')";
 
             if($connectAdmin->query($addUserToMainDBSQL)) {
                 $response['error'] = false;
             } else {
                 $response['error'] = true;
+                echo $connectAdmin->error;
             }
         }
 
