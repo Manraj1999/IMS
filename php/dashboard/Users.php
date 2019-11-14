@@ -18,9 +18,11 @@ class Users {
             while($row = $results->fetch_assoc()) {
 
                 $deleteString = "";
+                $changeSupervisorString = "";
 
                 if($row["User_Type"] !== "SUPERVISOR") {
-                    $deleteString = "<a class='dropdown-item delete-data' id='" . $row["User_ID"] ."' href='#'>Delete</a>";
+                    $deleteString = "<a class='dropdown-item delete-data' id='" . $row["User_ID"] . "' href='#'>Delete</a>";
+                    $changeSupervisorString = "<a class='dropdown-item pass-ownership-data' id='" . $row["User_ID"] . "' href='#'>Pass Ownership</a>";
                 }
 
                 echo "<tr>
@@ -35,6 +37,7 @@ class Users {
                                                                 </button>
                                                                 <div class='dropdown-menu' aria-labelledby='actionButton'>
                                                                     <a class='dropdown-item change-pass' id='" . $row["User_ID"] ."' data-toggle='modal' data-target='#updatePassword' href='#'>Change Password</a>
+                                                                    $changeSupervisorString
                                                                     $deleteString
                                                                 </div>
                                                             </div>

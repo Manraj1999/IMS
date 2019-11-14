@@ -23,6 +23,7 @@
         $User_Salt = $Tools->hashPasswordFromInput($_POST["user_pswd"]);
 
         $userEmail = "";
+        $userName = "";
 
         $sql = "UPDATE users SET User_Salt='$User_Salt' WHERE User_ID='$User_ID'";
         if($result = $connect->query($sql)) {
@@ -31,6 +32,7 @@
                 if($results->num_rows > 0) {
                     while($row = $results->fetch_assoc()) {
                         $userEmail = $row["User_Email"];
+                        $userName = $row["User_FullName"];
                     }
                 }
             }
@@ -46,8 +48,8 @@
         }
 
         if($response["error"] == false) {
-            echo "User [" . $_POST['User_ID'] . "]'s password has been updated";
+            echo "User [" . $userName . "]'s password has been updated";
         } else {
-            echo "Failed to update User [" . $_POST['User_ID'] . "]'s password";
+            echo "Failed to update User [" . $userName . "]'s password";
         }
     }

@@ -6,7 +6,8 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/ims/php/modals/CompanyModal.php';
 class Dashboard {
 
     function getNavigation($id) {
-        $UserModal = new UserModal();
+        $CompanyModal = new CompanyModal();
+        $CompanyName = $CompanyModal->getCompanyData("Company_Name");
 
         $string[] = array();
         $string[0] = "";
@@ -28,8 +29,8 @@ class Dashboard {
             <span class=\"navbar-toggler-icon\"></span>
         </button>
         <!-- Brand -->
-        <a class=\"navbar-brand pt-0\">
-            <img src=\"../assets/img/brand/blue.png\" class=\"navbar-brand-img\" alt=\"...\">
+        <a class=\"navbar-brand pt-2 mb-md--2\" style=\"font-family: 'Roboto', sans-serif;\">
+            <h2 class='text-white text-uppercase'><span class='bg-primary rounded p-2'>" . $CompanyName . "</span></h2>
         </a>
         <!-- User -->
         <ul class=\"nav align-items-center d-md-none\">
@@ -50,13 +51,13 @@ class Dashboard {
             </li>
         </ul>
         <!-- Collapse -->
-        <div class=\"collapse navbar-collapse\" id=\"sidenav-collapse-main\">
+        <div class=\"collapse navbar-collapse \" id=\"sidenav-collapse-main\">
             <!-- Collapse header -->
             <div class=\"navbar-collapse-header d-md-none\">
                 <div class=\"row\">
                     <div class=\"col-6 collapse-brand\">
                         <a>
-                            <img src='../assets/img/brand/blue.png'>
+                            <h2 class='text-primary text-uppercase'>" . $CompanyName . "</h2>
                         </a>
                     </div>
                     <div class=\"col-6 collapse-close\">
