@@ -6,6 +6,8 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/ims/php/modals/CompanyModal.php';
 class Dashboard {
 
     function getNavigation($id) {
+        $UserModal = new UserModal();
+
         $string[] = array();
         $string[0] = "";
         $string[1] = "";
@@ -32,21 +34,13 @@ class Dashboard {
         <!-- User -->
         <ul class=\"nav align-items-center d-md-none\">
             <li class=\"nav-item dropdown\">
-                <a class=\"nav-link\" href=\"#\" role=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
-                    <div class=\"media align-items-center\">
-                      <span class=\"avatar avatar-sm rounded-circle\">
-                        <img alt=\"Image placeholder\" src='" . "../assets/img/theme/team-4-800x800.jpg" . "'>
-                      </span>
-                    </div>
+                <a class='nav-link' href=\"#\" role=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
+                    <i class='fa fa-user fa-lg text-dark'></i>
                 </a>
                 <div class=\"dropdown-menu dropdown-menu-arrow dropdown-menu-right\">
                     <div class=\" dropdown-header noti-title\">
                         <h6 class=\"text-overflow m-0\">Welcome!</h6>
                     </div>
-                    <a href='profile.php' class=\"dropdown-item\">
-                        <i class=\"ni ni-single-02\"></i>
-                        <span>My profile</span>
-                    </a>
                     <div class=\"dropdown-divider\"></div>
                     <a href='logout.php' class=\"dropdown-item\">
                         <i class=\"ni ni-user-run\"></i>
@@ -159,8 +153,8 @@ class Dashboard {
                 <li class=\"nav-item dropdown\">
                     <a class=\"nav-link pr-0\" href=\"#\" role=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
                         <div class=\"media align-items-center\">
-                <span class=\"avatar avatar-sm rounded-circle\">
-                  <img alt=\"Image placeholder\" src=\"../assets/img/theme/team-4-800x800.jpg\">
+                <span class=\"avatar avatar-sm rounded-circle bg-transparent\">
+                    <i class='fa fa-user-circle fa-2x text-dark'></i>
                 </span>
                             <div class=\"media-body ml-2 d-none d-lg-block\">
                                 <span class=\"mb-0 text-sm  font-weight-bold\">" . $UserModal->getUserData("User_FullName") ."</span>
@@ -171,10 +165,6 @@ class Dashboard {
                         <div class=\" dropdown-header noti-title\">
                             <h6 class=\"text-overflow m-0\">Welcome!</h6>
                         </div>
-                        <a href='profile.php' class=\"dropdown-item\">
-                            <i class=\"ni ni-single-02\"></i>
-                            <span>My profile</span>
-                        </a>
                         <div class=\"dropdown-divider\"></div>
                         <a href='logout.php' class=\"dropdown-item\">
                             <i class=\"ni ni-user-run\"></i>

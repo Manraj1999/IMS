@@ -5,7 +5,7 @@ DEFINE("MSG_ERROR_CONNECT_DB", "Failed to connect to the MySQLi database! Please
 
 // Registration
 DEFINE("MSG_REGISTER_EMAIL_EXIST", "Email has already been registered. Please try another email.");
-DEFINE("MSG_REGISTER_SUCCESS", "User has been registered successfully.");
+DEFINE("MSG_REGISTER_SUCCESS", "You've registered and your account is now awaiting approval.");
 DEFINE("MSG_REGISTER_FAIL", "There was an error in registering the user.");
 DEFINE("MSG_DB_CREATION_FAILED", "We were unable to create your database.");
 DEFINE("MSG_TABLE_CREATION_FAILED", "We were unable to create the tables for your database.");

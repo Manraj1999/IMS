@@ -42,6 +42,65 @@ class User {
         return $response;
     }
 
+    function addToQueue($data) {
+        // Variable Defines
+        $emailFromUser = "";
+        $response = array();
+
+        // Obtain Database Table Data and Values for Each Table
+        $databaseTables = "";
+        $tableValues = "";
+
+        $numberOfTables = sizeof($data);
+
+        $apiTools = new Tools();
+
+        for($row = 0; $row < $numberOfTables; $row++) {
+
+            $data[$row][1] = $apiTools->hashPasswordFromArray($data, $row);
+
+            // Update Strings for SQL Statement
+            $databaseTables .= $data[$row][0];
+            $tableValues .= "'" . $data[$row][1] . "'";
+
+            // Make sure last table and value doesn't have a ','
+            if(!($row === $numberOfTables - 1)) {
+                $databaseTables .= ',';
+                $tableValues .= ',';
+            }
+
+            // Get email by looking for '@' to check if User is already registered
+            if(strpos($data[$row][1], '@') !== false) {
+                $emailFromUser = $data[$row][1];
+            }
+        }
+
+        // Check if User is already registered
+        if($this->emailExist($emailFromUser)) {
+            $response['error'] = true;
+            $response['status_code'] = 2;
+        } else {
+            // Connect to Database
+            $DatabaseHandler = new DatabaseHandler();
+            $connection = $DatabaseHandler->getMySQLiConnection();
+
+            // Add User to Queue
+            $registerSQL = "INSERT INTO company_list (" . $databaseTables . ") VALUES (" . $tableValues . ")";
+            $result = $connection->query($registerSQL);
+
+            if($result) {
+                $response['error'] = false;
+                $response['status_code'] = 0;
+            } else {
+                $response['error'] = true;
+                $response['status_code'] = 1;
+            }
+
+        }
+
+        return $response;
+    }
+
     function register($data, $companyName, $invType) {
         // Variable Defines
         $emailFromUser = "";
@@ -57,8 +116,6 @@ class User {
         $apiTools = new Tools();
 
         for($row = 0; $row < $numberOfTables; $row++) {
-
-            $data[$row][1] = $apiTools->hashPasswordFromArray($data, $row);
 
             // Update Strings for SQL Statement
             $databaseTables .= $data[$row][0];

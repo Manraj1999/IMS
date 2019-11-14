@@ -80,6 +80,18 @@
                                                 </select>
                                             </div>
                                         </div>
+                                        <div class="row mt-5">
+                                            <div class="col-xl-3 col-lg-3"></div>
+                                            <div class="col-xl-6 col-lg-6 mb-2">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text" style="background: var(--orange); border-color: var(--orange); color: var(--white);" id="search-icon"><i class="fa fa-search"></i></span>
+                                                    </div>
+                                                    <input type='search' id="search-product" name='search-product' placeholder='Search' class='form-control' style="border-color: var(--orange); text-align: center" />
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-3 col-lg-3"></div>
+                                        </div>
 
                                         <hr/>
 

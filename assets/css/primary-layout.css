@@ -6,3 +6,12 @@ body.container-fluid,
 body.container {
     background: #f5f4f3;
 }
+
+.hover-primary i {
+    color: var(--primary) !important;
+}
+
+.hover-primary:hover i {
+    color: var(--white) !important;
+    transition: color 0.15s linear;
+}

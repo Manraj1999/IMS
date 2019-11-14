@@ -9,7 +9,7 @@ class Armor {
         }
 
         if(!isset($_SESSION['email'])) {
-            header("Location: /ims/index.php");
+            header("Location: /IMS/index.php");
         }
     }
 

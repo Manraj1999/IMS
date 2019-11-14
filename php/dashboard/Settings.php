@@ -21,16 +21,18 @@ class Settings {
         if($result) {
             // Remove Supervisor & Users from Main Database
             $remUsersSQL = "DELETE FROM ims.users WHERE Company_ID = '" . $Company_ID . "'";
+            $remCompanyListSQL = "DELETE FROM ims.company_list WHERE Company_ID = '" . $Company_ID . "'";
             $connectionAdmin = $DatabaseHandler->getAdminMySQLiConnection();
 
             $remUsersResults = $connectionAdmin->query($remUsersSQL);
+            $remCompanyListResults = $connectionAdmin->query($remCompanyListSQL);
 
             $msg = "";
 
-            if($remUsersResults) {
+            if($remUsersResults && $remCompanyListResults) {
                 unset($_SESSION['email']);
 
-                header("Location: ../index.php");
+
             } else {
                 $msg = "There was an error deleting the inventory management system.";
             }

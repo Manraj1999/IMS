@@ -53,6 +53,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <title><?php echo ORI_SITE_NAME; ?> | Login</title>
+        <!-- Favicon -->
+        <link href="../assets/img/brand/favicon.png" rel="icon" type="image/png">
 
         <!-- CSS Files -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
@@ -66,7 +68,7 @@
     <body class="container-fluid">
     <div class="row">
         <div class="col-sm-6">
-            <img alt="..." class="responsive-img" src="http://manraj.randhawa.my/IMS/assets/ss_welcome.png" style="position: fixed; width: 50%;"/>
+            <img alt="..." class="responsive-img" src="./assets/img/theme/ss_welcome.png" style="position: fixed; width: 50%;"/>
             <h4 class="fixed-info mt-5">Welcome back.</h4>
             <h6 class="fixed-info">Sign in and get back to where you left off! :)</h6>
         </div>

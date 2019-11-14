@@ -109,6 +109,18 @@ function addProductModalsJS() {
         });
     });
 
+    $("#search-product").keyup(function() {
+        $.ajax({
+            url:"./products/getSearchProducts.php",
+            method:"POST",
+            data: {searchData: $("#search-product").val()},
+            success:function(data)
+            {
+                $('#products-table').html(data);
+            }
+        });
+    });
+
     // START: Reset Data after closing Modal
     $('#editProducts').on('hidden.bs.modal', function () {
         $(this).find("input").val('').end();
@@ -283,7 +295,73 @@ function settingsModalsJS() {
             url: "./settings/deleteEverything.php",
             method: "POST",
             data: {},
-            success: function(data) {}
+            success: function(data) {
+                window.location.replace("/ims/index.php");
+            }
+        });
+    });
+}
+
+function adminModalsJS() {
+    $(document).on('click', '.company-approve', function() {
+        var id = $(this).attr("id");
+        var status = "APPROVED";
+
+        $.ajax({
+            url: "./functions/updateStatus.php",
+            method: "POST",
+            data: {List_ID: id, Status: status},
+            success: function(data) {
+                $('#inner-msg').text(data).fadeIn().css('visibility', 'visible').delay(1800).fadeOut();
+                $.get("./functions/getQueueList.php", function (data) {
+                    $('#queue-table').html(data);
+                });
+
+                $.get("./functions/getCompanyList.php", function (data) {
+                    $('#list-table').html(data);
+                });
+            }
+        });
+    });
+
+    $(document).on('click', '.company-disapprove', function() {
+        var id = $(this).attr("id");
+        var status = "DISAPPROVED";
+
+        $.ajax({
+            url: "./functions/updateStatus.php",
+            method: "POST",
+            data: {List_ID: id, Status: status},
+            success: function(data) {
+                $('#inner-msg').text(data).fadeIn().css('visibility', 'visible').delay(1800).fadeOut();
+                $.get("./functions/getQueueList.php", function (data) {
+                    $('#queue-table').html(data);
+                });
+
+                $.get("./functions/getCompanyList.php", function (data) {
+                    $('#list-table').html(data);
+                });
+            }
+        });
+    });
+
+    $(document).on('click', '.company-delete', function() {
+        var id = $(this).attr("id");
+
+        $.ajax({
+            url: "./functions/deleteCompany.php",
+            method: "POST",
+            data: {List_ID: id},
+            success: function(data) {
+                $('#inner-msg').text(data).fadeIn().css('visibility', 'visible').delay(1800).fadeOut();
+                $.get("./functions/getQueueList.php", function (data) {
+                    $('#queue-table').html(data);
+                });
+
+                $.get("./functions/getCompanyList.php", function (data) {
+                    $('#list-table').html(data);
+                });
+            }
         });
     });
 }

@@ -20733,6 +20733,15 @@ button.edit-3:hover i {
   visibility: hidden;
 }
 
+.show-msg {
+  margin: 3% 0 0 -7%;
+  display: inline;
+  position: fixed;
+  z-index: 9999;
+  visibility: hidden;
+  width: 100%;
+}
+
 /* Mobile */
 @media (max-width: 575px) {
   .del-msg {
