@@ -45,6 +45,11 @@
                         <div class="row">
                             <div class="col-xl-2 col-lg-2"></div>
                             <div class="col-xl-8 col-lg-8">
+                                <div id="message" class="d-flex justify-content-center position-fixed center mt--6" style="visibility: hidden; width: 100%; text-align: center; z-index: 9999;">
+                                    <div id="inner-msg" class="alert alert-primary">
+
+                                    </div>
+                                </div>
                                 <div class="card card-stats mb-4 mb-xl-0">
                                     <div class="card-body">
                                         <div>

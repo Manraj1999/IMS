@@ -29,6 +29,23 @@ class User {
                 $response['error'] = false;
                 $response['status_code'] = 0;
 
+                $user_type = "";
+
+                $checkAdminSQL = "SELECT User_Type FROM ims.users WHERE User_Email = '$emailFromUser'";
+                $resultCheckAdmin = $DatabaseHandler->getAdminMySQLiConnection()->query($checkAdminSQL);
+
+                if($resultCheckAdmin->num_rows > 0) {
+                    while($row = $resultCheckAdmin->fetch_assoc()) {
+                        $user_type = $row["User_Type"];
+                    }
+
+                    if($user_type == "ADMINISTRATOR") {
+                        $response["admin"] = true;
+                    } else {
+                        $response['admin'] = false;
+                    }
+                }
+
             } else {
                 // Login: Incorrect Password
                 $response['error'] = true;

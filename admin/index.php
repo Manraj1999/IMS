@@ -11,20 +11,11 @@
         session_start();
     }
 
-    /*
     if(session_status() === PHP_SESSION_ACTIVE) {
-        if(!(isset($_SESSION['email']))) {
-            header("Location: /IMS/dashboard/dashboard.php");
-        } else {
-            $getUserType = $UserModal->getUserData("User_Type");
-            if(!($getUserType == "ADMINISTRATOR")) {
-                header("Location: /IMS/dashboard/dashboard.php");
-            } else {
-
-            }
+        if(!(isset($_SESSION['emailAdmin']))) {
+            header("Location: /IMS/index.php");
         }
     }
-    */
 
 ?>
 
@@ -47,26 +38,24 @@
 
     <body class="container-fluid">
         <div class="row">
-            <div class="row">
-                <div class="col-sm-12">
-                    <div id="message" class="position-fixed center mt-5 ml--7 ml-md--6 ml-lg--5" style="width: 100%; text-align: center; z-index: 9999;">
-                        <div class="show-msg">
-                            <div id="inner-msg" class="alert alert-primary">
-                                This company has been disapproved.
-                            </div>
-                        </div>
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8">
+                <div id="message" class="d-flex justify-content-center position-fixed center mt-6" style="visibility: hidden; width: 100%; text-align: center; z-index: 9999;">
+                    <div id="inner-msg" class="alert alert-primary">
+
                     </div>
                 </div>
             </div>
-
-
+            <div class="col-sm-2"></div>
+        </div>
+        <div class="row">
             <div class="col-sm-2"></div>
             <div class="col-sm-8 mt-4 mb-2">
-                <h2 class="text-center"><span class="bg-primary p-2 rounded text-white">Administrator Lounge</span></h2>
+                <h2 class="text-center"><span class="bg-primary p-2 rounded text-white"><?php echo ORI_SITE_NAME; ?>'s Admin Dashboard</span></h2>
                 <hr/>
             </div>
             <div class="col-sm-2 mt-3">
-                <button class="btn btn-outline-primary hover-primary float-md-right">Logout <i class="fa fa-sign-out-alt"></i></button>
+                <a href="../dashboard/logout.php"><button class="btn btn-outline-primary hover-primary float-md-right">Logout <i class="fa fa-sign-out-alt"></i></button></a>
             </div>
         </div>
         <div class="row">

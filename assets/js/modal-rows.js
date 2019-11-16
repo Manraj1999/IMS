@@ -16,7 +16,7 @@ function storeModalsJS(i) {
             data:$('#add_store').serialize(),
             success:function(data)
             {
-                alert(data);
+                $('#inner-msg').text(data).fadeIn().css('visibility', 'visible').delay(1800).fadeOut();
                 $.get("./stores/getStores.php", function(data) {
                     $('#company-stores-data').html(data);
                 });
@@ -61,7 +61,7 @@ function categoryModalsJS(j) {
             data:$('#add_categories').serialize(),
             success:function(data)
             {
-                alert(data);
+                $('#inner-msg').text(data).fadeIn().css('visibility', 'visible').delay(1800).fadeOut();
                 $.get("./categories/getCategories.php", function(data) {
                     $('#company-categories-data').html(data);
                 });
@@ -82,7 +82,7 @@ function addProductModalsJS() {
             data:$('#add_products').serialize(),
             success:function(data)
             {
-                $('#modal-msg').text(data).fadeIn().css('visibility', 'visible').delay(1800).fadeOut();
+                $('#inner-msg').text(data).fadeIn().css('visibility', 'visible').delay(1800).fadeOut();
                 $.get("./products/getProducts.php", function(data) {
                     $('#products-table').html(data);
                 });
@@ -101,7 +101,7 @@ function addProductModalsJS() {
             data:$('#update_products').serialize(),
             success:function(data)
             {
-                $('#modal-msg').text(data).fadeIn().css('visibility', 'visible').delay(1800).fadeOut();
+                $('#inner-msg').text(data).fadeIn().css('visibility', 'visible').delay(1800).fadeOut();
                 $.get("./products/getProducts.php", function(data) {
                     $('#products-table').html(data);
                 });
@@ -182,7 +182,7 @@ function supplierModalsJS(j) {
             data:$('#add_suppliers').serialize(),
             success:function(data)
             {
-                alert(data);
+                $('#inner-msg').text(data).fadeIn().css('visibility', 'visible').delay(1800).fadeOut();
                 $.get("./supplier/getSuppliers.php", function(data) {
                     $('#company-suppliers-data').html(data);
                 });
@@ -220,7 +220,7 @@ function usersModalsJS() {
             data:$('#add_user').serialize(),
             success:function(data)
             {
-                $('#modal-msg').text(data).fadeIn().css('visibility', 'visible').delay(1800).fadeOut();
+                $('#inner-msg').text(data).fadeIn().css('visibility', 'visible').delay(1800).fadeOut();
                 $.get("./users/getUsers.php", function(data) {
                     $('#users-table').html(data);
                 });
@@ -248,7 +248,7 @@ function usersModalsJS() {
                 data:$('#update_password').serialize() + "&User_ID=" + user_id,
                 success:function(data)
                 {
-                    $('#modal-msg').text(data).fadeIn().css('visibility', 'visible').delay(1800).fadeOut();
+                    $('#inner-msg').text(data).fadeIn().css('visibility', 'visible').delay(1800).fadeOut();
                     $.get("./users/getUsers.php", function(data) {
                         $('#users-table').html(data);
                     });
@@ -265,7 +265,7 @@ function usersModalsJS() {
             method: "POST",
             data: {User_ID: user_id},
             success: function(data) {
-                $('#modal-msg').text(data).fadeIn().css('visibility', 'visible').delay(1800).fadeOut();
+                $('#inner-msg').text(data).fadeIn().css('visibility', 'visible').delay(1800).fadeOut();
                 $.get("./users/getUsers.php", function(data) {
                     $('#users-table').html(data);
                 });
@@ -281,7 +281,7 @@ function usersModalsJS() {
             method: "POST",
             data: {User_ID: user_id},
             success: function(data) {
-                $('#modal-msg').text(data).fadeIn().css('visibility', 'visible').delay(1800).fadeOut();
+                $('#inner-msg').text(data).fadeIn().css('visibility', 'visible').delay(1800).fadeOut();
                 $.get("./users/getUsers.php", function(data) {
                     $('#users-table').html(data);
                 });

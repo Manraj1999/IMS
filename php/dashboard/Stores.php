@@ -32,8 +32,8 @@ class Stores {
                 ";
             }
         } else {
-            echo "<h2 class='subtitle text-red'>It seems that you've not inserted any categories yet...</h2>
-                                            <img src='../assets/img/theme/not-found.gif' class='gif'/>";
+            echo "<div class='col-sm-2'></div><div class='col-sm-8 card card-stats card-body mt--3'><h2 class='subtitle text-purple'>It seems that you've not inserted any stores yet...</h2>
+                                            <img src='../assets/img/theme/not-found.gif' class='gif'/></div><div class='col-sm-2'></div>";
         }
     }
 

@@ -147,14 +147,16 @@ class Admin {
 
         $error = false;
         $Company_ID = "";
+        $Company_Name = "";
 
         // Get Company_ID
-        $getCompanyIDSQL = "SELECT Company_ID FROM ims.company_list WHERE List_ID = $id";
+        $getCompanyIDSQL = "SELECT * FROM ims.company_list WHERE List_ID = $id";
         $result = $connectionAdmin->query($getCompanyIDSQL);
 
         if($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
                 $Company_ID = $row["Company_ID"];
+                $Company_Name = $row["Company_Name"];
             }
 
             $sql = "DELETE FROM ims.company_list WHERE `List_ID`=$id";
@@ -195,7 +197,9 @@ class Admin {
         }
 
         if($error) {
-            echo "There was an error deleting the inventory management system.";
+            echo "There was an error deleting $Company_Name's system.";
+        } else {
+            echo "The $Company_Name's system has been deleted.";
         }
     }
 

@@ -47,18 +47,9 @@
                     <div class="header-body">
                         <div class="row">
                             <div class="col-xl-12 col-lg-12">
-                                <div id="message" style="visibility: hidden; text-align: center;">
-                                    <div style="width: 50%; left: 75%; margin: -7% 0 0 -51%; display: block; position: fixed; z-index: 9999;">
-                                        <div id="modal-msg" class="alert alert-primary">
+                                <div id="message" class="d-flex justify-content-center position-fixed center mt--6" style="visibility: hidden; width: 100%; text-align: center; z-index: 9999;">
+                                    <div id="inner-msg" class="alert alert-primary">
 
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="message" style="visibility: visible; text-align: center;">
-                                    <div class="del-msg">
-                                        <div id="inner-msg" class="alert alert-primary">
-
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="card card-stats mb-4 mb-xl-0">
