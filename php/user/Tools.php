@@ -106,6 +106,7 @@ class Tools {
                 Product_Name VARCHAR(128) NOT NULL,
                 Product_Category VARCHAR(32) NOT NULL,
                 Product_Inventory INT(32) NOT NULL,
+                Product_Price DOUBLE NOT NULL,
                 PRIMARY KEY (Product_ID)
             )";
                 $purchasesSQL = "CREATE TABLE purchases (

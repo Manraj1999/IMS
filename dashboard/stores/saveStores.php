@@ -24,9 +24,9 @@ if($number > 0)
             $connect->query($sql);
         }
     }
-    echo "Data Inserted";
+    echo "The stores have been updated.";
 }
 else
 {
-    echo "Please insert the data correctly";
+    echo "There was an issue while updating the stores.";
 }

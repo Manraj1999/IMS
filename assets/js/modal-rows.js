@@ -127,6 +127,7 @@ function addProductModalsJS() {
         $('#supplier_code').selectpicker("val", "default");
         $('#product_category').selectpicker("val", "default");
         $('#store_code').selectpicker("val", "default");
+        $('.selectpicker').selectpicker('refresh');
 
     });
     // END: Reset Data after closing Modal
@@ -143,6 +144,11 @@ function addProductModalsJS() {
                 $('#update_product_code').val(product_code);
                 $('#update_product_name').val(data.Product_Name);
                 $('#update_product_inventory').val(data.Product_Inventory);
+                $('select[name=update_product_category]').val(data.Product_Category);
+                $('select[name=update_supplier_code]').val(data.Supplier_Code);
+                $('select[name=update_store_code]').val(data.Store_Code);
+                $('#update_product_price').val(data.Product_Price);
+                $('.selectpicker').selectpicker('refresh');
             }
         });
     });

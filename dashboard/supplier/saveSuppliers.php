@@ -24,9 +24,9 @@
                 $connect->query($sql);
             }
         }
-        echo "Data Inserted";
+        echo "The suppliers have been updated.";
     }
     else
     {
-        echo "Please enter the data correctly";
+        echo "There was an issue while updating the suppliers.";
     }

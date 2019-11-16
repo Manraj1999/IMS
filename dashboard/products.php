@@ -96,6 +96,7 @@
                                                     <th scope="col">Quantity</th>
                                                     <th scope="col">Store</th>
                                                     <th scope="col">Supplier</th>
+                                                    <th scope="col">Price</th>
                                                     <th scope="col">Action</th>
                                                 </tr>
                                                 </thead>
@@ -164,7 +165,7 @@
                                                                 <div class="input-group-prepend">
                                                                     <span class="input-group-text scale-transition"><?php echo $Products->getCurrencyFormat(); ?></span>
                                                                 </div>
-                                                                <input type='text' id="product_code" name='product_code' placeholder='Price' class='modal-text pl-3 form-control' />
+                                                                <input type='text' id="product_price" name='product_price' placeholder='Price' class='modal-text pl-3 form-control' />
                                                             </div>
                                                             <div class="col-xl-4"></div>
                                                         </div>
@@ -192,14 +193,52 @@
                                             <form name="update_products" id="update_products">
                                                 <div class="modal-body">
                                                     <div class="form-group row">
-                                                        <div class="col-xl-3 col-lg-3 mb-2">
-                                                            <input type='text' id="update_product_code" name='update_product_code' placeholder='Product Code' class='modal-text form-control' readonly="true" />
+                                                        <div class="row col-xl-12 col-lg-12">
+                                                            <div class="col-xl-4 col-lg-4 mb-2">
+                                                                <input type='text' id="update_product_code" name='update_product_code' placeholder='Product Code' class='modal-text form-control' readonly />
+                                                            </div>
+                                                            <div class="col-xl-4 col-lg-4 mb-2">
+                                                                <input type='text' id='update_product_name' name='update_product_name' placeholder='Product Name' class='modal-text form-control' />
+                                                            </div>
+                                                            <div class="col-xl-4 col-lg-4 mb-2">
+                                                                <input type="number" name='update_product_inventory' id="update_product_inventory" min="0" placeholder="Quantity" class="modal-text form-control"/>
+                                                            </div>
                                                         </div>
-                                                        <div class="col-xl-5 col-lg-5 mb-2">
-                                                            <input type='text' id="update_product_name" name='update_product_name' placeholder='Product Name' class='modal-text form-control' />
+                                                        <div class="row col-xl-12 col-lg-12">
+                                                            <div class="col-xl-4 col-lg-4 mb-2">
+                                                                <select id='product_category' class='selectpicker' data-style='btn-primary no-outline' name='update_product_category' data-live-search='true'>
+                                                                    <option val="default" selected disabled hidden>Category</option>
+                                                                    <?php
+                                                                    $Products->getCategoriesForAddingProducts();
+                                                                    ?>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-xl-4 col-lg-4 mb-2">
+                                                                <select id='supplier_code' class='selectpicker' data-style='btn-primary no-outline' name='update_supplier_code' data-live-search='true'>
+                                                                    <option val="default" selected disabled hidden>Supplier</option>
+                                                                    <?php
+                                                                    $Products->getSuppliersForAddingProducts();
+                                                                    ?>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-xl-3 col-lg-3 mb-2">
+                                                                <select id='store_code' class='selectpicker' data-style='btn-primary no-outline' name='update_store_code' data-live-search='true'>
+                                                                    <option val="default" selected disabled hidden>Store</option>
+                                                                    <?php
+                                                                    $Products->getStoresForAddingProducts();
+                                                                    ?>
+                                                                </select>
+                                                            </div>
                                                         </div>
-                                                        <div class="col-xl-3 col-lg-3 mb-2">
-                                                            <input type="number" name='update_product_inventory' id="update_product_inventory" min="0" placeholder="Quantity" class="modal-text form-control"/>
+                                                        <div class="row col-xl-12 col-lg-12 mt-5">
+                                                            <div class="col-xl-4"></div>
+                                                            <div class="col-xl-4 input-group">
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text scale-transition"><?php echo $Products->getCurrencyFormat(); ?></span>
+                                                                </div>
+                                                                <input type='text' id="update_product_price" name='update_product_price' placeholder='Price' class='modal-text pl-3 form-control' />
+                                                            </div>
+                                                            <div class="col-xl-4"></div>
                                                         </div>
                                                     </div>
                                                 </div>

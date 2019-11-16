@@ -9,6 +9,7 @@ class Products {
     function getProducts($limit) {
         $DatabaseHandler = new DatabaseHandler();
         $UserModal = new UserModal();
+        $CompanyModel = new CompanyModal();
 
         $sql = "SELECT * FROM products LIMIT " . $limit;
         $connection = $DatabaseHandler->getCompanyMySQLiConnection($UserModal->getUserData("Company_ID"));
@@ -59,6 +60,7 @@ class Products {
                                                         <td>" . $row["Product_Inventory"] . "</td>
                                                         <td>" . $storeName . "</td>
                                                         <td>" . $supplierName . " <span class='badge badge-light'>" . $row["Supplier_Code"] . "</span></td>
+                                                        <td>" . $CompanyModel->getCompanyData("Currency_Format") . $row["Product_Price"] . "</td>
                                                         <td>
                                                             <div class='dropdown'>
                                                                 <button class='btn btn-primary dropdown-toggle m--3' type='button' id='action-" . $row["Product_Code"] ."' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
@@ -81,6 +83,7 @@ class Products {
     function getSearchProducts($search_data) {
         $DatabaseHandler = new DatabaseHandler();
         $UserModal = new UserModal();
+        $CompanyModel = new CompanyModal();
 
         $sql = "SELECT * FROM products
                 WHERE Product_Code LIKE '%" . $search_data . "%'
@@ -134,6 +137,7 @@ class Products {
                                                         <td>" . $row["Product_Inventory"] . "</td>
                                                         <td>" . $storeName . "</td>
                                                         <td>" . $supplierName . " <span class='badge badge-light'>" . $row["Supplier_Code"] . "</span></td>
+                                                        <td>" . $CompanyModel->getCompanyData("Currency_Format") . $row["Product_Price"] . "</td>
                                                         <td>
                                                             <div class='dropdown'>
                                                                 <button class='btn btn-primary dropdown-toggle m--3' type='button' id='action-" . $row["Product_Code"] ."' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>

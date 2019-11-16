@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavaScriptLibraryMappings">
-    <file url="PROJECT" libraries="{Chart.bundle, bootstrap.bundle, f1cf4aa2da, jquery, jquery.dataTables, mdb, t}" />
+    <file url="PROJECT" libraries="{Chart.bundle, bootstrap-select, bootstrap.bundle, f1cf4aa2da, jquery, jquery.dataTables, mdb, t}" />
   </component>
 </project>

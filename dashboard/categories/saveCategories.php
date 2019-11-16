@@ -24,9 +24,9 @@ if($number > 0)
             $connect->query($sql);
         }
     }
-    echo "Data Inserted";
+    echo "Categories have been updated.";
 }
 else
 {
-    echo "Please enter the data correctly";
+    echo "There was an error while updating the categories.";
 }
