@@ -108,6 +108,36 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Update Modal -->
+                <div class="modal fade" id="updatePassword" tabindex="-1" role="dialog" aria-labelledby="ModalScrollableTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="ModalScrollableTitle">Change Password</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form name="update_password" id="update_password">
+                                    <div class="form-group row">
+                                        <div class="col-xl-6 col-lg-6 mb-2">
+                                            <input type='password' id="user_pswd" name='user_pswd' placeholder='Enter the new password' class='modal-text form-control' />
+                                        </div>
+                                        <div class="col-xl-6 col-lg-6 mb-2">
+                                            <input type='password' id="user_pswd_confirm" name='user_pswd_confirm' placeholder='Re-enter the new password' class='modal-text form-control' />
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" id="close-btn-update-pass" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" id="save-update-pass" class="btn btn-primary">Change Password</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="col-md-2"></div>
         </div>

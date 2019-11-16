@@ -402,4 +402,30 @@ function adminModalsJS() {
             }
         });
     });
+
+    $(document).on('click', '.company-change-pass', function() {
+        var user_id = $(this).attr("id");
+        var company_id = $(this).attr("company");
+        var company_name = $(this).attr("comp-name");
+        var email = $(this).attr("email");
+
+        // Reset Data
+        $("#user_pswd").val('');
+        $("#user_pswd_confirm").val('');
+
+        $('#save-update-pass').click(function() {
+            $.ajax({
+                url:"./functions/changeUserPass.php",
+                method:"POST",
+                data:$('#update_password').serialize() + "&User_ID=" + user_id + "&Company_ID=" + company_id + "&Email=" + email + "&Company_Name=" + company_name,
+                success:function(data)
+                {
+                    $('#inner-msg').text(data).fadeIn().css('visibility', 'visible').delay(1800).fadeOut();
+                    $.get("./functions/getCompanyList.php", function(data) {
+                        $('#list-table').html(data);
+                    });
+                }
+            });
+        });
+    });
 }

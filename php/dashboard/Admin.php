@@ -61,8 +61,7 @@ class Admin {
                                                 Action
                                             </button>
                                             <div class='dropdown-menu' aria-labelledby='actionButton'>
-                                                <a class='dropdown-item company-access' id='" . $row["List_ID"] . "' href='#'>Access System</a>
-                                                <a class='dropdown-item company-change-pass' id='" . $row["List_ID"] . "' data-toggle='modal' data-target='#updateProducts' href='#'>Change Supervisor Password</a>
+                                                <a class='dropdown-item company-change-pass' id='" . $row["List_ID"] . "' company='" . $row["Company_ID"] . "' comp-name='" . $row["Company_Name"] . "' email='" . $row["Email_Address"] . "' data-toggle='modal' data-target='#updatePassword' href='#'>Change Supervisor Password</a>
                                                 <a class='dropdown-item company-delete' id='" . $row["List_ID"] . "' href='#'>Delete System</a>
                                             </div>
                                         </div>

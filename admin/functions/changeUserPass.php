@@ -1,18 +1,16 @@
 <?php
 
     include_once $_SERVER['DOCUMENT_ROOT'] . '/ims/php/DatabaseHandler.php';
-    include_once $_SERVER['DOCUMENT_ROOT'] . '/ims/php/modals/UserModal.php';
     include_once $_SERVER['DOCUMENT_ROOT'] . '/ims/php/user/Tools.php';
 
     session_start();
 
     $DatabaseHandler = new DatabaseHandler();
-    $UserModal = new UserModal();
     $Tools = new Tools();
 
     $response["error"] = false;
 
-    $connect = $DatabaseHandler->getCompanyMySQLiConnection($UserModal->getUserData("Company_ID"));
+    $connect = $DatabaseHandler->getCompanyMySQLiConnection($_POST["Company_ID"]);
     $connectAdmin = $DatabaseHandler->getAdminMySQLiConnection();
 
     $User_ID = $_POST["User_ID"];
@@ -22,20 +20,11 @@
     } else {
         $User_Salt = $Tools->hashPasswordFromInput($_POST["user_pswd"]);
 
-        $userEmail = "";
+        $userEmail = $_POST["Email"];
         $userName = "";
 
-        $sql = "UPDATE users SET User_Salt='$User_Salt' WHERE User_ID='$User_ID'";
+        $sql = "UPDATE users SET User_Salt='$User_Salt' WHERE User_Email='$userEmail'";
         if($result = $connect->query($sql)) {
-            $getNewDataSQL = "SELECT * FROM users WHERE User_ID='$User_ID'";
-            if($results = $connect->query($getNewDataSQL)) {
-                if($results->num_rows > 0) {
-                    while($row = $results->fetch_assoc()) {
-                        $userEmail = $row["User_Email"];
-                        $userName = $row["User_FullName"];
-                    }
-                }
-            }
 
             $sqlChangeInMainDB = "UPDATE ims.users SET User_Salt='$User_Salt' WHERE User_Email='$userEmail'";
             $sqlChangeInMainCompanyDB = "UPDATE ims.company_list SET Password_Salt='$User_Salt' WHERE Email_Address='$userEmail'";
@@ -49,8 +38,8 @@
         }
 
         if($response["error"] == false) {
-            echo "User [" . $userName . "]'s password has been updated";
+            echo "The supervisor for " . $_POST["Company_Name"] . "'s password has been updated";
         } else {
-            echo "Failed to update User [" . $userName . "]'s password";
+            echo "Failed to update the supervisor of " . $_POST["Company_Name"] . "'s password";
         }
     }
