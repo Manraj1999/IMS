@@ -78,7 +78,7 @@
                             <span class="bg-danger p-2 rounded">Queue List</span>
                         </h4>
                         <div class="table-responsive">
-                            <table class="table text-center">
+                            <table class="table text-center mt-3 mb-4">
                                 <thead>
                                 <tr>
                                     <th scope="col" class="text-center">Company Name</th>
@@ -101,7 +101,7 @@
                             <span class="bg-success p-2 rounded">Company List</span>
                         </h4>
                         <div class="table-responsive">
-                            <table class="table text-center">
+                            <table class="table text-center mt-3 mb-5">
                                 <thead>
                                 <tr>
                                     <th scope="col" class="text-center">Company Name</th>

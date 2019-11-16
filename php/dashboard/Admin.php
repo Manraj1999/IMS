@@ -143,16 +143,59 @@ class Admin {
 
     function deleteCompany($id) {
         $DatabaseHandler = new DatabaseHandler();
-        $connection = $DatabaseHandler->getAdminMySQLiConnection();
+        $connectionAdmin = $DatabaseHandler->getAdminMySQLiConnection();
 
-        $sql = "DELETE FROM ims.company_list WHERE `List_ID`=$id";
+        $error = false;
+        $Company_ID = "";
 
-        $results = $connection->query($sql);
+        // Get Company_ID
+        $getCompanyIDSQL = "SELECT Company_ID FROM ims.company_list WHERE List_ID = $id";
+        $result = $connectionAdmin->query($getCompanyIDSQL);
 
-        if($results) {
-            echo "This company has been deleted.";
-        } else {
-            echo "There was an issue deleting this company.";
+        if($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                $Company_ID = $row["Company_ID"];
+            }
+
+            $sql = "DELETE FROM ims.company_list WHERE `List_ID`=$id";
+
+            $results = $connectionAdmin->query($sql);
+
+            if($results) {
+                $error = false;
+            } else {
+                $error = true;
+            }
+
+        }
+
+        if(!$error) {
+            // Delete Company Database
+            $sql = "DROP DATABASE " . $Company_ID;
+            $connection = $DatabaseHandler->getCompanyMySQLiConnection($Company_ID);
+
+            $result = $connection->query($sql);
+
+            if($result) {
+                // Remove Supervisor & Users from Main Database
+                $remUsersSQL = "DELETE FROM ims.users WHERE Company_ID = '" . $Company_ID . "'";
+                $remCompanyListSQL = "DELETE FROM ims.company_list WHERE Company_ID = '" . $Company_ID . "'";
+
+                $remUsersResults = $connectionAdmin->query($remUsersSQL);
+                $remCompanyListResults = $connectionAdmin->query($remCompanyListSQL);
+
+                if($remUsersResults && $remCompanyListResults) {
+                    $error = false;
+                } else {
+                    $error = true;
+                }
+            } else {
+                $error = true;
+            }
+        }
+
+        if($error) {
+            echo "There was an error deleting the inventory management system.";
         }
     }
 

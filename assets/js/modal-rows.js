@@ -272,6 +272,24 @@ function usersModalsJS() {
             }
         });
     });
+
+    $(document).on('click', '.pass-ownership-data', function() {
+        var user_id = $(this).attr("id");
+
+        $.ajax({
+            url: "./users/passOwnership.php",
+            method: "POST",
+            data: {User_ID: user_id},
+            success: function(data) {
+                $('#modal-msg').text(data).fadeIn().css('visibility', 'visible').delay(1800).fadeOut();
+                $.get("./users/getUsers.php", function(data) {
+                    $('#users-table').html(data);
+                });
+
+                window.location.replace("/ims/dashboard/dashboard.php");
+            }
+        });
+    });
 }
 
 function settingsModalsJS() {

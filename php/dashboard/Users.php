@@ -20,6 +20,7 @@ class Users {
                 $deleteString = "";
                 $changeSupervisorString = "";
 
+
                 if($row["User_Type"] !== "SUPERVISOR") {
                     $deleteString = "<a class='dropdown-item delete-data' id='" . $row["User_ID"] . "' href='#'>Delete</a>";
                     $changeSupervisorString = "<a class='dropdown-item pass-ownership-data' id='" . $row["User_ID"] . "' href='#'>Pass Ownership</a>";
@@ -95,18 +96,124 @@ class Users {
         }
     }
 
-    function passOwnership($previousOwnerID, $newOwnerID) {
+    function passOwnership($newOwnerID) {
         $DatabaseHandler = new DatabaseHandler();
         $UserModal = new UserModal();
 
+        $previousOwnerID = "";
+        $previousOwnerEmail = "";
+        $newOwnerEmail = "";
+        $newOwnerName = "";
+        $newSupervisorID = "";
+
+        $connection = $DatabaseHandler->getCompanyMySQLiConnection($UserModal->getUserData("Company_ID"));
+        $connectionAdmin = $DatabaseHandler->getAdminMySQLiConnection();
+
+        // Get Previous Owner ID
+        $sql = "SELECT User_ID FROM users WHERE User_Type = 'SUPERVISOR'";
+        $results = $connection->query($sql);
+
+        if($results->num_rows > 0) {
+            while ($row = $results->fetch_assoc()) {
+                $previousOwnerID = $row["User_ID"];
+            }
+        }
+
         // Get current owner and change them to Employee
         $currentOwnerSQL = "SELECT * FROM users WHERE User_ID = " . $previousOwnerID;
-        $connection = $DatabaseHandler->getCompanyMySQLiConnection($UserModal->getUserData("Company_ID"));
 
         $result = $connection->query($currentOwnerSQL);
 
+        $error = false;
+
+        if($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                $previousOwnerEmail = $row["User_Email"];
+            }
+
+            // Demote user from Supervisor -> Employee in Company Database
+            $demoteSQL = "UPDATE users SET User_Type = 'EMPLOYEE' WHERE User_Email = '$previousOwnerEmail'";
+            $resultDemote = $connection->query($demoteSQL);
+
+            if($resultDemote) {
+                // Demote user from Supervisor -> Employee in Main Database
+                $demoteMainUsersSQL = "UPDATE ims.users SET User_Type = 'EMPLOYEE' WHERE User_Email = '$previousOwnerEmail'";
+                $resultDemoteMainUsers = $connectionAdmin->query($demoteMainUsersSQL);
+
+                if(!$resultDemoteMainUsers) {
+                    $error = true;
+                } else {
+                    $error = false;
+                }
+            } else {
+                $error = false;
+            }
+        }
+
         // Get new owner and change them to Supervisor
 
+        if($error == false) {
+            $newOwnerSQL = "SELECT * FROM users WHERE User_ID = " . $newOwnerID;
+            $resultNewOwner = $connection->query($newOwnerSQL);
+
+            if($resultNewOwner->num_rows > 0) {
+                while($row = $resultNewOwner->fetch_assoc()) {
+                    $newOwnerEmail = $row["User_Email"];
+                    $newOwnerName = $row["User_FullName"];
+                }
+
+                // Promote user from Employee -> Supervisor in Company Database
+                $promoteSQL = "UPDATE users SET User_Type = 'SUPERVISOR' WHERE User_Email = '$newOwnerEmail'";
+                $resultPromote = $connection->query($promoteSQL);
+
+                if($resultPromote) {
+                    // Promote user from Employee -> Supervisor in Main Database
+                    $promoteMainUsersSQL = "UPDATE ims.users SET User_Type = 'SUPERVISOR' WHERE User_Email = '$newOwnerEmail'";
+                    $resultPromoteMainUsers = $connectionAdmin->query($promoteMainUsersSQL);
+
+                    if($resultPromoteMainUsers) {
+                        // Promote user from Employee -> Supervisor in Main Company List Database
+                        $UserModal = new UserModal();
+                        $comp_id = $UserModal->getUserData("Company_ID");
+                        $promoteMainCompanySQL = "UPDATE ims.company_list SET Supervisor_Name = '$newOwnerName', Email_Address = '$newOwnerEmail' WHERE Company_ID = '$comp_id'";
+                        $resultPromoteMainCompany = $connectionAdmin->query($promoteMainCompanySQL);
+
+                        if($resultPromoteMainCompany) {
+                            // Update Supervisor ID in company_info table
+                            $getNewSupervisorSQL = "SELECT * FROM ims.users WHERE Company_ID = '$comp_id' AND User_Type = 'SUPERVISOR'";
+                            $getNewSupervisor = $connectionAdmin->query($getNewSupervisorSQL);
+
+                            if($getNewSupervisor->num_rows > 0) {
+                                while($row = $getNewSupervisor->fetch_assoc()) {
+                                    $newSupervisorID = $row["User_ID"];
+                                }
+
+                                $updateCompanyInfoSQL = "UPDATE company_info SET SU_ID = $newSupervisorID WHERE Company_ID = 1";
+                                $updateResult = $connection->query($updateCompanyInfoSQL);
+
+                                if(!$updateResult) {
+                                    $error = true;
+                                } else {
+                                    $error = false;
+                                }
+                            }
+                        } else {
+                            $error = true;
+                            echo $connectionAdmin->error;
+                        }
+                    }
+                } else {
+                    $error = true;
+                    echo $connection->error;
+                }
+            }
+        }
+
+        if($error == true) {
+            echo "There was an issue when transferring the ownership.";
+        } elseif($error == false) {
+            echo "Ownership transfer was successful.";
+        }
     }
 
 }
