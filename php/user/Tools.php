@@ -120,8 +120,9 @@ class Tools {
                 $ordersSQL = "CREATE TABLE orders (
                 Order_ID INT NOT NULL AUTO_INCREMENT,
                 Product_ID VARCHAR(32) NOT NULL,
-                Order_Person_Name VARCHAR(128) NOT NULL,
-                Product_Amount VARCHAR(32) NOT NULL,
+                Customer_Name VARCHAR(128) NOT NULL,
+                Product_Quantity INT(32) NOT NULL,
+                Total_Amount DOUBLE NOT NULL,
                 Order_Date DATETIME NOT NULL,
                 PRIMARY KEY (Order_ID)
             )";
