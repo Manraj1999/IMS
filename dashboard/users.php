@@ -51,22 +51,15 @@
             <div class="container-fluid">
                 <div class="header-body">
                     <div class="row">
-                        <div id="message" style="visibility: hidden; text-align: center;">
-                            <div style="width: 50%; left: 75%; margin: -7% 0 0 -51%; display: block; position: fixed; z-index: 9999;">
-                                <div id="modal-msg" class="alert alert-primary">
-
-                                </div>
-                            </div>
-                        </div>
-                        <div id="message" style="visibility: visible; text-align: center;">
-                            <div class="del-msg">
-                                <div id="inner-msg" class="alert alert-primary">
-
-                                </div>
-                            </div>
-                        </div>
                         <div class="col-xl-2 col-lg-2"></div>
                         <div class="col-xl-8 col-lg-8">
+                            <div id="message" class="position-fixed center mt--7" style="visibility: hidden; text-align: center; z-index: 9999;">
+                                <div>
+                                    <div id="modal-msg" class="alert alert-primary">
+
+                                    </div>
+                                </div>
+                            </div>
                             <div class="card card-stats mb-4 mb-xl-0">
                                 <div class="card-body">
                                     <div>

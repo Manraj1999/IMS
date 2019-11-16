@@ -220,7 +220,7 @@ function usersModalsJS() {
             data:$('#add_user').serialize(),
             success:function(data)
             {
-                alert(data);
+                $('#modal-msg').text(data).fadeIn().css('visibility', 'visible').delay(1800).fadeOut();
                 $.get("./users/getUsers.php", function(data) {
                     $('#users-table').html(data);
                 });
@@ -265,7 +265,7 @@ function usersModalsJS() {
             method: "POST",
             data: {User_ID: user_id},
             success: function(data) {
-                $('#inner-msg').text(data).fadeIn().css('visibility', 'visible').delay(1800).fadeOut();
+                $('#modal-msg').text(data).fadeIn().css('visibility', 'visible').delay(1800).fadeOut();
                 $.get("./users/getUsers.php", function(data) {
                     $('#users-table').html(data);
                 });

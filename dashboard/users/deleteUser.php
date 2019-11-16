@@ -19,6 +19,7 @@
         $User_ID = $_POST["User_ID"];
 
         $userEmail = "";
+        $userName = "";
 
         $getNewDataSQL = "SELECT * FROM users WHERE User_ID='$User_ID'";
 
@@ -30,6 +31,7 @@
             if($results->num_rows > 0) {
                 while($row = $results->fetch_assoc()) {
                     $userEmail = $row["User_Email"];
+                    $userName = $row["User_FullName"];
                 }
             }
         }
@@ -48,8 +50,8 @@
         }
 
         if($response["error"] == false) {
-            echo "User [" . $_POST['User_ID'] . "] has been deleted";
+            echo "User [" . $userName . "] has been deleted";
         } else {
-            echo "Failed to delete User [" . $_POST['User_ID'] . "]";
+            echo "Failed to delete User [" . $userName . "]";
         }
     }

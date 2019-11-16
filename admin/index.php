@@ -47,16 +47,18 @@
 
     <body class="container-fluid">
         <div class="row">
-
-            <div class="col-sm-12">
-                <div id="message" style="visibility: visible; text-align: center;">
-                    <div class="show-msg">
-                        <div id="inner-msg" class="alert alert-primary">
-
+            <div class="row">
+                <div class="col-sm-12">
+                    <div id="message" class="position-fixed center mt-5 ml--7 ml-md--6 ml-lg--5" style="width: 100%; text-align: center; z-index: 9999;">
+                        <div class="show-msg">
+                            <div id="inner-msg" class="alert alert-primary">
+                                This company has been disapproved.
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+
 
             <div class="col-sm-2"></div>
             <div class="col-sm-8 mt-4 mb-2">
