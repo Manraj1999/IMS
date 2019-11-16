@@ -16079,6 +16079,7 @@ textarea[resize="horizontal"] {
   color: #8898aa;
   background-color: #fff;
   border-color: rgba(50, 151, 211, 0.25);
+  transition: ease-in-out 0.2s;
 }
 
 .focused .form-control {
@@ -16250,7 +16251,7 @@ textarea[resize="horizontal"] {
 }
 
 .input-group-text {
-  transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transition: ease-in-out 0.2s;
 }
 
 .input-group-alternative {

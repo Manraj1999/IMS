@@ -308,6 +308,20 @@ function settingsModalsJS() {
         });
     });
 
+    $("#save-currency").click(function() {
+
+        var format = $("#currency_format").val();
+
+        $.ajax({
+            url: "./settings/updateCurrencyFormat.php",
+            method: "POST",
+            data: {Format: format},
+            success: function(data) {
+                $('#inner-msg').text(data).fadeIn().css('visibility', 'visible').delay(1800).fadeOut();
+            }
+        });
+    });
+
     $("#delete").click(function() {
         $.ajax({
             url: "./settings/deleteEverything.php",

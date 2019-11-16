@@ -15,9 +15,11 @@
 
     $Min_Threshold = $CompanyModal->getCompanyData("Minimum_Threshold");
     $Max_Threshold = $CompanyModal->getCompanyData("Maximum_Threshold");
+    $Currency_Format = $CompanyModal->getCompanyData("Currency_Format");
 
     $Min_String = "";
     $Max_String = "";
+    $Currency_String = "";
 
     if($Min_Threshold != 0) {
         $Min_String = "value='" . $Min_Threshold . "'";
@@ -27,9 +29,17 @@
         $Max_String = "value='" . $Max_Threshold . "'";
     }
 
+    if(!empty($Currency_Format)) {
+        $Currency_String = "value='" . $Currency_Format . "'";
+    }
+
     if(isset($_POST["save-threshold"])) {
         $Min_String = "value='" . $CompanyModal->getCompanyData("Minimum_Threshold") . "'";
         $Max_String = "value='" . $CompanyModal->getCompanyData("Maximum_Threshold") . "'";
+    }
+
+    if(isset($_POST["save-currency"])) {
+        $Currency_String = "value='" . $CompanyModal->getCompanyData("Currency_Format") . "'";
     }
 
 ?>
@@ -102,36 +112,60 @@
 
                             <h2 class="text-white">Threshold Settings</h2>
                             <div class="border border-white rounded p-3">
-                                    <div class="row">
-                                        <div class="col col-xl-8 col-lg-auto">
-                                            <h3 class="text-white">Set minimum threshold</h3>
-                                            <h5 class="text-white-50">Whenever an item reaches this threshold or lower, an alert would be sent to the dashboard.</h5>
-                                            <h6 class="text-white-50">*Helps alert whenever a particular item requires restocking.</h6>
-                                        </div>
-                                        <div class="col col-xl-4 col-lg-4 mt-5 mt-lg-0 mt-xl-3">
-                                            <input type="number" placeholder="Minimum Threshold" id="min_threshold" name="min_threshold" <?php echo $Min_String; ?> class="form-control"/>
-                                        </div>
+                                <div class="row">
+                                    <div class="col col-xl-8 col-lg-auto">
+                                        <h3 class="text-white">Set minimum threshold</h3>
+                                        <h5 class="text-white-50">Whenever an item reaches this threshold or lower, an alert would be sent to the dashboard.</h5>
+                                        <h6 class="text-white-50">*Helps alert whenever a particular item requires restocking.</h6>
                                     </div>
-                                    <br/>
-                                    <div class="row">
-                                        <div class="col col-xl-8 col-lg-auto">
-                                            <h3 class="text-white">Set maximum threshold</h3>
-                                            <h5 class="text-white-50">This will set the maximum amount of inventory you're able to have for each item.</h5>
-                                            <h6 class="text-white-50">*Helps reduce the overflow of products.</h6>
-                                        </div>
-                                        <div class="col col-xl-4 col-lg-4 mt-5 mt-lg-0 mt-xl-3">
-                                            <input type="number" placeholder="Maximum Threshold" id="max_threshold" name="max_threshold" <?php echo $Max_String; ?> class="form-control"/>
-                                        </div>
+                                    <div class="col col-xl-4 col-lg-4 mt-5 mt-lg-0 mt-xl-3">
+                                        <input type="number" placeholder="Minimum Threshold" id="min_threshold" name="min_threshold" <?php echo $Min_String; ?> class="form-control"/>
                                     </div>
+                                </div>
+                                <br/>
+                                <div class="row">
+                                    <div class="col col-xl-8 col-lg-auto">
+                                        <h3 class="text-white">Set maximum threshold</h3>
+                                        <h5 class="text-white-50">This will set the maximum amount of inventory you're able to have for each item.</h5>
+                                        <h6 class="text-white-50">*Helps reduce the overflow of products.</h6>
+                                    </div>
+                                    <div class="col col-xl-4 col-lg-4 mt-5 mt-lg-0 mt-xl-3">
+                                        <input type="number" placeholder="Maximum Threshold" id="max_threshold" name="max_threshold" <?php echo $Max_String; ?> class="form-control"/>
+                                    </div>
+                                </div>
 
-                                    <br/>
+                                <br/>
 
-                                    <div class="row">
-                                        <div class="col col-xl-8"></div>
-                                        <div class="col col-xl-4">
-                                            <button id="save-threshold" name="save-threshold" class="btn btn-outline-white float-right">Save</button>
-                                        </div>
+                                <div class="row">
+                                    <div class="col col-xl-8"></div>
+                                    <div class="col col-xl-4">
+                                        <button id="save-threshold" name="save-threshold" class="btn btn-outline-white float-right">Save</button>
                                     </div>
+                                </div>
+                            </div>
+
+                            <br/>
+
+                            <h2 class="text-white">Currency Settings</h2>
+                            <div class="border border-white rounded p-3">
+                                <div class="row">
+                                    <div class="col col-xl-8 col-lg-auto">
+                                        <h3 class="text-white">Set currency format</h3>
+                                        <h5 class="text-white-50">Set your currency format according to the country you're in. It is set to '$' by default.</h5>
+                                    </div>
+                                    <div class="col col-xl-4 col-lg-4 mt-4 mt-lg-0 mt-xl-3">
+                                        <input type="text" placeholder="Currency Format" id="currency_format" name="currency_format" <?php echo $Currency_String; ?> class="form-control"/>
+                                    </div>
+                                </div>
+
+                                <br/>
+
+                                <div class="row">
+                                    <div class="col col-xl-8"></div>
+                                    <div class="col col-xl-4">
+                                        <button id="save-currency" name="save-currency" class="btn btn-outline-white float-right">Save</button>
+                                    </div>
+                                </div>
                             </div>
 
                             <br/>

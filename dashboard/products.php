@@ -125,10 +125,10 @@
                                                             <div class="col-xl-4 col-lg-4 mb-2">
                                                                 <input type='text' id="product_code" name='product_code' placeholder='Product Code' class='modal-text form-control' />
                                                             </div>
-                                                            <div class="col-xl-5 col-lg-5 mb-2">
+                                                            <div class="col-xl-4 col-lg-4 mb-2">
                                                                 <input type='text' name='product_name' placeholder='Product Name' class='modal-text form-control' />
                                                             </div>
-                                                            <div class="col-xl-3 col-lg-3 mb-2">
+                                                            <div class="col-xl-4 col-lg-4 mb-2">
                                                                 <input type="number" name='product_inventory' id="product_inventory" min="0" placeholder="Quantity" class="modal-text form-control"/>
                                                             </div>
                                                         </div>
@@ -157,6 +157,16 @@
                                                                     ?>
                                                                 </select>
                                                             </div>
+                                                        </div>
+                                                        <div class="row col-xl-12 col-lg-12 mt-5">
+                                                            <div class="col-xl-4"></div>
+                                                            <div class="col-xl-4 input-group">
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text scale-transition"><?php echo $Products->getCurrencyFormat(); ?></span>
+                                                                </div>
+                                                                <input type='text' id="product_code" name='product_code' placeholder='Price' class='modal-text pl-3 form-control' />
+                                                            </div>
+                                                            <div class="col-xl-4"></div>
                                                         </div>
                                                     </div>
                                                 </div>

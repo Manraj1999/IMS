@@ -59,4 +59,20 @@ class Settings {
         }
     }
 
+    function saveCurrencyFormat($format) {
+        $DatabaseHandler = new DatabaseHandler();
+        $UserModal = new UserModal();
+
+        $sql = "UPDATE company_info SET Currency_Format = '$format' WHERE Company_ID = 1";
+        $connection = $DatabaseHandler->getCompanyMySQLiConnection($UserModal->getUserData("Company_ID"));
+
+        $result = $connection->query($sql);
+
+        if($result) {
+            echo "The currency format has been saved.";
+        } else {
+            echo "There was an error in updating the currency format.";
+        }
+    }
+
 }

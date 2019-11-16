@@ -75,6 +75,7 @@ class Tools {
                 Inventory_Type VARCHAR(32),
                 Minimum_Threshold INT(64),
                 Maximum_Threshold INT(64),
+                Currency_Format VARCHAR(64),
                 PRIMARY KEY (Company_ID)
             )";
                 $companyStoresSQL = "CREATE TABLE company_stores (

@@ -2,6 +2,7 @@
 
 include_once $_SERVER['DOCUMENT_ROOT'] . '/ims/php/DatabaseHandler.php';
 include_once $_SERVER['DOCUMENT_ROOT'] . '/ims/php/modals/UserModal.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/ims/php/modals/CompanyModal.php';
 
 class Products {
 
@@ -198,6 +199,11 @@ class Products {
                 echo "<option value='" . $row['Store_Code'] . "'>" . $row['Store_Name'] . "</option>";
             }
         }
+    }
+
+    function getCurrencyFormat() {
+        $CompanyModel = new CompanyModal();
+        return $CompanyModel->getCompanyData("Currency_Format");
     }
 
 

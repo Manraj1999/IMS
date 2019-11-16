@@ -194,7 +194,7 @@ class User {
                 }
 
                 $companyConnection = $DatabaseHandler->getCompanyMySQLiConnection($companyID);
-                $updateCompanyInfoSQL = "INSERT INTO company_info (Company_Name, SU_ID, Inventory_Type) VALUES ('" . $companyName . "', '" . $su_id . "', '" . $invType . "')";
+                $updateCompanyInfoSQL = "INSERT INTO company_info (Company_Name, SU_ID, Inventory_Type, Currency_Format) VALUES ('" . $companyName . "', '" . $su_id . "', '" . $invType . "', '$')";
 
                 $companyResult = $companyConnection->query($updateCompanyInfoSQL);
 
