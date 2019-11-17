@@ -429,3 +429,52 @@ function adminModalsJS() {
         });
     });
 }
+
+function customerModalsJS() {
+    $('#company_name').on("change", function () {
+        var comp_id = $(this).val();
+        $.ajax({
+            url: "./functions/getProducts.php",
+            method: "POST",
+            data: {Company_ID: comp_id},
+            success: function(data) {
+                $('#product_name').html(data);
+                $('.selectpicker').selectpicker('refresh');
+            }
+        });
+    });
+
+    $('#product_name').on("change", function () {
+        var comp_id = $('#company_name').val();
+        var prod_id = $(this).val();
+        $.ajax({
+            url: "./functions/getMaxInventory.php",
+            method: "POST",
+            data: {Company_ID: comp_id, Product_ID: prod_id},
+            success: function(data) {
+                $('#product_quantity').val("");
+                $('#product_quantity').removeAttr("readonly").attr("max", data);
+
+            }
+        });
+    });
+
+    $('#product_quantity').on('keyup', function() {
+        var comp_id = $('#company_name').val();
+        var prod_id = $('#product_name').val();
+        var prod_quantity = $(this).val();
+
+        if(prod_quantity === "") {
+            prod_quantity = 0;
+        }
+
+        $.ajax({
+            url: "./functions/getPrice.php",
+            method: "POST",
+            data: {Company_ID: comp_id, Product_ID: prod_id, Product_Quantity: prod_quantity},
+            success: function(data) {
+                $('#product_price').val(data);
+            }
+        });
+    });
+}
