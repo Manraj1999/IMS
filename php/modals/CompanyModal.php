@@ -35,6 +35,24 @@ class CompanyModal {
         return $data;
     }
 
+    public function getCompanyDataWithoutSession($DataType, $company_ID) {
+        $data = "";
+
+        // Connect to Database
+        $DatabaseHandler = new DatabaseHandler();
+
+        $companyConnection = $DatabaseHandler->getCompanyMySQLiConnection($company_ID);
+        $sqlCompany = "SELECT " . $DataType . " FROM company_info WHERE Company_ID = 1";
+        $resultsCompany = $companyConnection->query($sqlCompany);
+
+        if($resultsCompany->num_rows > 0) {
+            while($row = $resultsCompany->fetch_assoc()) {
+                $data = $row[$DataType];
+            }
+        }
+        return $data;
+    }
+
     public function getCompanySupervisorData($DataType) {
         $data = "";
 

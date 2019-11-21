@@ -56,6 +56,13 @@
     <div class="row">
         <div class="col-md-2"></div>
         <div class="col-md-8">
+
+            <div id="message" class="d-flex justify-content-center position-fixed center mt--5" style="visibility: hidden; width: 100%; text-align: center; z-index: 9999;">
+                <div id="inner-msg" class="alert alert-primary">
+
+                </div>
+            </div>
+
             <div class="card border-0">
                 <div class="card-header bg-gradient-white">
                     <h4 class="text-center mt-0 mb-3 text-white">
@@ -79,7 +86,7 @@
 
                     <div class="row">
                         <div class="col-md-4">
-                            <input type="text" placeholder="Customer Name" class="form-control"/>
+                            <input type="text" id="customer_name" placeholder="Customer Name" class="form-control"/>
                         </div>
                         <div class="col-12 col-md-4 d-flex justify-content-center">
                             <select id='product_name' class='selectpicker' data-style='btn-primary no-outline' name='product_name' data-live-search='true'>
@@ -95,7 +102,7 @@
                         <div class="col-md-4"></div>
                         <div class="col-md-4 input-group mt-5">
                             <div class="input-group-prepend">
-                                <span class="input-group-text scale-transition">RM</span>
+                                <span class="input-group-text scale-transition" id="currency-format">RM</span>
                             </div>
                             <input type='text' id="product_price" name='product_price' placeholder='Price' class='modal-text pl-3 form-control' readonly />
                         </div>
@@ -106,7 +113,7 @@
                         <div class="col-md-4"></div>
                         <div class="col-md-4"></div>
                         <div class="col-md-4">
-                            <button type="button" class="btn btn-outline-success float-right">Order</button>
+                            <button type="button" id="order-btn" class="btn btn-outline-success float-right">Order</button>
                         </div>
                     </div>
                 </div>

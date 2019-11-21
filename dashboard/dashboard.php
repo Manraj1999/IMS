@@ -3,9 +3,19 @@
     include_once $_SERVER['DOCUMENT_ROOT'] . '/ims/php/ui/Dashboard.php';
     include_once $_SERVER['DOCUMENT_ROOT'] . "/ims/php/DatabaseHandler.php";
     include_once $_SERVER['DOCUMENT_ROOT'] . "/ims/php/Armor.php";
+    include_once $_SERVER['DOCUMENT_ROOT'] . "/ims/php/dashboard/DashboardHome.php";
 
     $armor = new Armor();
     $armor->initDashboard();
+
+    $DashboardHome = new DashboardHome();
+    $alert = $DashboardHome->checkForAlerts();
+
+    if($alert["bool"]) {
+        $alertColour = "danger";
+    } else {
+        $alertColour = "success";
+    }
 ?>
 
 <!DOCTYPE html>
@@ -44,13 +54,13 @@
             <div class="header-body">
                 <!-- Card stats -->
                 <div class="row">
-                    <div class="col-xl-4 col-lg-6">
+                    <div class="col-xl-3 col-lg-6">
                         <div class="card card-stats mb-4 mb-xl-0">
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col">
-                                        <h5 class="card-title text-uppercase text-muted mb-0">New users</h5>
-                                        <span class="h2 font-weight-bold mb-0">2,356</span>
+                                        <h5 class="card-title text-uppercase text-muted mb-0">Orders</h5>
+                                        <span class="h2 font-weight-bold mb-0"><?php echo $DashboardHome->getCurrentWeekOrderCount(); ?></span>
                                     </div>
                                     <div class="col-auto">
                                         <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
@@ -59,34 +69,34 @@
                                     </div>
                                 </div>
                                 <p class="mt-3 mb-0 text-muted text-sm">
-                                    <span class="text-danger mr-2"><i class="fas fa-arrow-down"></i> 3.48%</span>
+                                    <span class="text-success mr-2"><i class="fas fa-arrow-right"></i></span>
                                     <span class="text-nowrap">Since last week</span>
                                 </p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-4 col-lg-6">
+                    <div class="col-xl-6 col-lg-6">
                         <div class="card card-stats mb-4 mb-xl-0">
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col">
-                                        <h5 class="card-title text-uppercase text-muted mb-0">Sales</h5>
-                                        <span class="h2 font-weight-bold mb-0">924</span>
+                                        <h5 class="card-title text-uppercase text-muted mb-0">Alerts</h5>
+                                        <span class="h2 font-weight-bold mb-0"><?php echo $alert["count"]; ?></span>
                                     </div>
                                     <div class="col-auto">
-                                        <div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
-                                            <i class="fas fa-users"></i>
+                                        <div class="icon icon-shape bg-<?php echo $alertColour; ?> text-white rounded-circle shadow">
+                                            <i class="fas fa-bell"></i>
                                         </div>
                                     </div>
                                 </div>
                                 <p class="mt-3 mb-0 text-muted text-sm">
-                                    <span class="text-warning mr-2"><i class="fas fa-arrow-down"></i> 1.10%</span>
-                                    <span class="text-nowrap">Since yesterday</span>
+
+                                    <span class="text-nowrap text-danger"><?php echo $alert["msg"]; ?></span>
                                 </p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-4 col-lg-6">
+                    <div class="col-xl-3 col-lg-6">
                         <div class="card card-stats mb-4 mb-xl-0">
                             <div class="card-body">
                                 <div class="row">
@@ -161,7 +171,7 @@
                     <div class="card-body">
                         <!-- Chart -->
                         <div class="chart">
-                            <canvas id="chart-orders" class="chart-canvas"></canvas>
+                            <canvas id="chart-bruh" class="chart-canvas"></canvas>
                         </div>
                     </div>
                 </div>
@@ -405,7 +415,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js"></script>
 <!--   Dashboard JS   -->
 <script src="../assets/js/dashboard.min.js"></script>
-
+<script src="../assets/js/modal-rows.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        dashboardModalsJS();
+    });
+</script>
 </body>
 
 </html>

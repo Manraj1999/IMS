@@ -9,6 +9,9 @@ class Dashboard {
         $CompanyModal = new CompanyModal();
         $CompanyName = $CompanyModal->getCompanyData("Company_Name");
 
+        $UserModal = new UserModal();
+        $UserType = $UserModal->getUserData("User_Type");
+
         $string[] = array();
         $string[0] = "";
         $string[1] = "";
@@ -21,6 +24,14 @@ class Dashboard {
         $string[8] = "";
         $string[9] = "";
         $string[$id] = "active";
+
+        $hide = "";
+
+        if($UserType == "EMPLOYEE") {
+            $hide = "d-none";
+        } else {
+            $hide = "";
+        }
 
         echo "<nav class=\"navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white\" id=\"sidenav-main\">
     <div class=\"container-fluid\">
@@ -84,7 +95,7 @@ class Dashboard {
             <hr class=\"my-3\">
             <h6 class=\"navbar-heading text-muted\">Inventory</h6>
             <ul class='navbar-nav'>    
-                <li class=\"nav-item\">
+                <li class=\"nav-item $hide\">
                     <a class='nav-link " . $string[2] . "' href=\"./supplier.php\">
                         <i class=\"fa fa-industry\" style='color: #ed213a;'></i> Supplier
                     </a>
@@ -99,17 +110,17 @@ class Dashboard {
                         <i class=\"fa fa-archive text-orange\"></i> Products
                     </a>
                 </li>
-                <li class=\"nav-item\">
+                <li class=\"nav-item $hide\">
                     <a class='nav-link " . $string[5] . "' href=\"./stores.php\">
                         <i class=\"fa fa-store text-purple\"></i> Stores
                     </a>
                 </li>
-                <li class=\"nav-item\">
+                <li class=\"nav-item $hide\">
                     <a class='nav-link " . $string[6] . "' href=\"./orders.php\">
                         <i class=\"fa fa-shopping-cart text-info\"></i> Orders
                     </a>
                 </li>
-                <li class=\"nav-item\">
+                <li class=\"nav-item $hide\">
                     <a class='nav-link " . $string[7] . "' href=\"./users.php\">
                         <i class=\"ni ni-single-02 text-green\"></i> Users
                     </a>
@@ -121,7 +132,7 @@ class Dashboard {
             <h6 class=\"navbar-heading text-muted\">Services</h6>
             <!-- Navigation -->
             <ul class=\"navbar-nav mb-md-3\">
-                <li class=\"nav-item\">
+                <li class=\"nav-item $hide\">
                     <a class='nav-link " . $string[8] . "' href='settings.php'>
                         <i class=\"fa fa-cog\"></i> Settings
                     </a>

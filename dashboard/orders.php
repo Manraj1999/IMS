@@ -71,7 +71,7 @@
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text" style="background: var(--info); border-color: var(--info); color: var(--white);" id="search-icon"><i class="fa fa-search"></i></span>
                                                     </div>
-                                                    <input type='search' id="search-user" name='search-user' placeholder='Search' class='form-control' style="border-color: var(--info); text-align: center" />
+                                                    <input type='search' id="search-orders" name='search-orders' placeholder='Search' class='form-control' style="border-color: var(--info); text-align: center" />
                                                 </div>
                                             </div>
                                             <div class="col-xl-3 col-lg-3"></div>
@@ -133,8 +133,8 @@
             ordersModalsJS();
 
             // START: Get Products and place them in the respective div
-            $.get("./users/getUsers.php", function(data) {
-                $('#users-table').html(data);
+            $.get("./orders/getOrders.php", function(data) {
+                $('#orders-table').html(data);
             });
             // END
         });

@@ -1,3 +1,58 @@
+function dashboardModalsJS() {
+    var $chart = $('#chart-bruh');
+
+    // Create chart
+    var ordersChart = new Chart($chart, {
+        type: 'bar',
+        options: {
+            scales: {
+                yAxes: [{
+                    gridLines: {
+                        lineWidth: 1,
+                        color: '#dfe2e6',
+                        zeroLineColor: '#dfe2e6'
+                    },
+                    ticks: {
+                        callback: function(value) {
+                            if (!(value % 10)) {
+                                //return '$' + value + 'k'
+                                return value
+                            }
+                        }
+                    }
+                }]
+            },
+            tooltips: {
+                callbacks: {
+                    label: function(item, data) {
+                        var label = data.datasets[item.datasetIndex].label || '';
+                        var yLabel = item.yLabel;
+                        var content = '';
+
+                        if (data.datasets.length > 1) {
+                            content += '<span class="popover-body-label mr-auto">' + label + '</span>';
+                        }
+
+                        content += '<span class="popover-body-value">' + yLabel + '</span>';
+
+                        return content;
+                    }
+                }
+            }
+        },
+        data: {
+            labels: ['Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            datasets: [{
+                label: 'Sales',
+                data: [25, 20, 30, 22, 17, 29]
+            }]
+        }
+    });
+
+    // Save to jQuery object
+    $chart.data('chart', ordersChart);
+}
+
 function storeModalsJS(i) {
     $('#add').click(function(){
         i++;
@@ -431,6 +486,7 @@ function adminModalsJS() {
 }
 
 function customerModalsJS() {
+
     $('#company_name').on("change", function () {
         var comp_id = $(this).val();
         $.ajax({
@@ -453,15 +509,25 @@ function customerModalsJS() {
             data: {Company_ID: comp_id, Product_ID: prod_id},
             success: function(data) {
                 $('#product_quantity').val("");
-                $('#product_quantity').removeAttr("readonly").attr("max", data);
-
+                $('#product_quantity').removeAttr("readonly");
+                $('#product_quantity').attr("max", data);
             }
         });
     });
 
-    $('#product_quantity').on('keyup', function() {
+    $('#product_quantity').on('keydown keyup mousedown', function(e) {
         var comp_id = $('#company_name').val();
         var prod_id = $('#product_name').val();
+        var max = parseInt($('#product_quantity').attr('max'));
+
+        if (parseInt($(this).val()) > max
+            && e.keyCode !== 46 // keycode for delete
+            && e.keyCode !== 8 // keycode for backspace
+        ) {
+            e.preventDefault();
+            $(this).val(max);
+        }
+
         var prod_quantity = $(this).val();
 
         if(prod_quantity === "") {
@@ -474,6 +540,37 @@ function customerModalsJS() {
             data: {Company_ID: comp_id, Product_ID: prod_id, Product_Quantity: prod_quantity},
             success: function(data) {
                 $('#product_price').val(data);
+            }
+        });
+    });
+
+    $('#order-btn').on('click', function() {
+        var comp_id = $('#company_name').val();
+        var prod_id = $('#product_name').val();
+        var prod_quantity = $('#product_quantity').val();
+        var prod_price = $('#product_price').val();
+        var customer_name = $('#customer_name').val();
+
+        $.ajax({
+            url: "./functions/orderProduct.php",
+            method: "POST",
+            data: {Company_ID: comp_id, Product_ID: prod_id, Product_Quantity: prod_quantity, Product_Price: prod_price, Customer_Name: customer_name},
+            success: function(data) {
+                $('#inner-msg').text(data).fadeIn().css('visibility', 'visible').delay(1800).fadeOut();
+            }
+        });
+    });
+}
+
+function ordersModalsJS() {
+    $("#search-orders").keyup(function() {
+        $.ajax({
+            url:"./orders/getSearchOrders.php",
+            method:"POST",
+            data: {searchData: $("#search-orders").val()},
+            success:function(data)
+            {
+                $('#orders-table').html(data);
             }
         });
     });
