@@ -12,5 +12,6 @@
     <orderEntry type="library" name="mdb" level="application" />
     <orderEntry type="library" name="jquery.dataTables" level="application" />
     <orderEntry type="library" name="bootstrap-select" level="application" />
+    <orderEntry type="library" name="jspdf.debug" level="application" />
   </component>
 </module>

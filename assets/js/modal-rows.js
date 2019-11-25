@@ -1,7 +1,87 @@
 function dashboardModalsJS() {
-    var $chart = $('#chart-bruh');
+    $.ajaxSetup ({
+        cache: false
+    });
 
-    // Create chart
+    // START: Total Orders Chart
+
+    var $chart = $('#chart-total-orders');
+
+    var octoberCount = function() {
+        var tmp = null;
+        $.ajax({
+            url:"./dashboard/getOrderCount.php",
+            method:"POST",
+            async: false,
+            data: {month: "10", year: "2019"},
+            success:function(data)
+            {
+                tmp = data;
+            }
+        });
+        return tmp;
+    }();
+
+    var novemberCount = function() {
+        var tmp = null;
+        $.ajax({
+            url:"./dashboard/getOrderCount.php",
+            method:"POST",
+            async: false,
+            data: {month: "11", year: "2019"},
+            success:function(data)
+            {
+                tmp = data;
+            }
+        });
+        return tmp;
+    }();
+
+    var decemberCount = function() {
+        var tmp = null;
+        $.ajax({
+            url:"./dashboard/getOrderCount.php",
+            method:"POST",
+            async: false,
+            data: {month: "12", year: "2019"},
+            success:function(data)
+            {
+                tmp = data;
+            }
+        });
+        return tmp;
+    }();
+
+    var januaryCount = function() {
+        var tmp = null;
+        $.ajax({
+            url:"./dashboard/getOrderCount.php",
+            method:"POST",
+            async: false,
+            data: {month: "01", year: "2020"},
+            success:function(data)
+            {
+                tmp = data;
+            }
+        });
+        return tmp;
+    }();
+
+    var februaryCount = function() {
+        var tmp = null;
+        $.ajax({
+            url:"./dashboard/getOrderCount.php",
+            method:"POST",
+            async: false,
+            data: {month: "02", year: "2020"},
+            success:function(data)
+            {
+                tmp = data;
+            }
+        });
+        return tmp;
+    }();
+
     var ordersChart = new Chart($chart, {
         type: 'bar',
         options: {
@@ -41,16 +121,189 @@ function dashboardModalsJS() {
             }
         },
         data: {
-            labels: ['Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            labels: ['Oct', 'Nov', 'Dec', 'Jan', 'Feb'],
             datasets: [{
                 label: 'Sales',
-                data: [25, 20, 30, 22, 17, 29]
+                data: [octoberCount, novemberCount, decemberCount, januaryCount, februaryCount]
             }]
         }
     });
-
-    // Save to jQuery object
     $chart.data('chart', ordersChart);
+
+    // END: Total Orders Chart
+
+    // START: Total Sales Chart
+    var $chartSales = $('#chart-total-sales');
+
+    var currencyFormat = function() {
+        var tmp = null;
+        $.ajax({
+            url:"./dashboard/getCurrencyFormat.php",
+            method:"POST",
+            async: false,
+            success:function(data)
+            {
+                tmp = data;
+            }
+        });
+        return tmp;
+    }();
+
+    var octoberTotal = function() {
+        var tmp = null;
+        $.ajax({
+            url:"./dashboard/getOrderTotal.php",
+            method:"POST",
+            async: false,
+            data: {month: "10", year: "2019"},
+            success:function(data)
+            {
+                tmp = data;
+            }
+        });
+        return tmp;
+    }();
+
+    var novemberTotal = function() {
+        var tmp = null;
+        $.ajax({
+            url:"./dashboard/getOrderTotal.php",
+            method:"POST",
+            async: false,
+            data: {month: "11", year: "2019"},
+            success:function(data)
+            {
+                tmp = data;
+            }
+        });
+        return tmp;
+    }();
+
+    var decemberTotal = function() {
+        var tmp = null;
+        $.ajax({
+            url:"./dashboard/getOrderTotal.php",
+            method:"POST",
+            async: false,
+            data: {month: "12", year: "2019"},
+            success:function(data)
+            {
+                tmp = data;
+            }
+        });
+        return tmp;
+    }();
+
+    var januaryTotal = function() {
+        var tmp = null;
+        $.ajax({
+            url:"./dashboard/getOrderTotal.php",
+            method:"POST",
+            async: false,
+            data: {month: "01", year: "2020"},
+            success:function(data)
+            {
+                tmp = data;
+            }
+        });
+        return tmp;
+    }();
+
+    var februaryTotal = function() {
+        var tmp = null;
+        $.ajax({
+            url:"./dashboard/getOrderTotal.php",
+            method:"POST",
+            async: false,
+            data: {month: "02", year: "2020"},
+            success:function(data)
+            {
+                tmp = data;
+            }
+        });
+        return tmp;
+    }();
+
+    var salesChart = new Chart($chartSales, {
+        type: 'line',
+        options: {
+            scales: {
+                yAxes: [{
+                    gridLines: {
+                        lineWidth: 1,
+                        color: Charts.colors.gray[900],
+                        zeroLineColor: Charts.colors.gray[900]
+                    },
+                    ticks: {
+                        callback: function(value) {
+                            if (!(value % 10)) {
+                                return currencyFormat + value + '';
+                            }
+                        }
+                    }
+                }]
+            },
+            tooltips: {
+                callbacks: {
+                    label: function(item, data) {
+                        var label = data.datasets[item.datasetIndex].label || '';
+                        var yLabel = item.yLabel;
+                        var content = '';
+
+                        if (data.datasets.length > 1) {
+                            content += '<span class="popover-body-label mr-auto">' + label + '</span>';
+                        }
+
+                        content += '<span class="popover-body-value">' + currencyFormat + yLabel + '</span>';
+                        return content;
+                    }
+                }
+            }
+        },
+        data: {
+            labels: ['Oct', 'Nov', 'Dec', 'Jan', 'Feb'],
+            datasets: [{
+                label: 'Performance',
+                data: [octoberTotal, novemberTotal, decemberTotal, januaryTotal, februaryTotal]
+            }]
+        }
+    });
+    $chartSales.data('chart', salesChart);
+    // END: Total Sales Chart
+
+    // Downloads
+    $("#download-total-sales").click(function () {
+        var HTML_Width = $("#chart-content").width();
+        var HTML_Height = $("#chart-content").height();
+        var top_left_margin = 30;
+        var PDF_Width = HTML_Width+(top_left_margin*2);
+        var PDF_Height = (PDF_Width*1.5)+(top_left_margin*2);
+        var canvas_image_width = HTML_Width;
+        var canvas_image_height = HTML_Height;
+
+        var totalPDFPages = Math.ceil(HTML_Height/PDF_Height)-1;
+
+        window.scrollTo(0,0);
+
+        html2canvas($("#chart-content")[0],{allowTaint:true}).then(function(canvas) {
+            canvas.getContext('2d');
+
+            console.log(canvas.height+"  "+canvas.width);
+
+
+            var imgData = canvas.toDataURL("image/jpeg", 1.0);
+            var pdf = new jsPDF('p', 'pt',  [PDF_Width, PDF_Height]);
+            pdf.text("Total Sales Value by Month", 188, 25);
+            pdf.addImage(imgData, 'JPG', top_left_margin, top_left_margin,canvas_image_width,canvas_image_height);
+
+            for (var i = 1; i <= totalPDFPages; i++) {
+                pdf.addPage(PDF_Width, PDF_Height);
+                pdf.addImage(imgData, 'JPG', top_left_margin, -(PDF_Height*i)+(top_left_margin*4),canvas_image_width,canvas_image_height);
+            }
+
+            pdf.save("total-sales.pdf");
+        });
+    });
 }
 
 function storeModalsJS(i) {
