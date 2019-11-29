@@ -19,7 +19,7 @@ class Stores {
                 echo "
                     <div class=\"col-xl-6 col-lg-6 mb-4\">
                     <a class='product-store' data-toggle=\"modal\" data-target=\"#showTable\" href=\"#\" id='" . $row["Store_Code"] . "'>
-                        <div class=\"card card-stats bg-gradient-dark\">
+                        <div class=\"card card-stats btn-outline-dark btn-fade\">
                             <div class=\"card-body\">
                                 <h3 class=\"text-center text-primary\">" . $row["Store_Name"] . "</h3>
                                 <h4 class=\"text-center text-primary\">" . $row["Store_Location"] . "</h4>

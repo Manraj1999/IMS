@@ -40,8 +40,8 @@ class Dashboard {
             <span class=\"navbar-toggler-icon\"></span>
         </button>
         <!-- Brand -->
-        <a class=\"navbar-brand pt-2 mb-md--2\" style=\"font-family: 'Roboto', sans-serif;\">
-            <h2 class='text-white text-uppercase'><span class='bg-primary rounded p-2'>" . $CompanyName . "</span></h2>
+        <a class=\"navbar-brand pt-2 mb-lg--4 \" style=\"font-family: 'Roboto', sans-serif;\">
+            <h2 class='text-primary text-uppercase'>" . $CompanyName . "</h2>
         </a>
         <!-- User -->
         <ul class=\"nav align-items-center d-md-none\">
@@ -95,7 +95,7 @@ class Dashboard {
             <hr class=\"my-3\">
             <h6 class=\"navbar-heading text-muted\">Inventory</h6>
             <ul class='navbar-nav'>    
-                <li class=\"nav-item $hide\">
+                <li class=\"nav-item\">
                     <a class='nav-link " . $string[2] . "' href=\"./supplier.php\">
                         <i class=\"fa fa-industry\" style='color: #ed213a;'></i> Supplier
                     </a>
@@ -127,19 +127,14 @@ class Dashboard {
                 </li>
             </ul>
             <!-- Divider -->
-            <hr class=\"my-3\">
+            <hr class=\"my-3 $hide\">
             <!-- Heading -->
-            <h6 class=\"navbar-heading text-muted\">Services</h6>
+            <h6 class=\"navbar-heading text-muted $hide\">Services</h6>
             <!-- Navigation -->
             <ul class=\"navbar-nav mb-md-3\">
                 <li class=\"nav-item $hide\">
                     <a class='nav-link " . $string[8] . "' href='settings.php'>
                         <i class=\"fa fa-cog\"></i> Settings
-                    </a>
-                </li>
-                <li class=\"nav-item\">
-                    <a class='nav-link " . $string[9] . "' href=\"./privacy-policy.php\">
-                        <i class=\"fa fa-lock\"></i> Privacy Policy
                     </a>
                 </li>
             </ul>

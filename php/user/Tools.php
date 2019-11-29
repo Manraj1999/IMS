@@ -109,14 +109,6 @@ class Tools {
                 Product_Price DOUBLE NOT NULL,
                 PRIMARY KEY (Product_ID)
             )";
-                $purchasesSQL = "CREATE TABLE purchases (
-                Purchase_ID INT NOT NULL AUTO_INCREMENT,
-                Product_ID VARCHAR(32) NOT NULL,
-                Supplier_ID VARCHAR(32) NOT NULL,
-                Amount_Received INT(32) NOT NULL,
-                Purchase_Date DATETIME NOT NULL,
-                PRIMARY KEY (Purchase_ID)
-            )";
                 $ordersSQL = "CREATE TABLE orders (
                 Order_ID INT NOT NULL AUTO_INCREMENT,
                 Product_ID VARCHAR(32) NOT NULL,
@@ -135,7 +127,7 @@ class Tools {
                 PRIMARY KEY (User_ID)
             )";
 
-                $tablesSQL = [$companyInfoSQL, $companyStoresSQL, $categoriesSQL, $supplierSQL, $productsSQL, $purchasesSQL, $ordersSQL, $usersSQL];
+                $tablesSQL = [$companyInfoSQL, $companyStoresSQL, $categoriesSQL, $supplierSQL, $productsSQL, $ordersSQL, $usersSQL];
 
                 foreach($tablesSQL as $k => $sql) {
                     $tablesResult = $connectionCompanyTablesCreations->query($sql);
@@ -153,7 +145,10 @@ class Tools {
                     $addInitialDataSQL = "INSERT INTO categories(Category_Abbr, Category_Name) VALUES ('UN-CAT', 'Uncategorized')";
                     $initialSetup = $connectionCompanyTablesCreations->query($addInitialDataSQL);
 
-                    if($initialSetup) {
+                    $addThresholdDataSQL = "INSERT INTO company_info(Minimum_Threshold, Maximum_Threshold) VALUES (5, 50)";
+                    $thresholdSetup = $connectionCompanyTablesCreations->query($addThresholdDataSQL);
+
+                    if($initialSetup && $thresholdSetup) {
                         $response['error'] = false;
                         $response['status_code'] = 0;
                     } else {

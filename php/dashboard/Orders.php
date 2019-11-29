@@ -41,8 +41,8 @@ class Orders {
                                                     </tr>";
             }
         } else {
-            echo "<div class='align-content-center'><h2 class='subtitle text-green text-center'>There seems to be no orders yet...</h2>
-                                            <img src='../assets/img/theme/not-found.gif' class='gif'/></div>";
+            echo "<td></td><td></td><td><div class='align-content-center'><h2 class='subtitle text-info text-center'>There seems to be no orders yet...</h2>
+                                            <img src='../assets/img/theme/not-found.gif' class='gif'/></div></td>";
         }
     }
 
