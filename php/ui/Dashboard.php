@@ -80,6 +80,8 @@ class Dashboard {
                 </div>
             </div>
             
+            <hr class='my-3 mt-lg--2 mt-md--4 d-none d-md-block'/>
+            <h6 class='navbar-heading text-muted'>Dashboard</h6>
             <!-- Navigation -->
             <ul class=\"navbar-nav\">
                 <li class=\"nav-item\">
