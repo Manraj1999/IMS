@@ -109,6 +109,15 @@ div.log-top-container {
     color: #f5f4f3 !important;
 }
 
+.cust-btn {
+    position: absolute;
+    background-color: #5e72e4 !important;
+    color: #f5f4f3 !important;
+    border-radius: 5px;
+    bottom: -100% !important;
+    margin-right: 35% !important;
+}
+
 .sign-up-btn,
 .sign-in-btn {
     background-color: #5e72e4 !important;

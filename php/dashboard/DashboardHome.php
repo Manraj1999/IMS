@@ -26,6 +26,30 @@ class DashboardHome {
         return $count;
     }
 
+    function isUserSupervisor() {
+        $DatabaseHandler = new DatabaseHandler();
+        $UserModal = new UserModal();
+
+        $connection = $DatabaseHandler->getCompanyMySQLiConnection($UserModal->getUserData("Company_ID"));
+
+        $getSupervisorSQL = "SELECT * FROM users WHERE User_Type = 'SUPERVISOR'";
+        $getSupervisorResult = $connection->query($getSupervisorSQL);
+
+        $supervisorEmail = "";
+
+        if($getSupervisorResult->num_rows > 0) {
+            while ($row = $getSupervisorResult->fetch_assoc()) {
+                $supervisorEmail = $row["User_Email"];
+            }
+        }
+
+        if($_SESSION["email"] === $supervisorEmail) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     function checkForAlerts() {
         $DatabaseHandler = new DatabaseHandler();
         $UserModal = new UserModal();

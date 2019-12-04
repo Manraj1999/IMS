@@ -79,6 +79,11 @@
             <img alt="..." class="responsive-img" src="./assets/img/theme/ss_welcome.png" style="position: fixed; width: 50%;"/>
             <h4 class="fixed-info mt-5">Welcome back.</h4>
             <h6 class="fixed-info">Sign in and get back to where you left off! :)</h6>
+
+            <button onclick="location.href='customer/index.php'" class="btn waves-effect waves-light lighten-1 d-none d-sm-block cust-btn right" type="button" name="back-btn">
+                <i class="material-icons right">chevron_right</i>
+                Customer
+            </button>
         </div>
         <div class="col-sm-1"></div>
         <div class="col-sm-4 bg-white register-form">

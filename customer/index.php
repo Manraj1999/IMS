@@ -35,7 +35,12 @@
 
     <body class="container-fluid">
     <div class="row">
-        <div class="col-sm-2"></div>
+        <div class="col-sm-2">
+            <button onclick="location.href='../index.php'" type="button" class="btn btn-outline-primary position-fixed mt-md-3 ml-md-3" style="z-index: 9999;">
+                <span class="fa fa-angle-left p-1"></span>
+                Back
+            </button>
+        </div>
         <div class="col-sm-8">
             <div id="message" class="d-flex justify-content-center position-fixed center mt-6" style="visibility: hidden; width: 100%; text-align: center; z-index: 9999;">
                 <div id="inner-msg" class="alert alert-primary">

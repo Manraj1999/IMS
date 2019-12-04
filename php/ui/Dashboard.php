@@ -88,11 +88,14 @@ class Dashboard {
                     <a class='nav-link " . $string[0] . "' href=\" ./dashboard.php\"> <i class=\"ni ni-tv-2 text-indigo\"></i> Dashboard
                     </a>
                 </li>
+                
+                <!-- Hide Company Link
                 <li class=\"nav-item\">
                     <a class='nav-link " . $string[1] . "' href=\"./company.php\">
                         <i class=\"fa fa-building text-blue\"></i> Company
                     </a>
                 </li>
+                -->
             </ul>
             <hr class=\"my-3\">
             <h6 class=\"navbar-heading text-muted\">Inventory</h6>

@@ -16,6 +16,12 @@
     } else {
         $alertColour = "success";
     }
+
+    $hide = "";
+
+    if(!($DashboardHome->isUserSupervisor())) {
+        $hide = "d-none";
+    }
 ?>
 
 <!DOCTYPE html>
@@ -100,7 +106,7 @@
         </div>
     </div>
     <div class="container-fluid mt--7">
-        <div class="row">
+        <div class="row <?php echo $hide; ?>">
             <div class="col-xl-8 mb-5 mb-xl-0">
                 <div class="card bg-gradient-default shadow">
                     <div class="card-header bg-transparent">
