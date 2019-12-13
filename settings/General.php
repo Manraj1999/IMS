@@ -19,4 +19,4 @@
     }
 
     DEFINE("SITE_NAME", $CompanyName);
-    DEFINE("ORI_SITE_NAME", "IMS");
+    DEFINE("ORI_SITE_NAME", "ManageSpace");
