@@ -29,7 +29,3 @@ To start using ManageSpace, businesses can deploy the system on their servers or
 ## Contributing
 
 We welcome contributions from the community to enhance ManageSpace's features and functionality. If you'd like to contribute, please fork the repository, make your changes, and submit a pull request.
-
-## License
-
-This project is licensed under the [MIT License](LICENSE). Feel free to use, modify, and distribute the code for your own purposes.
